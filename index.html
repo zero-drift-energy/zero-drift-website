@@ -335,11 +335,13 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,0.05);paddin
   .hero-left .hero-badge{justify-content:center}
   .live-dash{transform:none}
   .live-dash-body{padding:16px}
-  .compare-visual{grid-template-columns:1fr}
-  .compare-card{padding:16px}
-  .live-dash-stats{grid-template-columns:1fr}
-  .live-dash-stat{border-right:none;border-bottom:1px solid rgba(255,255,255,0.04);padding:14px}
-  .live-dash-stat:last-child{border-bottom:none}
+  .compare-visual{grid-template-columns:1fr;gap:8px}
+  .compare-card{padding:14px}
+  .compare-label{font-size:8px;margin-bottom:8px}
+  .compare-line{font-size:11px;margin-bottom:6px}
+  .live-dash-stats{grid-template-columns:repeat(3,1fr)}
+  .live-dash-stat{padding:12px 8px}
+  .live-dash-stat-num{font-size:24px}
   .problem-left,.problem-right{padding:48px 24px}
   .fee-label{width:130px;font-size:11px}
   .fee-val{font-size:10px;width:50px}
@@ -696,7 +698,9 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,0.05);paddin
 
 // ===== SCROLL REVEALS =====
 const obs=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');e.target.querySelectorAll('.fee-fill').forEach(b=>b.classList.add('v'));e.target.querySelectorAll('[data-count]').forEach(startCount)}})},{threshold:0.15,rootMargin:'0px 0px -30px 0px'});
-document.querySelectorAll('.r,.bento-card,.quote-glass,.stats-inner').forEach(el=>obs.observe(el));
+document.querySelectorAll('.r,.bento-card,.quote-glass,.stats-inner,.live-dash-stats').forEach(el=>obs.observe(el));
+// Also trigger dashboard counters after hero animation completes
+setTimeout(()=>{document.querySelectorAll('.live-dash-stats [data-count]').forEach(startCount)},2000);
 
 // ===== COUNTERS =====
 const counted=new Set();
