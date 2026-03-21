@@ -203,12 +203,12 @@ nav.scrolled{background:rgba(10,14,20,0.7);backdrop-filter:blur(24px);-webkit-ba
 .contact-email a{font-size:15px;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color 0.3s}
 .contact-email a:hover{color:var(--green)}
 
-.form-card{background:rgba(20,25,32,0.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:44px;box-shadow:0 24px 80px rgba(0,0,0,0.3)}
+.form-card{background:rgba(38,48,68,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:44px;box-shadow:0 24px 80px rgba(0,0,0,0.3)}
 .form-group{margin-bottom:24px}
 .form-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(138,155,168,0.5);margin-bottom:8px;display:block}
-.form-input{width:100%;background:rgba(10,14,20,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:16px 18px;font-size:15px;color:var(--white);font-family:'DM Sans',sans-serif;transition:all 0.3s;outline:none}
+.form-input{width:100%;background:rgba(19,26,36,0.8);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px 18px;font-size:15px;color:var(--white);font-family:'DM Sans',sans-serif;transition:all 0.3s;outline:none}
 .form-input:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(0,200,150,0.08),0 0 30px rgba(0,200,150,0.05)}
-.form-input::placeholder{color:rgba(138,155,168,0.3)}
+.form-input::placeholder{color:rgba(163,179,196,0.5)}
 textarea.form-input{resize:vertical;min-height:110px}
 .form-btn{width:100%;background:var(--green);color:var(--midnight);font-weight:600;padding:18px;border-radius:12px;border:none;cursor:pointer;font-family:'Bebas Neue',sans-serif;letter-spacing:0.1em;font-size:20px;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:10px}
 .form-btn:hover{box-shadow:0 0 60px rgba(0,200,150,0.3);transform:translateY(-2px)}
@@ -322,17 +322,34 @@ footer{background:var(--midnight);border-top:1px solid rgba(255,255,255,0.03);pa
   .how-card{min-width:300px}
   .bento{grid-template-columns:1fr}
   .proof-row{gap:40px}
-  .hero-split{grid-template-columns:1fr;text-align:center}
+  .hero-split{grid-template-columns:1fr;text-align:center;gap:40px}
   .hero-left{text-align:center}
+  .hero-left h1{text-align:center!important}
+  .hero-left .hero-sub{text-align:center!important;margin-left:auto!important;margin-right:auto!important}
+  .hero-left .hero-actions{justify-content:center!important}
+  .hero-left .hero-badge{justify-content:center}
   .live-dash{transform:none}
-  .about-hero{grid-template-columns:1fr;text-align:center}
-  .about-photo-wrap{max-width:280px;margin:0 auto}
+  .live-dash-body{padding:16px}
+  .compare-visual{grid-template-columns:1fr}
+  .compare-card{padding:16px}
+  .live-dash-stats{grid-template-columns:1fr}
+  .live-dash-stat{border-right:none;border-bottom:1px solid rgba(255,255,255,0.04);padding:14px}
+  .live-dash-stat:last-child{border-bottom:none}
+  .problem-left,.problem-right{padding:48px 24px}
+  .fee-label{width:130px;font-size:11px}
+  .fee-val{font-size:10px;width:50px}
+  .fee-big{font-size:40px}
+  .about-hero{grid-template-columns:1fr;text-align:center;gap:48px}
+  .about-photo-wrap{max-width:260px;margin:0 auto}
   .about-quote{text-align:left}
   .process-flow{flex-wrap:wrap;gap:16px}
   .process-arrow{display:none}
-  .compare-visual{grid-template-columns:1fr}
+  .process-node{flex:0 0 45%}
   .contact-grid{grid-template-columns:1fr;gap:48px}
-  .form-card{padding:32px}
+  .form-card{padding:28px}
+  .energy-illus,.card-illus{height:60px}
+  .section-title{font-size:clamp(32px,8vw,48px)}
+  .proof-big{font-size:clamp(48px,12vw,80px)}
   footer{padding:40px 24px}
   .ft-inner{grid-template-columns:1fr;gap:32px}
   .ft-bottom{flex-direction:column;gap:12px;align-items:flex-start}
@@ -372,7 +389,7 @@ footer{background:var(--midnight);border-top:1px solid rgba(255,255,255,0.03);pa
     <div class="hero-left">
       <div class="hero-badge"><span class="pulse"></span>Independent Cost Advisory &middot; UK &amp; Ireland</div>
       <h1 style="text-align:left">TIRED OF COSTS<br>THAT WON'T <span>STAY PUT?</span></h1>
-      <p class="hero-sub" style="text-align:left;margin-left:0">Your energy bill has crept up. Your card processing fees don't match what you signed. <strong>Sound familiar?</strong> We find out exactly what you should be paying, negotiate it properly, and make sure it never moves again.</p>
+      <p class="hero-sub" style="text-align:left;margin-left:0">Your energy bill has crept up. Your card processing fees don't match what you signed. <strong>Sound familiar?</strong> As an independent broker, we work for you &mdash; not the suppliers. We search the whole market, find the best deal, and make sure the price never moves again.</p>
       <div class="hero-actions" style="justify-content:flex-start">
         <a href="#contact" class="btn-glow">Get a free benchmark <svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <a href="#how" class="btn-ghost">See how it works</a>
@@ -456,15 +473,16 @@ footer{background:var(--midnight);border-top:1px solid rgba(255,255,255,0.03);pa
   <div class="problem-right">
     <div class="fee-glass r">
       <p class="fee-glass-title">What's hiding in your card statement</p>
-      <div class="fee-row"><span class="fee-label">Scheme fee increases</span><div class="fee-track"><div class="fee-fill fee-fill-r" style="width:78%"></div></div><span class="fee-val">+0.18%</span></div>
-      <div class="fee-row"><span class="fee-label">Incremental rate hikes</span><div class="fee-track"><div class="fee-fill fee-fill-r" style="width:62%"></div></div><span class="fee-val">+0.14%</span></div>
-      <div class="fee-row"><span class="fee-label">PCI non-compliance</span><div class="fee-track"><div class="fee-fill fee-fill-a" style="width:85%"></div></div><span class="fee-val" style="color:var(--amber)">£35</span></div>
-      <div class="fee-row"><span class="fee-label">Card type creep</span><div class="fee-track"><div class="fee-fill fee-fill-r" style="width:45%"></div></div><span class="fee-val">+0.08%</span></div>
+      <div class="fee-row"><span class="fee-label">Acquirer markup</span><div class="fee-track"><div class="fee-fill fee-fill-r" style="width:82%"></div></div><span class="fee-val">+0.4%</span></div>
+      <div class="fee-row"><span class="fee-label">Scheme fee rises (Visa/MC)</span><div class="fee-track"><div class="fee-fill fee-fill-r" style="width:55%"></div></div><span class="fee-val">+0.12%</span></div>
+      <div class="fee-row"><span class="fee-label">PCI non-compliance charge</span><div class="fee-track"><div class="fee-fill fee-fill-a" style="width:70%"></div></div><span class="fee-val" style="color:var(--amber)">£15/mo</span></div>
+      <div class="fee-row"><span class="fee-label">Terminal rental</span><div class="fee-track"><div class="fee-fill fee-fill-a" style="width:60%"></div></div><span class="fee-val" style="color:var(--amber)">£25/mo</span></div>
+      <div class="fee-row"><span class="fee-label">Authorisation fees</span><div class="fee-track"><div class="fee-fill fee-fill-r" style="width:40%"></div></div><span class="fee-val">3p/txn</span></div>
       <div class="fee-bottom">
-        <div><div class="fee-bottom-label">Hidden cost per annum</div><div class="fee-bottom-sub">Unauthorised. Unnoticed.</div></div>
-        <div class="fee-big" data-count="793" data-prefix="£">£0</div>
+        <div><div class="fee-bottom-label">Typical overpayment per annum</div><div class="fee-bottom-sub">On a 1.75% effective rate vs 1.2% achievable</div></div>
+        <div class="fee-big" data-count="2400" data-prefix="£">£0</div>
       </div>
-      <div class="too-busy">Your supplier is banking on you being <span class="too-busy-tag">TOO BUSY</span> to notice. <strong>That's not bad luck. That's by design.</strong></div>
+      <div class="too-busy">Your processor is banking on you being <span class="too-busy-tag">TOO BUSY</span> to check. <strong>Interchange is regulated. Everything else is negotiable &mdash; and that's where we come in.</strong></div>
     </div>
   </div>
 </div>
@@ -510,7 +528,7 @@ footer{background:var(--midnight);border-top:1px solid rgba(255,255,255,0.03);pa
   <div class="section" style="padding-bottom:40px">
     <div class="section-tag r">Services</div>
     <h2 class="section-title r">TWO COST LINES.<br>ONE EXPERT.</h2>
-    <p class="section-desc r">Energy and card processing. Two bills every business pays, and two bills almost every business overpays. We fix both.</p>
+    <p class="section-desc r">Energy and card processing. Two bills every business pays, and two bills almost every business overpays. As an independent broker, we're not tied to any single supplier &mdash; which means we'll never put you with a company that doesn't work for you. We search the whole market, every time.</p>
   </div>
   <div class="bento" style="max-width:1200px;margin:0 auto">
     <div class="bento-card r" onmousemove="this.style.setProperty('--mx',((event.clientX-this.getBoundingClientRect().left)/this.offsetWidth*100)+'%');this.style.setProperty('--my',((event.clientY-this.getBoundingClientRect().top)/this.offsetHeight*100)+'%')">
@@ -541,14 +559,15 @@ footer{background:var(--midnight);border-top:1px solid rgba(255,255,255,0.03);pa
     </div>
     <div class="bento-card r rd1" onmousemove="this.style.setProperty('--mx',((event.clientX-this.getBoundingClientRect().left)/this.offsetWidth*100)+'%');this.style.setProperty('--my',((event.clientY-this.getBoundingClientRect().top)/this.offsetHeight*100)+'%')">
       <!-- Card statement breakdown illustration -->
-      <svg class="card-illus" width="100%" height="80" viewBox="0 0 500 80" fill="none" preserveAspectRatio="xMidYMid meet">
-        <rect x="0" y="0" width="500" height="80" rx="8" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.04)"/>
-        <text x="16" y="20" font-family="Space Mono" font-size="8" fill="rgba(255,255,255,0.2)" letter-spacing="0.1em">STATEMENT AUDIT</text>
-        <line x1="16" y1="30" x2="484" y2="30" stroke="rgba(255,255,255,0.04)"/>
-        <text x="16" y="46" font-family="DM Sans" font-size="11" fill="var(--muted)">Interchange</text><text x="200" y="46" font-family="Space Mono" font-size="11" fill="rgba(0,200,150,0.6)">✓ Fair</text>
-        <text x="260" y="46" font-family="DM Sans" font-size="11" fill="var(--muted)">Scheme fees</text><text x="420" y="46" font-family="Space Mono" font-size="11" fill="rgba(255,85,85,0.7)">+0.14% ✗</text>
-        <text x="16" y="66" font-family="DM Sans" font-size="11" fill="var(--muted)">PCI charge</text><text x="200" y="66" font-family="Space Mono" font-size="11" fill="rgba(255,85,85,0.7)">£35 ✗</text>
-        <text x="260" y="66" font-family="DM Sans" font-size="11" fill="var(--muted)">Effective rate</text><text x="420" y="66" font-family="Space Mono" font-size="11" fill="rgba(255,85,85,0.7)">1.64% ✗</text>
+      <svg class="card-illus" width="100%" height="90" viewBox="0 0 500 90" fill="none" preserveAspectRatio="xMidYMid meet">
+        <rect x="0" y="0" width="500" height="90" rx="8" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.04)"/>
+        <text x="16" y="18" font-family="Space Mono" font-size="8" fill="rgba(255,255,255,0.2)" letter-spacing="0.1em">STATEMENT BREAKDOWN</text>
+        <line x1="16" y1="28" x2="484" y2="28" stroke="rgba(255,255,255,0.04)"/>
+        <text x="16" y="44" font-family="DM Sans" font-size="11" fill="var(--muted)">Interchange (0.2%)</text><text x="210" y="44" font-family="Space Mono" font-size="10" fill="rgba(0,200,150,0.6)">Regulated ✓</text>
+        <text x="290" y="44" font-family="DM Sans" font-size="11" fill="var(--muted)">Scheme fees (0.04%)</text><text x="470" y="44" font-family="Space Mono" font-size="10" fill="rgba(0,200,150,0.6)">Fixed ✓</text>
+        <text x="16" y="64" font-family="DM Sans" font-size="11" fill="var(--muted)">Acquirer markup</text><text x="210" y="64" font-family="Space Mono" font-size="10" fill="rgba(255,85,85,0.7)">+0.4% ✗</text>
+        <text x="290" y="64" font-family="DM Sans" font-size="11" fill="var(--muted)">Effective rate</text><text x="470" y="64" font-family="Space Mono" font-size="10" fill="rgba(255,85,85,0.7)">1.75% ✗</text>
+        <text x="16" y="82" font-family="Space Mono" font-size="9" fill="rgba(0,200,150,0.5)" letter-spacing="0.06em">ACHIEVABLE: 1.2% → SAVING £2,400/YR</text>
       </svg>
       <div class="bento-icon bento-icon-card"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="14" rx="2" stroke="#00C896" stroke-width="1.5"/><line x1="2" y1="10" x2="22" y2="10" stroke="#00C896" stroke-width="1.5"/><line x1="6" y1="15" x2="10" y2="15" stroke="#00C896" stroke-width="1.5" stroke-linecap="round"/></svg></div>
       <h3 class="bento-h">Card Processing</h3>
