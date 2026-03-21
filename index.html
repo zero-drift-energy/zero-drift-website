@@ -20,9 +20,10 @@
 @font-face{font-family:"Space Mono";src:url("assets/fonts/SpaceMono-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
 
 :root{
-  --midnight:#0A0E14;--graphite:#141920;--slate:#1E2530;
-  --green:#00C896;--green-dark:#00A070;--white:#F0F4F0;
-  --muted:#8A9BA8;--red:#FF4444;--amber:#FFB800;
+  --midnight:#0C1118;--graphite:#161D28;--slate:#1F2937;
+  --green:#00C896;--green-dark:#00A070;--white:#F2F5F0;
+  --muted:#9CABBA;--red:#FF5555;--amber:#FFB800;
+  --warm:#2A3040;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -32,9 +33,9 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--midnight);color
 /* ===== ANIMATED GRADIENT MESH BG ===== */
 .mesh-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .mesh-blob{position:absolute;border-radius:50%;filter:blur(120px);opacity:0;animation:meshFloat 20s ease-in-out infinite,meshFadeIn 2s ease forwards}
-.mesh-blob-1{width:60vw;height:60vw;top:-20%;left:-10%;background:radial-gradient(circle,rgba(0,200,150,0.12),transparent 70%);animation-delay:0s}
-.mesh-blob-2{width:50vw;height:50vw;bottom:-20%;right:-15%;background:radial-gradient(circle,rgba(0,160,112,0.08),transparent 70%);animation-delay:5s}
-.mesh-blob-3{width:40vw;height:40vw;top:40%;left:50%;background:radial-gradient(circle,rgba(0,200,150,0.06),transparent 70%);animation-delay:10s}
+.mesh-blob-1{width:60vw;height:60vw;top:-20%;left:-10%;background:radial-gradient(circle,rgba(0,200,150,0.1),rgba(0,160,112,0.04) 40%,transparent 70%);animation-delay:0s}
+.mesh-blob-2{width:50vw;height:50vw;bottom:-20%;right:-15%;background:radial-gradient(circle,rgba(0,180,130,0.07),rgba(40,60,80,0.04) 40%,transparent 70%);animation-delay:5s}
+.mesh-blob-3{width:40vw;height:40vw;top:40%;left:50%;background:radial-gradient(circle,rgba(0,200,150,0.05),rgba(30,50,70,0.03) 40%,transparent 70%);animation-delay:10s}
 @keyframes meshFloat{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(5%,8%) scale(1.05)}50%{transform:translate(-3%,5%) scale(0.95)}75%{transform:translate(4%,-6%) scale(1.03)}}
 @keyframes meshFadeIn{to{opacity:1}}
 
@@ -225,6 +226,24 @@ footer{background:var(--midnight);border-top:1px solid rgba(255,255,255,0.03);pa
 .ft-bottom{max-width:1200px;margin:48px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.03);display:flex;justify-content:space-between;align-items:center}
 .ft-legal{font-family:'Space Mono',monospace;font-size:9px;color:rgba(138,155,168,0.25);letter-spacing:0.1em}
 
+/* ===== ABOUT TIM ===== */
+.about-section{background:linear-gradient(180deg,var(--graphite),var(--midnight));position:relative;z-index:1;overflow:hidden}
+.about-grid{display:grid;grid-template-columns:320px 1fr;gap:64px;align-items:center}
+.about-photo{position:relative}
+.about-photo img{width:100%;border-radius:24px;display:block;box-shadow:0 24px 64px rgba(0,0,0,0.4)}
+.about-photo::after{content:'';position:absolute;inset:-3px;border-radius:27px;border:2px solid rgba(0,200,150,0.15);pointer-events:none}
+.about-name{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:0.03em;margin-bottom:4px}
+.about-role{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--green);margin-bottom:24px}
+.about-text{font-size:16px;color:var(--muted);line-height:1.85;margin-bottom:20px}
+.about-text strong{color:var(--white);font-weight:500}
+.about-sig{font-family:'Space Mono',monospace;font-size:11px;color:rgba(156,171,186,0.5);letter-spacing:0.08em;margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.04)}
+
+/* ===== SVG ILLUSTRATIONS ===== */
+.illus{display:block;margin:0 auto 40px;opacity:0.7}
+
+/* ===== WARM SECTION DIVIDER ===== */
+.warm-divider{height:1px;max-width:200px;margin:0 auto;background:linear-gradient(90deg,transparent,rgba(0,200,150,0.2),transparent)}
+
 /* ===== FLOATING CTA ===== */
 .float-cta{display:none;position:fixed;bottom:24px;left:20px;right:20px;z-index:99}
 .float-cta a{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--green);color:var(--midnight);font-weight:600;font-size:15px;padding:18px;border-radius:16px;text-decoration:none;box-shadow:0 12px 40px rgba(0,200,150,0.35)}
@@ -246,6 +265,8 @@ footer{background:var(--midnight);border-top:1px solid rgba(255,255,255,0.03);pa
   .how-card{min-width:300px}
   .bento{grid-template-columns:1fr}
   .proof-row{gap:40px}
+  .about-grid{grid-template-columns:1fr;text-align:center}
+  .about-photo{max-width:240px;margin:0 auto}
   .contact-grid{grid-template-columns:1fr;gap:48px}
   .form-card{padding:32px}
   footer{padding:40px 24px}
@@ -287,6 +308,8 @@ footer{background:var(--midnight);border-top:1px solid rgba(255,255,255,0.03);pa
     <div class="hero-badge"><span class="pulse"></span>Independent Cost Advisory &middot; UK &amp; Ireland</div>
     <h1>TIRED OF COSTS<br>THAT WON'T <span>STAY PUT?</span></h1>
     <p class="hero-sub">Your energy bill has crept up. Your card processing fees don't match what you signed. <strong>Sound familiar?</strong> We find out exactly what you should be paying, negotiate it properly, and make sure it never moves again.</p>
+    <!-- Hero visual accent -->
+    <svg class="illus" width="120" height="8" viewBox="0 0 120 8" fill="none" style="margin-bottom:36px;opacity:0;animation:fadeUp 0.8s ease 0.65s forwards"><rect width="40" height="2" rx="1" fill="#00C896" y="3"/><circle cx="50" cy="4" r="4" fill="#00C896" opacity="0.3"/><circle cx="50" cy="4" r="2" fill="#00C896"/><rect x="60" width="60" height="2" rx="1" fill="#00C896" y="3" opacity="0.3"/></svg>
     <div class="hero-actions">
       <a href="#contact" class="btn-glow">Get a free benchmark <svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a href="#how" class="btn-ghost">See how it works</a>
@@ -311,6 +334,8 @@ footer{background:var(--midnight);border-top:1px solid rgba(255,255,255,0.03);pa
     <h2 class="section-title r">THEY'RE HOPING<br>YOU WON'T CHECK</h2>
     <p class="section-desc r">Here's the thing nobody tells you: the price you signed up for isn't the price you're paying. Somewhere between day one and today, the numbers shifted. Not by accident.</p>
 
+    <!-- Visual: rising cost line -->
+    <svg width="100%" height="48" viewBox="0 0 500 48" fill="none" style="margin-bottom:20px;opacity:0.5" preserveAspectRatio="none"><line x1="0" y1="40" x2="500" y2="40" stroke="rgba(255,255,255,0.04)" stroke-width="1"/><polyline points="0,38 80,34 160,28 240,20 320,14 400,8 500,2" fill="none" stroke="rgba(255,85,85,0.3)" stroke-width="2" stroke-linecap="round"/><line x1="0" y1="36" x2="500" y2="36" stroke="rgba(0,200,150,0.15)" stroke-width="2" stroke-dasharray="4 4"/><text x="500" y="16" text-anchor="end" fill="rgba(255,85,85,0.4)" font-family="Space Mono" font-size="8" letter-spacing="0.1em">RISING</text><text x="500" y="44" text-anchor="end" fill="rgba(0,200,150,0.3)" font-family="Space Mono" font-size="8" letter-spacing="0.1em">SHOULD BE</text></svg>
     <div class="pain-card r"><div class="pain-num">01</div><div><p class="pain-h">Energy Bills Keep Rising</p><p class="pain-p">Your supplier added charges you didn't agree to. When renewal came, they rolled you onto a worse rate. You were running a business &mdash; they were running up your bill.</p></div></div>
     <div class="pain-card r rd1"><div class="pain-num">02</div><div><p class="pain-h">Card Fees Quietly Creep</p><p class="pain-p">That statement is deliberately confusing. Interchange, scheme fees, PCI charges &mdash; they add line items knowing you won't question them. Most business owners don't even know what they're paying per transaction.</p></div></div>
     <div class="pain-card r rd2"><div class="pain-num">03</div><div><p class="pain-h">You Can't Budget Properly</p><p class="pain-p">If your costs change every month, you can't plan. You can't forecast. You can't grow with confidence. One fixed number changes everything.</p></div></div>
@@ -393,11 +418,35 @@ footer{background:var(--midnight);border-top:1px solid rgba(255,255,255,0.03);pa
     <div class="proof-item r rd1"><div class="proof-big" data-count="0" data-prefix="£">£0</div><div class="proof-sub">Unexpected cost increases during your agreed term</div></div>
     <div class="proof-item r rd2"><div class="proof-big" data-count="2">0</div><div class="proof-sub">Major cost lines benchmarked, negotiated and locked</div></div>
   </div>
+  <!-- Visual: flatline motif -->
+  <svg class="illus r" width="200" height="24" viewBox="0 0 200 24" fill="none" style="margin:40px auto"><line x1="0" y1="12" x2="80" y2="12" stroke="#00C896" stroke-width="2" stroke-dasharray="4 4" opacity="0.3"/><circle cx="100" cy="12" r="8" fill="none" stroke="#00C896" stroke-width="1.5" opacity="0.3"/><circle cx="100" cy="12" r="3" fill="#00C896"/><line x1="120" y1="12" x2="200" y2="12" stroke="#00C896" stroke-width="2" stroke-dasharray="4 4" opacity="0.3"/></svg>
   <div class="quote-glass r">
     <h3 class="quote-big">YOU CAN'T MANAGE<br>WHAT YOU CAN'T MEASURE.</h3>
     <p class="quote-sub">Most businesses we talk to have never seen a clear breakdown of what they're actually paying. That's not your fault &mdash; it's by design. Our free benchmark changes that in one conversation.</p>
   </div>
 </div>
+
+<!-- ===== ABOUT TIM ===== -->
+<div class="about-section">
+  <div class="section">
+    <div class="about-grid">
+      <div class="about-photo r">
+        <img src="assets/images/tim.jpg" alt="Tim Jackson, Founder of Zero Drift" width="320" height="320" loading="lazy">
+      </div>
+      <div class="r rd1">
+        <div class="section-tag">The person behind Zero Drift</div>
+        <h2 class="about-name">Tim Jackson</h2>
+        <p class="about-role">Director &amp; Cost Consultant</p>
+        <p class="about-text">I started Zero Drift because I've been where you are. I ran a business, trusted my suppliers, and assumed the price I signed was the price I was paying. <strong>It wasn't.</strong></p>
+        <p class="about-text">When I finally looked into it, I found charges I'd never agreed to, rates that had crept up without notice, and renewal terms designed to catch me out. I wasn't angry &mdash; I was frustrated that nobody was looking out for businesses like mine.</p>
+        <p class="about-text">So I built Zero Drift. One person, completely independent, focused on two things: your energy costs and your card processing fees. I benchmark what you're paying, negotiate something better, and make sure the price stays exactly where we agreed. <strong>No drift. That's the promise.</strong></p>
+        <p class="about-sig">Based in Northern Ireland &middot; Working across the UK &amp; Ireland</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="warm-divider"></div>
 
 <!-- ===== CONTACT ===== -->
 <div class="contact-wrap" id="contact">
@@ -452,7 +501,7 @@ footer{background:var(--midnight);border-top:1px solid rgba(255,255,255,0.03);pa
       p.x+=p.vx;p.y+=p.vy;
       if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
       ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(0,200,150,0.12)';ctx.fill();
+      ctx.fillStyle='rgba(0,200,150,0.15)';ctx.fill();
     });
     // Connect nearby
     for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
