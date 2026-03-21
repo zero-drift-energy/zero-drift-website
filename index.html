@@ -37,7 +37,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--midnight);color
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes flatlinePulse{0%,100%{box-shadow:0 0 0 0 rgba(0,200,150,0.3)}50%{box-shadow:0 0 0 12px rgba(0,200,150,0)}}
 
-.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
 .reveal-delay-1{transition-delay:0.12s}.reveal-delay-2{transition-delay:0.24s}.reveal-delay-3{transition-delay:0.36s}.reveal-delay-4{transition-delay:0.48s}
 
@@ -98,11 +98,11 @@ nav.scrolled{background:rgba(10,14,20,0.96);border-bottom-color:rgba(0,200,150,0
 .ticker-item{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:0.16em;color:rgba(138,155,168,0.25);white-space:nowrap;padding:0 20px;display:flex;align-items:center;gap:20px}
 .ticker-dot{width:4px;height:4px;border-radius:50%;background:var(--green);opacity:0.4}
 
-section{padding:120px 48px;max-width:1200px;margin:0 auto}
+section{padding:80px 48px;max-width:1200px;margin:0 auto}
 .section-eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--green);margin-bottom:16px;display:flex;align-items:center;gap:12px}
 .section-eyebrow::before{content:'';width:20px;height:1px;background:var(--green)}
 .section-headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,4.5vw,56px);letter-spacing:0.03em;line-height:0.98;margin-bottom:20px}
-.section-sub{font-size:17px;color:var(--muted);font-weight:300;max-width:560px;margin-bottom:56px;line-height:1.8}
+.section-sub{font-size:17px;color:var(--muted);font-weight:300;max-width:560px;margin-bottom:40px;line-height:1.8}
 
 .problem-section{background:var(--graphite)}
 .problem-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
@@ -227,7 +227,7 @@ footer{background:var(--midnight);border-top:1px solid rgba(255,255,255,0.04);pa
   .menu-toggle.open span:nth-child(2){opacity:0}
   .menu-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
   .hero{padding:0 24px}.hero-inner{grid-template-columns:1fr;gap:48px}
-  section{padding:80px 24px}.problem-layout{grid-template-columns:1fr;gap:48px}
+  section{padding:60px 24px}.problem-layout{grid-template-columns:1fr;gap:48px}
   .services-grid{grid-template-columns:1fr}.proof-grid{grid-template-columns:1fr}
   .contact-section{grid-template-columns:1fr;gap:48px}
   footer{padding:40px 24px 32px}.footer-inner{grid-template-columns:1fr;gap:32px}
@@ -256,7 +256,7 @@ footer{background:var(--midnight);border-top:1px solid rgba(255,255,255,0.04);pa
     <div>
       <p class="hero-eyebrow">Independent Cost Advisory &middot; UK &amp; Ireland</p>
       <h1 class="hero-headline">TIRED OF COSTS<br>THAT WON'T<br><span class="accent">STAY PUT?</span></h1>
-      <p class="hero-sub">You signed a deal on energy or card processing. Then the charges started shifting. <strong>You're not imagining it &mdash; and you're not alone.</strong> We lock in the right price and guarantee it stays there.</p>
+      <p class="hero-sub">Your energy bill has crept up. Your card processing fees don't match what you signed. <strong>Sound familiar?</strong> We find out exactly what you should be paying, negotiate it properly, and make sure it never moves again.</p>
       <div class="hero-cta">
         <div class="cta-row">
           <a href="#contact" class="btn-primary">Get a free cost benchmark <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -310,17 +310,17 @@ footer{background:var(--midnight);border-top:1px solid rgba(255,255,255,0.04);pa
   <div class="problem-layout">
     <div>
       <p class="section-eyebrow reveal">The problem</p>
-      <h2 class="section-headline reveal reveal-delay-1">YOUR SUPPLIERS<br>AREN'T ON YOUR SIDE</h2>
-      <p class="section-sub reveal reveal-delay-2">You signed a deal. They moved the numbers. Standing charges crept up, scheme fees appeared, unit rates nudged &mdash; all while you were busy running your business.</p>
+      <h2 class="section-headline reveal reveal-delay-1">THEY'RE HOPING<br>YOU WON'T CHECK</h2>
+      <p class="section-sub reveal reveal-delay-2">Here's the thing nobody tells you: the price you signed up for isn't the price you're paying. Somewhere between day one and today, the numbers shifted. Not by accident.</p>
       <div class="problem-cards">
-        <div class="p-card reveal reveal-delay-1"><div class="p-icon"><svg width="20" height="20" viewBox="0 0 36 36" fill="none"><polygon points="22,2 8,20 17,20 14,34 28,16 19,16" fill="#FF4444" opacity="0.8"/></svg></div><div><p class="p-title">Energy Bills Keep Rising</p><p class="p-body">Unit rates, standing charges and network fees increase mid-contract. Most businesses auto-renew into a worse deal and never realise it.</p></div></div>
-        <div class="p-card reveal reveal-delay-2"><div class="p-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="14" rx="2" stroke="#FF4444" stroke-width="1.5"/><line x1="2" y1="10" x2="22" y2="10" stroke="#FF4444" stroke-width="1.5"/></svg></div><div><p class="p-title">Card Fees Quietly Creep</p><p class="p-body">Scheme fees, PCI charges and incremental rate increases are buried in your statement. Your processor counts on your confusion.</p></div></div>
-        <div class="p-card reveal reveal-delay-3"><div class="p-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#FF4444" stroke-width="1.5"/><line x1="12" y1="7" x2="12" y2="13" stroke="#FF4444" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="16" r="1" fill="#FF4444"/></svg></div><div><p class="p-title">You Can't Budget Properly</p><p class="p-body">When costs drift month to month, budgeting becomes guesswork. A growing business needs one number, held for the full term.</p></div></div>
+        <div class="p-card reveal reveal-delay-1"><div class="p-icon"><svg width="20" height="20" viewBox="0 0 36 36" fill="none"><polygon points="22,2 8,20 17,20 14,34 28,16 19,16" fill="#FF4444" opacity="0.8"/></svg></div><div><p class="p-title">Energy Bills Keep Rising</p><p class="p-body">Your supplier added charges you didn't agree to. When renewal came, they rolled you onto a worse rate. You were running a business &mdash; they were running up your bill.</p></div></div>
+        <div class="p-card reveal reveal-delay-2"><div class="p-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="14" rx="2" stroke="#FF4444" stroke-width="1.5"/><line x1="2" y1="10" x2="22" y2="10" stroke="#FF4444" stroke-width="1.5"/></svg></div><div><p class="p-title">Card Fees Quietly Creep</p><p class="p-body">That statement is deliberately confusing. Interchange, scheme fees, PCI charges &mdash; they add line items knowing you won't question them. Most business owners don't even know what they're paying per transaction.</p></div></div>
+        <div class="p-card reveal reveal-delay-3"><div class="p-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#FF4444" stroke-width="1.5"/><line x1="12" y1="7" x2="12" y2="13" stroke="#FF4444" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="16" r="1" fill="#FF4444"/></svg></div><div><p class="p-title">You Can't Budget Properly</p><p class="p-body">If your costs change every month, you can't plan. You can't forecast. You can't grow with confidence. One fixed number changes everything.</p></div></div>
       </div>
     </div>
     <div class="reveal reveal-delay-2">
       <div class="fee-widget">
-        <p class="fee-header">Where your fees actually go</p>
+        <p class="fee-header">What's hiding in your card statement</p>
         <div class="fee-row"><span class="fee-label">Scheme fee increases</span><div class="fee-bar-wrap"><div class="fee-bar fee-bar-red" style="width:78%"></div></div><span class="fee-pct">+0.18%</span></div>
         <div class="fee-row"><span class="fee-label">Incremental rate hikes</span><div class="fee-bar-wrap"><div class="fee-bar fee-bar-red" style="width:62%"></div></div><span class="fee-pct">+0.14%</span></div>
         <div class="fee-row"><span class="fee-label">PCI non-compliance</span><div class="fee-bar-wrap"><div class="fee-bar fee-bar-amber" style="width:85%"></div></div><span class="fee-pct" style="color:var(--amber)">&pound;35</span></div>
@@ -335,24 +335,24 @@ footer{background:var(--midnight);border-top:1px solid rgba(255,255,255,0.04);pa
 <section id="how">
   <p class="section-eyebrow reveal">How it works</p>
   <h2 class="section-headline reveal reveal-delay-1" style="text-align:center">FOUR STEPS TO<br><span style="color:var(--green)">ZERO DRIFT</span></h2>
-  <p class="section-sub reveal reveal-delay-2" style="margin-left:auto;margin-right:auto;text-align:center;max-width:520px">Simple, independent and completely transparent. No ties to any supplier.</p>
+  <p class="section-sub reveal reveal-delay-2" style="margin-left:auto;margin-right:auto;text-align:center;max-width:520px">No jargon. No allegiances. No reason to recommend anything other than the best deal for you.</p>
   <div class="steps-layout">
-    <div class="step reveal"><div class="step-marker"><div class="step-marker-inner">01</div></div><div class="step-content"><p class="step-title">Free Cost Benchmark</p><p class="step-body">We analyse what you're currently paying for energy and card processing against what the market actually offers. Most clients discover significant overpayment in the first conversation.</p></div></div>
-    <div class="step reveal reveal-delay-1"><div class="step-marker"><div class="step-marker-inner">02</div></div><div class="step-content"><p class="step-title">Independent Negotiation</p><p class="step-body">We go to market on your behalf with no allegiance to any single supplier. We find the right deal, not just the closest one. Then we negotiate it properly.</p></div></div>
-    <div class="step reveal reveal-delay-2"><div class="step-marker"><div class="step-marker-inner">03</div></div><div class="step-content"><p class="step-title">Fixed Price Agreement</p><p class="step-body">The price we agree on day one is the price you pay on the last day. No mid-contract increases. No hidden charges. One number, guaranteed.</p></div></div>
-    <div class="step reveal reveal-delay-3"><div class="step-marker"><div class="step-marker-inner">04</div></div><div class="step-content"><p class="step-title">Ongoing Management</p><p class="step-body">We monitor your agreements throughout the term. When renewal comes, we're already working on the next deal. You never have to think about it again.</p></div></div>
+    <div class="step reveal"><div class="step-marker"><div class="step-marker-inner">01</div></div><div class="step-content"><p class="step-title">Free Cost Benchmark</p><p class="step-body">Send us a recent bill or statement. We'll tell you exactly what you're overpaying &mdash; and by how much. It takes one conversation. Most people are surprised.</p></div></div>
+    <div class="step reveal reveal-delay-1"><div class="step-marker"><div class="step-marker-inner">02</div></div><div class="step-content"><p class="step-title">Independent Negotiation</p><p class="step-body">We don't work for any supplier. We work for you. That means we go to the whole market, find the best deal, and negotiate like it's our own money.</p></div></div>
+    <div class="step reveal reveal-delay-2"><div class="step-marker"><div class="step-marker-inner">03</div></div><div class="step-content"><p class="step-title">Fixed Price Agreement</p><p class="step-body">The price on day one is the price on the last day. That's it. No mid-contract surprises. No creative fee additions. One number you can actually budget around.</p></div></div>
+    <div class="step reveal reveal-delay-3"><div class="step-marker"><div class="step-marker-inner">04</div></div><div class="step-content"><p class="step-title">Ongoing Management</p><p class="step-body">We watch the contract so you don't have to. Before it expires, we're already negotiating the next one. You'll never get caught on an auto-renewal again.</p></div></div>
   </div>
 </section>
 
 <div class="services-bg"><section id="services">
   <p class="section-eyebrow reveal">Services</p>
   <h2 class="section-headline reveal reveal-delay-1">TWO COST LINES.<br>ONE EXPERT.</h2>
-  <p class="section-sub reveal reveal-delay-2">We specialise in the two costs most SMEs are consistently overpaying &mdash; and we fix both.</p>
+  <p class="section-sub reveal reveal-delay-2">Energy and card processing. Two bills every business pays, and two bills almost every business overpays. We fix both.</p>
   <div class="services-grid">
     <div class="svc-card reveal reveal-delay-1">
       <div class="svc-icon" style="background:rgba(255,68,68,0.08);border:1px solid rgba(255,68,68,0.12)"><svg width="28" height="28" viewBox="0 0 36 36" fill="none"><polygon points="22,2 8,20 17,20 14,34 28,16 19,16" fill="#FF4444" opacity="0.9"/></svg></div>
       <p class="svc-title">Business Energy</p>
-      <p class="svc-body">We benchmark your current energy costs, go to market independently and lock in a better unit rate for the full contract term. No more auto-renewals onto worse deals.</p>
+      <p class="svc-body">We'll look at your gas and electricity, find out what the market is actually charging, and lock you into a rate that doesn't move. When renewal comes around, we handle it before your supplier gets the chance to roll you over.</p>
       <ul class="svc-features">
         <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6.4 11.2 2.7 7.5" stroke="#00C896" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Gas and electricity for commercial premises</li>
         <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6.4 11.2 2.7 7.5" stroke="#00C896" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Multi-site and group contracts</li>
@@ -364,7 +364,7 @@ footer{background:var(--midnight);border-top:1px solid rgba(255,255,255,0.04);pa
     <div class="svc-card reveal reveal-delay-2">
       <div class="svc-icon" style="background:rgba(0,200,150,0.08);border:1px solid rgba(0,200,150,0.12)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="14" rx="2" stroke="#00C896" stroke-width="1.5"/><line x1="2" y1="10" x2="22" y2="10" stroke="#00C896" stroke-width="1.5"/><line x1="6" y1="15" x2="10" y2="15" stroke="#00C896" stroke-width="1.5" stroke-linecap="round"/></svg></div>
       <p class="svc-title">Card Processing</p>
-      <p class="svc-body">We audit your current card processing costs, identify scheme fees and incremental charges, and negotiate a fixed effective rate with no hidden creep.</p>
+      <p class="svc-body">We pull apart your merchant statement line by line. Every interchange fee, every scheme charge, every margin your processor has quietly added. Then we negotiate a single, fixed effective rate &mdash; and it stays fixed.</p>
       <ul class="svc-features">
         <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6.4 11.2 2.7 7.5" stroke="#00C896" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Full statement audit &mdash; see what you actually pay</li>
         <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6.4 11.2 2.7 7.5" stroke="#00C896" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Fixed effective rate agreed upfront</li>
@@ -384,14 +384,14 @@ footer{background:var(--midnight);border-top:1px solid rgba(255,255,255,0.04);pa
     <div class="proof-card reveal reveal-delay-2"><div class="proof-num">&pound;0</div><div class="proof-label">Unexpected cost increases during your agreed term</div></div>
     <div class="proof-card reveal reveal-delay-3"><div class="proof-num">2</div><div class="proof-label">Major cost lines benchmarked, negotiated and locked in one place</div></div>
   </div>
-  <div class="quote-card reveal"><div class="quote-mark">&ldquo;</div><p class="quote-text">YOU CAN'T MANAGE<br>WHAT YOU CAN'T MEASURE.</p><p class="quote-body">Before we start, most clients have no clear view of what they're actually paying &mdash; or why it keeps changing. Our benchmark gives you the full picture in one conversation. From there, we fix it.</p></div>
+  <div class="quote-card reveal"><div class="quote-mark">&ldquo;</div><p class="quote-text">YOU CAN'T MANAGE<br>WHAT YOU CAN'T MEASURE.</p><p class="quote-body">Most businesses we talk to have never seen a clear breakdown of what they're actually paying. That's not your fault &mdash; it's by design. Our free benchmark changes that in one conversation.</p></div>
 </section></div>
 
 <section id="contact"><div class="contact-section">
   <div class="reveal">
     <p class="section-eyebrow">Get started</p>
-    <h2 class="contact-headline">READY TO SEE<br>WHAT YOU'RE<br><span>REALLY PAYING?</span></h2>
-    <p class="contact-sub">Book a free cost benchmark. We'll show you exactly where your money is going &mdash; and how much you could save. No commitment, no pressure.</p>
+    <h2 class="contact-headline">FIVE MINUTES.<br>ONE CONVERSATION.<br><span>REAL ANSWERS.</span></h2>
+    <p class="contact-sub">Tell us what you're paying. We'll tell you what you should be paying. If we can save you money, we'll show you exactly how. If we can't, you'll know your deal is already solid.</p>
     <ul class="promises">
       <li><svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6.4 11.2 2.7 7.5" stroke="#00C896" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Free benchmark &mdash; no strings attached</li>
       <li><svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6.4 11.2 2.7 7.5" stroke="#00C896" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>We'll call you back within one business day</li>
@@ -422,7 +422,7 @@ footer{background:var(--midnight);border-top:1px solid rgba(255,255,255,0.04);pa
 <div class="floating-cta" id="floatingCta"><a href="#contact">Get a free benchmark <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
 
 <script>
-const obs=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');e.target.querySelectorAll('.fee-bar').forEach(b=>b.classList.add('visible'))}})},{threshold:0.12,rootMargin:'0px 0px -60px 0px'});
+const obs=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');e.target.querySelectorAll('.fee-bar').forEach(b=>b.classList.add('visible'))}})},{threshold:0.12,rootMargin:'0px 0px -20px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 document.querySelectorAll('.svc-card,.proof-card').forEach(el=>obs.observe(el));
 window.addEventListener('scroll',()=>{document.querySelector('nav').classList.toggle('scrolled',window.scrollY>60);const c=document.getElementById('floatingCta');if(c){const h=document.querySelector('.hero').getBoundingClientRect().bottom;const t=document.getElementById('contact');const ct=t?t.getBoundingClientRect().top:Infinity;c.style.display=(h<0&&ct>window.innerHeight)?'block':'none'}},{passive:true});
