@@ -26,10 +26,9 @@
   --black: #0A0A0A;
   --ink: #111111;
   --green: #00B383;
-  --green-dim: rgba(0,179,131,0.12);
+  --green-dim: rgba(0,179,131,0.1);
   --green-dark: #009970;
   --cream: #F4EFE8;
-  --cream-dark: #EAE4DC;
   --white: #FFFFFF;
   --red: #C42B00;
   --font-display: 'Bebas Neue', sans-serif;
@@ -38,65 +37,117 @@
 }
 
 html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--black);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-body{
-  font-family:var(--font-body);
-  background:var(--black);
-  color:var(--white);
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
+/* ── KEYFRAMES ── */
+@keyframes ghost-drift{
+  0%,100%{transform:translateY(0) translateX(0) rotate(0deg)}
+  25%{transform:translateY(-12px) translateX(6px) rotate(0.3deg)}
+  75%{transform:translateY(8px) translateX(-4px) rotate(-0.2deg)}
+}
+@keyframes scan-line{
+  0%{transform:translateX(-100%)}
+  100%{transform:translateX(200%)}
+}
+@keyframes bar-bad{
+  from{height:0}
+  to{height:82%}
+}
+@keyframes bar-good{
+  from{height:0}
+  to{height:5px}
+}
+@keyframes pulse-ring{
+  0%{transform:scale(1);opacity:0.6}
+  100%{transform:scale(1.6);opacity:0}
+}
+@keyframes fade-up{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:none}
+}
+@keyframes draw-line{
+  from{stroke-dashoffset:1000}
+  to{stroke-dashoffset:0}
+}
+@keyframes shimmer{
+  0%{left:-60%}
+  100%{left:130%}
+}
+
+/* ── CURSOR GLOW ── */
+#cursor-glow{
+  position:fixed;width:500px;height:500px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(0,179,131,0.07) 0%,transparent 65%);
+  pointer-events:none;z-index:1;
+  transform:translate(-50%,-50%);
+  transition:opacity 0.4s;
+  mix-blend-mode:screen;
 }
 
 /* ── NAV ── */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:20px 48px;
+  padding:22px 48px;
   display:flex;align-items:center;justify-content:space-between;
-  transition:background 0.3s ease, border-color 0.3s ease, padding 0.3s ease;
+  transition:background 0.35s ease,border-color 0.35s ease,padding 0.35s ease;
   border-bottom:1px solid transparent;
 }
 .nav.scrolled{
-  background:rgba(10,10,10,0.93);
-  backdrop-filter:blur(16px);
-  border-color:rgba(255,255,255,0.06);
+  background:rgba(10,10,10,0.92);
+  backdrop-filter:blur(20px);
+  border-color:rgba(255,255,255,0.05);
   padding:14px 48px;
 }
-.nav-logo img{height:30px;width:auto;display:block}
+/* Wordmark logo */
+.nav-wordmark{
+  font-family:var(--font-display);
+  font-size:20px;letter-spacing:0.1em;
+  color:var(--white);text-decoration:none;
+  display:flex;align-items:center;gap:0;
+}
+.nav-wordmark .wm-zero{color:var(--white)}
+.nav-wordmark .wm-sep{
+  display:inline-block;
+  width:5px;height:5px;
+  background:var(--green);
+  border-radius:50%;
+  margin:0 7px;
+  position:relative;top:-1px;
+}
+.nav-wordmark .wm-drift{color:var(--green)}
 .nav-links{display:flex;align-items:center;gap:36px;list-style:none}
 .nav-links a{
   font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;
-  text-transform:uppercase;color:rgba(255,255,255,0.55);
+  text-transform:uppercase;color:rgba(255,255,255,0.5);
   text-decoration:none;transition:color 0.2s;
 }
 .nav-links a:hover{color:var(--white)}
 .nav-cta-link{
   color:var(--green) !important;
-  border:1px solid rgba(0,179,131,0.4);
+  border:1px solid rgba(0,179,131,0.35);
   padding:9px 20px;
-  transition:background 0.2s, color 0.2s !important;
+  transition:background 0.2s,color 0.2s !important;
 }
 .nav-cta-link:hover{background:var(--green);color:var(--black) !important}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
 .hamburger span{display:block;width:22px;height:1.5px;background:var(--white);transition:all 0.3s}
 .mobile-menu{
   display:none;position:fixed;inset:0;background:var(--black);z-index:99;
-  flex-direction:column;align-items:flex-start;justify-content:flex-end;
-  padding:48px;
+  flex-direction:column;align-items:flex-start;justify-content:flex-end;padding:48px;
 }
 .mobile-menu.open{display:flex}
 .mobile-close{
   position:absolute;top:20px;right:24px;
-  font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.4);
-  letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;
-  background:none;border:none;color:inherit;
+  font-family:var(--font-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
+  cursor:pointer;background:none;border:none;color:rgba(255,255,255,0.4);
 }
 .mobile-menu nav{display:flex;flex-direction:column;gap:8px;width:100%}
 .mobile-menu a{
   font-family:var(--font-display);font-size:clamp(40px,10vw,72px);
   color:var(--white);text-decoration:none;letter-spacing:0.01em;
   line-height:1.1;border-bottom:1px solid rgba(255,255,255,0.06);
-  padding-bottom:16px;
-  transition:color 0.2s;
+  padding-bottom:16px;transition:color 0.2s;
 }
 .mobile-menu a:hover{color:var(--green)}
 .mobile-menu a:last-child{border-bottom:none}
@@ -105,187 +156,219 @@ body{
 .hero{
   min-height:100svh;
   background:var(--black);
-  display:grid;
-  grid-template-rows:1fr auto;
+  display:grid;grid-template-rows:1fr auto;
   padding:0 48px 56px;
-  position:relative;
-  overflow:hidden;
+  position:relative;overflow:hidden;
+}
+/* Dot grid overlay */
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,0.035) 1px,transparent 1px);
+  background-size:44px 44px;
+  pointer-events:none;z-index:0;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 100%);
 }
 .hero-ghost{
-  position:absolute;
-  bottom:-0.15em;right:-0.05em;
+  position:absolute;bottom:-0.15em;right:-0.05em;
   font-family:var(--font-display);
   font-size:clamp(200px,32vw,560px);
   color:rgba(255,255,255,0.025);
   line-height:1;letter-spacing:-0.02em;
   user-select:none;pointer-events:none;white-space:nowrap;
+  animation:ghost-drift 22s ease-in-out infinite;
+  will-change:transform;
 }
 .hero-main{
-  display:flex;flex-direction:column;
-  justify-content:flex-end;
-  padding-top:120px;
-  position:relative;z-index:1;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding-top:120px;position:relative;z-index:1;
 }
 .eyebrow{
   font-family:var(--font-mono);font-size:10px;
   color:var(--green);letter-spacing:0.2em;text-transform:uppercase;
   display:flex;align-items:center;gap:12px;margin-bottom:28px;
+  animation:fade-up 0.8s 0.2s cubic-bezier(0.16,1,0.3,1) both;
 }
 .eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--green)}
 .hero-headline{
   font-family:var(--font-display);
   font-size:clamp(80px,14vw,220px);
   line-height:0.88;letter-spacing:-0.01em;
-  color:var(--white);
-  max-width:12ch;
-  margin-bottom:0;
+  color:var(--white);max-width:12ch;margin-bottom:0;
+  animation:fade-up 0.9s 0.35s cubic-bezier(0.16,1,0.3,1) both;
 }
 .hero-headline em{font-style:normal;color:var(--green)}
 .hero-foot{
-  display:grid;
-  grid-template-columns:1fr auto;
-  align-items:flex-end;
-  gap:40px;
+  display:grid;grid-template-columns:1fr auto;
+  align-items:flex-end;gap:40px;
   position:relative;z-index:1;
+  animation:fade-up 0.9s 0.55s cubic-bezier(0.16,1,0.3,1) both;
 }
-.hero-sub{
-  font-size:18px;line-height:1.65;
-  color:rgba(255,255,255,0.55);
-  max-width:440px;
-}
+.hero-sub{font-size:18px;line-height:1.65;color:rgba(255,255,255,0.5);max-width:440px}
 .hero-actions{display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+
+/* ── BUTTONS ── */
 .btn{
   display:inline-block;
   font-family:var(--font-mono);font-size:11px;font-weight:700;
   letter-spacing:0.1em;text-transform:uppercase;
   text-decoration:none;padding:15px 28px;
-  transition:all 0.2s;white-space:nowrap;
+  transition:all 0.22s;white-space:nowrap;
+  position:relative;overflow:hidden;
 }
+.btn .arrow{display:inline-block;transition:transform 0.22s}
+.btn:hover .arrow{transform:translateX(4px)}
 .btn-green{background:var(--green);color:var(--black)}
-.btn-green:hover{background:var(--green-dark);transform:translateY(-2px)}
+.btn-green:hover{background:var(--green-dark)}
 .btn-outline{border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.7)}
 .btn-outline:hover{border-color:rgba(255,255,255,0.5);color:var(--white)}
 .btn-dark{background:var(--black);color:var(--white)}
 .btn-dark:hover{background:var(--green);color:var(--black)}
-.btn-cream{background:var(--cream);color:var(--black)}
-.btn-cream:hover{background:var(--white)}
+.btn-white{background:var(--white);color:var(--black)}
+.btn-white:hover{background:var(--green);color:var(--black)}
 
 /* ── GREEN BAND ── */
-.green-band{
-  background:var(--green);
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-}
+.green-band{background:var(--green);display:grid;grid-template-columns:repeat(3,1fr)}
 .band-stat{
-  padding:44px 48px;
-  border-right:1px solid rgba(0,0,0,0.12);
+  padding:44px 48px;border-right:1px solid rgba(0,0,0,0.12);
   display:flex;flex-direction:column;gap:10px;
+  position:relative;overflow:hidden;
 }
 .band-stat:last-child{border-right:none}
+/* shimmer on scroll-in */
+.band-stat.in::after{
+  content:'';position:absolute;top:0;bottom:0;width:50%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);
+  animation:shimmer 0.9s ease both;
+}
 .band-number{
   font-family:var(--font-display);
   font-size:clamp(56px,7vw,88px);
   color:var(--black);line-height:1;letter-spacing:-0.01em;
 }
-.band-label{
-  font-family:var(--font-mono);font-size:10px;
-  color:rgba(0,0,0,0.55);letter-spacing:0.12em;text-transform:uppercase;
-}
+.band-label{font-family:var(--font-mono);font-size:10px;color:rgba(0,0,0,0.55);letter-spacing:0.12em;text-transform:uppercase}
 
-/* ── PROBLEM ── */
+/* ── PROBLEM (redesigned — dark, comparison panels) ── */
 .problem{
-  background:var(--cream);color:var(--black);
-  padding:112px 48px;
+  background:var(--black);color:var(--white);
+  padding:112px 48px;position:relative;overflow:hidden;
 }
-.section-tag{
-  font-family:var(--font-mono);font-size:10px;
-  letter-spacing:0.2em;text-transform:uppercase;
-  margin-bottom:20px;
+.problem-wm{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  font-family:var(--font-display);
+  font-size:clamp(180px,28vw,380px);
+  color:rgba(196,43,0,0.04);
+  letter-spacing:-0.03em;user-select:none;pointer-events:none;white-space:nowrap;
 }
+.problem-top{text-align:center;margin-bottom:72px;position:relative;z-index:1}
+.problem-heading{
+  font-family:var(--font-display);
+  font-size:clamp(52px,7vw,96px);
+  line-height:0.93;color:var(--white);
+}
+.problem-heading em{font-style:normal;color:var(--red)}
+.problem-sub{
+  font-size:18px;line-height:1.6;color:rgba(255,255,255,0.45);
+  max-width:560px;margin:24px auto 0;
+}
+.compare{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:3px;margin-bottom:64px;position:relative;z-index:1;
+}
+.cmp{
+  padding:52px;display:flex;flex-direction:column;gap:0;
+  transition:transform 0.3s;
+}
+.cmp:hover{transform:translateY(-4px)}
+.cmp.bad{background:rgba(196,43,0,0.07);border:1px solid rgba(196,43,0,0.18)}
+.cmp.good{background:rgba(0,179,131,0.07);border:1px solid rgba(0,179,131,0.2)}
+.cmp-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+.cmp-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase}
+.cmp.bad .cmp-label{color:rgba(196,43,0,0.7)}
+.cmp.good .cmp-label{color:rgba(0,179,131,0.7)}
+.cmp-icon{width:28px;height:28px;flex-shrink:0}
+.cmp.bad .cmp-icon{color:rgba(196,43,0,0.6)}
+.cmp.good .cmp-icon{color:rgba(0,179,131,0.6)}
+.cmp-big{
+  font-family:var(--font-display);
+  font-size:clamp(72px,10vw,120px);
+  line-height:0.88;margin-bottom:8px;
+}
+.cmp.bad .cmp-big{color:var(--red)}
+.cmp.good .cmp-big{color:var(--green)}
+.cmp-caption{font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:32px}
+.cmp.bad .cmp-caption{color:rgba(255,255,255,0.3)}
+.cmp.good .cmp-caption{color:rgba(255,255,255,0.3)}
+/* bar visual */
+.cmp-bar-wrap{
+  height:120px;display:flex;flex-direction:column;justify-content:flex-end;
+  margin-bottom:32px;border-bottom:1px solid rgba(255,255,255,0.08);
+  position:relative;
+}
+.cmp-bar{width:100%;border-radius:1px 1px 0 0}
+.cmp.bad .cmp-bar{
+  background:linear-gradient(to top,#C42B00,#e03000);
+  height:0;
+}
+.cmp.bad.in .cmp-bar{animation:bar-bad 1.4s 0.2s cubic-bezier(0.16,1,0.3,1) both}
+.cmp.good .cmp-bar{
+  background:var(--green);
+  height:0;
+}
+.cmp.good.in .cmp-bar{animation:bar-good 0.8s 0.4s cubic-bezier(0.16,1,0.3,1) both}
+.cmp-bar-lbl{
+  position:absolute;bottom:-24px;left:0;right:0;
+  font-family:var(--font-mono);font-size:9px;
+  color:rgba(255,255,255,0.25);letter-spacing:0.1em;text-transform:uppercase;
+  text-align:center;
+}
+.cmp-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.cmp-list li{
+  font-size:15px;line-height:1.5;
+  display:flex;align-items:flex-start;gap:10px;
+}
+.cmp.bad .cmp-list li{color:rgba(255,255,255,0.5)}
+.cmp.good .cmp-list li{color:rgba(255,255,255,0.75)}
+.cmp-li-icon{width:14px;height:14px;flex-shrink:0;margin-top:3px}
+.cmp.bad .cmp-li-icon{color:rgba(196,43,0,0.5)}
+.cmp.good .cmp-li-icon{color:var(--green)}
+.problem-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:32px;position:relative;z-index:1;
+}
+.problem-note{font-size:13px;color:rgba(255,255,255,0.3);font-style:italic;max-width:520px;line-height:1.6}
+
+/* ── SECTION TAGS ── */
+.section-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:20px}
 .section-tag.on-dark{color:rgba(255,255,255,0.3)}
 .section-tag.on-light{color:rgba(10,10,10,0.35)}
 .section-tag.on-green{color:rgba(0,0,0,0.45)}
-.problem-layout{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:96px;align-items:start;margin-top:48px;
-}
-.problem-heading{
-  font-family:var(--font-display);
-  font-size:clamp(56px,7vw,100px);
-  line-height:0.93;letter-spacing:-0.01em;color:var(--black);
-}
-.problem-heading em{font-style:normal;color:var(--red)}
-.problem-body{
-  font-size:18px;line-height:1.7;
-  color:rgba(10,10,10,0.6);margin-top:32px;
-}
-.problem-body+.problem-body{margin-top:16px}
-.data-table{display:flex;flex-direction:column}
-.data-row{
-  display:flex;justify-content:space-between;align-items:baseline;
-  padding:22px 0;
-  border-bottom:1px solid rgba(10,10,10,0.1);
-}
-.data-row:first-child{border-top:1px solid rgba(10,10,10,0.1)}
-.data-label{
-  font-family:var(--font-mono);font-size:10px;
-  color:rgba(10,10,10,0.45);letter-spacing:0.08em;text-transform:uppercase;
-}
-.data-value{
-  font-family:var(--font-display);
-  font-size:clamp(28px,3.5vw,42px);
-  letter-spacing:-0.01em;line-height:1;
-}
-.data-value.bad{color:var(--red)}
-.data-value.good{color:var(--green)}
-.data-value.neutral{color:var(--black)}
-.problem-note{
-  font-size:14px;line-height:1.6;
-  color:rgba(10,10,10,0.5);
-  margin-top:32px;font-style:italic;
-}
 
 /* ── ABOUT ── */
 .about{
   background:var(--ink);color:var(--white);
-  display:grid;grid-template-columns:1fr 1fr;
-  min-height:75vh;
+  display:grid;grid-template-columns:1fr 1fr;min-height:75vh;
 }
-.about-copy{
-  padding:96px 60px 96px 48px;
-  display:flex;flex-direction:column;justify-content:center;
-}
-.about-heading{
-  font-family:var(--font-display);
-  font-size:clamp(52px,5.5vw,80px);
-  line-height:0.93;color:var(--white);
-  margin-top:20px;margin-bottom:36px;
-}
+.about-copy{padding:96px 60px 96px 48px;display:flex;flex-direction:column;justify-content:center}
+.about-heading{font-family:var(--font-display);font-size:clamp(52px,5.5vw,80px);line-height:0.93;color:var(--white);margin-top:20px;margin-bottom:36px}
 .about-heading em{font-style:normal;color:var(--green)}
 .about-body{font-size:17px;line-height:1.75;color:rgba(255,255,255,0.55)}
 .about-body p+p{margin-top:16px}
 .about-photo{overflow:hidden;position:relative}
-.about-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.about-photo img{
+  width:100%;height:100%;object-fit:cover;object-position:top center;display:block;
+  transition:transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+.about-photo:hover img{transform:scale(1.03)}
 
 /* ── SERVICE BLOCKS ── */
-.svc{
-  padding:100px 48px;
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:80px;align-items:center;
-}
+.svc{padding:100px 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
 .svc.dark{background:var(--black);color:var(--white)}
 .svc.cream{background:var(--cream);color:var(--black)}
-.svc-label{
-  font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;
-  text-transform:uppercase;margin-bottom:18px;
-}
+.svc-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:18px}
 .svc.dark .svc-label{color:rgba(255,255,255,0.3)}
 .svc.cream .svc-label{color:rgba(10,10,10,0.35)}
-.svc-heading{
-  font-family:var(--font-display);
-  font-size:clamp(52px,6.5vw,88px);
-  line-height:0.93;margin-bottom:32px;
-}
+.svc-heading{font-family:var(--font-display);font-size:clamp(52px,6.5vw,88px);line-height:0.93;margin-bottom:32px}
 .svc.dark .svc-heading{color:var(--white)}
 .svc.cream .svc-heading{color:var(--black)}
 .svc-heading em{font-style:normal;color:var(--green)}
@@ -303,60 +386,44 @@ body{
   font-size:clamp(140px,18vw,240px);
   line-height:0.85;letter-spacing:-0.02em;
   user-select:none;pointer-events:none;
+  transition:transform 0.5s ease,opacity 0.5s ease;
 }
 .svc.dark .ghost-num{color:rgba(255,255,255,0.03)}
 .svc.cream .ghost-num{color:rgba(10,10,10,0.04)}
-.metric{
-  padding:24px 28px;
-  border-top:1px solid;
-}
+.svc:hover .ghost-num{transform:scale(1.04) rotate(-1deg)}
+.metric{padding:24px 28px;border-top:1px solid}
 .svc.dark .metric{border-color:rgba(255,255,255,0.06)}
 .svc.cream .metric{border-color:rgba(10,10,10,0.08)}
-.metric-val{
-  font-family:var(--font-display);
-  font-size:52px;color:var(--green);
-  letter-spacing:-0.01em;line-height:1;
-}
-.metric-lbl{
-  font-family:var(--font-mono);font-size:10px;
-  letter-spacing:0.1em;text-transform:uppercase;margin-top:6px;
-}
+.metric-val{font-family:var(--font-display);font-size:52px;color:var(--green);letter-spacing:-0.01em;line-height:1}
+.metric-lbl{font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;margin-top:6px}
 .svc.dark .metric-lbl{color:rgba(255,255,255,0.35)}
 .svc.cream .metric-lbl{color:rgba(10,10,10,0.4)}
 
 /* ── HOW IT WORKS ── */
-.how{
-  background:var(--green);color:var(--black);
-  padding:100px 48px;
-}
-.how-heading{
-  font-family:var(--font-display);
-  font-size:clamp(64px,10vw,140px);
-  line-height:0.88;color:var(--black);
-  margin-bottom:72px;
-}
+.how{background:var(--green);color:var(--black);padding:100px 48px}
+.how-heading{font-family:var(--font-display);font-size:clamp(64px,10vw,140px);line-height:0.88;color:var(--black);margin-bottom:72px}
 .steps{display:flex;flex-direction:column}
 .step{
   display:grid;grid-template-columns:72px 1fr;
   gap:0;align-items:start;
   border-top:1px solid rgba(0,0,0,0.14);
   padding:32px 0;
+  transition:border-color 0.2s;
+  position:relative;
 }
+.step::before{
+  content:'';
+  position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:var(--black);transform:scaleY(0);transform-origin:top;
+  transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.step:hover::before{transform:scaleY(1)}
 .step:last-child{border-bottom:1px solid rgba(0,0,0,0.14)}
-.step-n{
-  font-family:var(--font-display);
-  font-size:56px;color:rgba(0,0,0,0.14);line-height:1;
-}
+.step-n{font-family:var(--font-display);font-size:56px;color:rgba(0,0,0,0.14);line-height:1;transition:color 0.3s}
+.step:hover .step-n{color:rgba(0,0,0,0.35)}
 .step-body{padding-top:8px}
-.step-title{
-  font-family:var(--font-display);
-  font-size:clamp(28px,3vw,40px);
-  color:var(--black);margin-bottom:10px;line-height:1;
-}
-.step-desc{
-  font-size:16px;line-height:1.65;
-  color:rgba(0,0,0,0.6);max-width:520px;
-}
+.step-title{font-family:var(--font-display);font-size:clamp(28px,3vw,40px);color:var(--black);margin-bottom:10px;line-height:1}
+.step-desc{font-size:16px;line-height:1.65;color:rgba(0,0,0,0.6);max-width:520px}
 
 /* ── PROOF ── */
 .proof{background:var(--black);padding:112px 48px}
@@ -370,116 +437,136 @@ body{
   padding:44px 36px;
   border-bottom:1px solid rgba(255,255,255,0.06);
   border-right:1px solid rgba(255,255,255,0.06);
+  position:relative;overflow:hidden;
+  transition:background 0.3s;
 }
-.proof-big{
-  font-family:var(--font-display);
-  font-size:clamp(56px,7vw,96px);
-  color:var(--green);line-height:1;margin-bottom:10px;
-}
-.proof-lbl{
-  font-family:var(--font-mono);font-size:10px;
-  color:rgba(255,255,255,0.35);
-  letter-spacing:0.1em;text-transform:uppercase;
-}
+.proof-cell:hover{background:rgba(255,255,255,0.02)}
+.proof-big{font-family:var(--font-display);font-size:clamp(56px,7vw,96px);color:var(--green);line-height:1;margin-bottom:10px}
+.proof-lbl{font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase}
 .testimonial{
-  border-top:1px solid rgba(255,255,255,0.06);
-  padding-top:64px;
-  display:grid;grid-template-columns:1fr auto;
-  align-items:flex-end;gap:48px;
+  border-top:1px solid rgba(255,255,255,0.06);padding-top:64px;
+  display:grid;grid-template-columns:1fr auto;align-items:flex-end;gap:48px;
 }
-.tq{
-  font-family:var(--font-display);
-  font-size:clamp(36px,4.5vw,60px);
-  color:var(--white);line-height:1.05;
-}
+.tq{font-family:var(--font-display);font-size:clamp(36px,4.5vw,60px);color:var(--white);line-height:1.05}
 .ta{text-align:right}
-.ta-name{
-  font-family:var(--font-mono);font-size:11px;
-  color:var(--green);letter-spacing:0.1em;text-transform:uppercase;
-}
-.ta-co{
-  font-family:var(--font-mono);font-size:10px;
-  color:rgba(255,255,255,0.28);letter-spacing:0.05em;margin-top:6px;
-}
+.ta-name{font-family:var(--font-mono);font-size:11px;color:var(--green);letter-spacing:0.1em;text-transform:uppercase}
+.ta-co{font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.28);letter-spacing:0.05em;margin-top:6px}
 
-/* ── CONTACT ── */
+/* ── CONTACT (redesigned — dark, Tim card + styled form) ── */
 .contact{
-  background:var(--cream);color:var(--black);
+  background:var(--ink);color:var(--white);
   display:grid;grid-template-columns:1fr 1fr;
   gap:80px;padding:112px 48px;
 }
 .contact-heading{
   font-family:var(--font-display);
-  font-size:clamp(64px,9vw,128px);
-  line-height:0.88;color:var(--black);
+  font-size:clamp(64px,9vw,120px);
+  line-height:0.88;color:var(--white);
   margin-top:20px;margin-bottom:28px;
 }
-.contact-sub{
-  font-size:17px;line-height:1.65;
-  color:rgba(10,10,10,0.5);max-width:360px;
+.contact-heading em{font-style:normal;color:var(--green)}
+.contact-sub{font-size:17px;line-height:1.65;color:rgba(255,255,255,0.45);max-width:360px;margin-bottom:40px}
+/* Tim profile card */
+.tim-card{
+  display:flex;align-items:center;gap:20px;
+  padding:24px;border:1px solid rgba(255,255,255,0.07);
+  margin-bottom:32px;
 }
-.form{display:flex;flex-direction:column}
+.tim-card-photo{
+  width:60px;height:60px;border-radius:50%;overflow:hidden;flex-shrink:0;
+  border:2px solid rgba(0,179,131,0.4);
+}
+.tim-card-photo img{width:100%;height:100%;object-fit:cover;object-position:top}
+.tim-card-info{}
+.tim-card-name{font-family:var(--font-display);font-size:24px;color:var(--white);line-height:1}
+.tim-card-role{font-family:var(--font-mono);font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:0.12em;text-transform:uppercase;margin-top:4px}
+.tim-card-email{
+  font-family:var(--font-mono);font-size:10px;
+  color:var(--green);text-decoration:none;letter-spacing:0.05em;
+  display:block;margin-top:6px;
+  transition:color 0.2s;
+}
+.tim-card-email:hover{color:var(--white)}
+/* Promise list */
+.promises{list-style:none;display:flex;flex-direction:column;gap:14px}
+.promises li{display:flex;align-items:center;gap:12px;font-size:15px;color:rgba(255,255,255,0.55)}
+.promise-icon{width:16px;height:16px;flex-shrink:0;color:var(--green)}
+/* Form */
+.form-wrap{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  padding:40px;
+}
+.form{display:flex;flex-direction:column;gap:0}
 .fg{
-  border-bottom:1px solid rgba(10,10,10,0.14);
-  padding:0;
+  margin-bottom:0;
+  border-bottom:1px solid rgba(255,255,255,0.07);
 }
-.fg:first-child{border-top:1px solid rgba(10,10,10,0.14)}
+.fg:first-child{border-top:1px solid rgba(255,255,255,0.07)}
 .fg label{
   display:block;font-family:var(--font-mono);font-size:9px;
-  color:rgba(10,10,10,0.38);letter-spacing:0.16em;text-transform:uppercase;
+  color:rgba(255,255,255,0.3);letter-spacing:0.16em;text-transform:uppercase;
   padding-top:18px;
 }
 .fg input,.fg select,.fg textarea{
   width:100%;background:transparent;border:none;outline:none;
-  font-family:var(--font-body);font-size:17px;color:var(--black);
+  font-family:var(--font-body);font-size:16px;color:var(--white);
   padding:6px 0 18px;-webkit-appearance:none;appearance:none;
 }
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(255,255,255,0.2)}
+.fg select option{background:var(--ink)}
 .fg textarea{resize:none;min-height:72px}
-.fg input::placeholder,.fg textarea::placeholder{color:rgba(10,10,10,0.25)}
-.fg select option{background:var(--cream)}
+/* Focus state — green underline sweeps in */
+.fg{position:relative}
+.fg::after{
+  content:'';position:absolute;bottom:0;left:0;
+  height:1px;width:0;background:var(--green);
+  transition:width 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.fg:focus-within::after{width:100%}
 .form-btn{
-  margin-top:32px;align-self:flex-start;
-  background:var(--black);color:var(--white);border:none;
+  margin-top:28px;align-self:flex-start;
+  background:var(--green);color:var(--black);border:none;
   font-family:var(--font-mono);font-size:11px;font-weight:700;
   letter-spacing:0.12em;text-transform:uppercase;
   padding:18px 36px;cursor:pointer;
-  transition:background 0.2s,color 0.2s;
+  transition:background 0.2s,transform 0.2s;
 }
-.form-btn:hover{background:var(--green);color:var(--black)}
+.form-btn:hover{background:var(--green-dark);transform:translateY(-1px)}
 
 /* ── FOOTER ── */
 footer{
-  background:var(--ink);
+  background:var(--black);
   display:grid;grid-template-columns:1fr auto;
   align-items:center;padding:56px 48px;
   border-top:1px solid rgba(255,255,255,0.05);
 }
-.footer-logo img{height:26px;width:auto;opacity:0.6;display:block}
+.footer-wordmark{
+  font-family:var(--font-display);font-size:18px;
+  letter-spacing:0.1em;color:rgba(255,255,255,0.3);
+  text-decoration:none;display:flex;align-items:center;gap:0;
+}
+.footer-wordmark .wm-sep{
+  display:inline-block;width:4px;height:4px;
+  background:rgba(0,179,131,0.4);border-radius:50%;
+  margin:0 6px;position:relative;top:-1px;
+}
+.footer-wordmark .wm-drift{color:rgba(0,179,131,0.4)}
 .footer-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
 .footer-links{display:flex;gap:28px;list-style:none}
-.footer-links a{
-  font-family:var(--font-mono);font-size:10px;
-  color:rgba(255,255,255,0.28);text-decoration:none;
-  letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;
-}
+.footer-links a{font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.25);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
 .footer-links a:hover{color:var(--green)}
-.footer-copy{
-  font-family:var(--font-mono);font-size:9px;
-  color:rgba(255,255,255,0.18);letter-spacing:0.05em;
-}
+.footer-copy{font-family:var(--font-mono);font-size:9px;color:rgba(255,255,255,0.15);letter-spacing:0.05em}
 
 /* ── SCROLL REVEAL ── */
-.rv{opacity:0;transform:translateY(36px);transition:opacity 0.7s ease,transform 0.7s ease}
+.rv{opacity:0;transform:translateY(36px);transition:opacity 0.75s ease,transform 0.75s ease}
 .rv.in{opacity:1;transform:none}
-.d1{transition-delay:0.1s}.d2{transition-delay:0.2s}
-.d3{transition-delay:0.3s}.d4{transition-delay:0.4s}
+.d1{transition-delay:0.1s}.d2{transition-delay:0.2s}.d3{transition-delay:0.3s}.d4{transition-delay:0.4s}
 
 /* ── MOBILE ── */
 @media(max-width:900px){
-  .nav{padding:16px 24px}
-  .nav.scrolled{padding:13px 24px}
-  .nav-links{display:none}
-  .hamburger{display:flex}
+  .nav{padding:16px 24px}.nav.scrolled{padding:13px 24px}
+  .nav-links{display:none}.hamburger{display:flex}
   .hero{padding:0 24px 48px}
   .hero-foot{grid-template-columns:1fr;gap:28px}
   .hero-actions{align-items:flex-start;flex-direction:row;flex-wrap:wrap}
@@ -487,7 +574,9 @@ footer{
   .band-stat{padding:28px 24px;border-right:none;border-bottom:1px solid rgba(0,0,0,0.1)}
   .band-stat:last-child{border-bottom:none}
   .problem{padding:80px 24px}
-  .problem-layout{grid-template-columns:1fr;gap:56px}
+  .compare{grid-template-columns:1fr;gap:3px}
+  .cmp{padding:36px 28px}
+  .problem-foot{flex-direction:column;align-items:flex-start}
   .about{grid-template-columns:1fr}
   .about-photo{height:380px;order:-1}
   .about-copy{padding:64px 24px}
@@ -495,12 +584,15 @@ footer{
   .svc-aside{order:-1}
   .ghost-num{font-size:clamp(100px,24vw,160px)}
   .how{padding:80px 24px}
+  .step{grid-template-columns:48px 1fr}
+  .step-n{font-size:40px}
   .proof{padding:80px 24px}
   .proof-grid{grid-template-columns:repeat(2,1fr)}
   .proof-cell{padding:28px 20px}
   .testimonial{grid-template-columns:1fr}
   .ta{text-align:left}
   .contact{grid-template-columns:1fr;padding:80px 24px;gap:56px}
+  .form-wrap{padding:28px 24px}
   footer{grid-template-columns:1fr;gap:28px;padding:40px 24px}
   .footer-right{align-items:flex-start}
 }
@@ -509,15 +601,21 @@ footer{
   .btn{padding:13px 22px;font-size:10px}
   .proof-grid{grid-template-columns:1fr 1fr}
   .proof-big{font-size:clamp(40px,10vw,64px)}
+  .cmp-big{font-size:clamp(56px,14vw,80px)}
 }
 </style>
 </head>
 <body>
 
+<!-- Cursor glow -->
+<div id="cursor-glow"></div>
+
 <!-- NAV -->
 <header class="nav" id="nav">
-  <a href="#" class="nav-logo">
-    <img src="assets/images/logo-light.png" alt="Zero Drift Energy">
+  <a href="#" class="nav-wordmark">
+    <span class="wm-zero">ZERO</span>
+    <span class="wm-sep"></span>
+    <span class="wm-drift">DRIFT</span>
   </a>
   <ul class="nav-links">
     <li><a href="#problem">The Problem</a></li>
@@ -555,7 +653,7 @@ footer{
       Zero Drift works exclusively for your business — not the supplier. We find you the best rate, manage the switch, and charge you absolutely nothing.
     </p>
     <div class="hero-actions">
-      <a href="#contact" class="btn btn-green">Get a free review →</a>
+      <a href="#contact" class="btn btn-green">Get a free review <span class="arrow">→</span></a>
       <a href="#how" class="btn btn-outline">How it works</a>
     </div>
   </div>
@@ -579,47 +677,85 @@ footer{
 
 <!-- THE PROBLEM -->
 <section class="problem" id="problem">
-  <div class="section-tag on-light">The Problem</div>
-  <div class="problem-layout">
-    <div>
-      <h2 class="problem-heading rv">
-        Your broker is working for the<em> supplier.</em>
-      </h2>
-      <p class="problem-body rv d1">
-        Most UK energy brokers earn hidden commissions from the suppliers they recommend. Those commissions come directly from your unit rate — sometimes over £700 a year — with no legal obligation to disclose them.
-      </p>
-      <p class="problem-body rv d2">
-        That's not brokerage. It's a conflict of interest dressed up as advice.
-      </p>
-      <a href="#contact" class="btn btn-dark rv d3" style="margin-top:40px;display:inline-block">Find out what you're overpaying →</a>
-    </div>
-    <div class="rv d1">
-      <div class="data-table">
-        <div class="data-row">
-          <span class="data-label">Hidden broker commission (avg)</span>
-          <span class="data-value bad">£793/yr</span>
-        </div>
-        <div class="data-row">
-          <span class="data-label">Required to disclose it</span>
-          <span class="data-value bad">No</span>
-        </div>
-        <div class="data-row">
-          <span class="data-label">Working for you or the supplier</span>
-          <span class="data-value bad">Supplier</span>
-        </div>
-        <div class="data-row">
-          <span class="data-label">Zero Drift fee</span>
-          <span class="data-value good">£0</span>
-        </div>
-        <div class="data-row">
-          <span class="data-label">Who we work for</span>
-          <span class="data-value good">You</span>
-        </div>
+  <div class="problem-wm" aria-hidden="true">£793</div>
+  <div class="problem-top rv">
+    <div class="section-tag on-dark">The Problem</div>
+    <h2 class="problem-heading">The energy market is<em> working against you.</em></h2>
+    <p class="problem-sub">Your broker earns a hidden commission from the supplier they recommend. That cost comes straight out of your rate — and they're not required to tell you.</p>
+  </div>
+
+  <!-- Visual comparison -->
+  <div class="compare">
+    <div class="cmp bad rv">
+      <div class="cmp-hdr">
+        <span class="cmp-label">Typical Broker</span>
+        <svg class="cmp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6" stroke-linecap="round"/>
+        </svg>
       </div>
-      <p class="problem-note">
-        £793 is the average annual hidden commission UK energy brokers receive from suppliers on SME contracts. Source: Citizens Advice / Ofgem research.
-      </p>
+      <div class="cmp-bar-wrap">
+        <div class="cmp-bar"></div>
+        <div class="cmp-bar-lbl">Hidden annual cost</div>
+      </div>
+      <div class="cmp-big">£793+</div>
+      <div class="cmp-caption">Per year, buried in your unit rate</div>
+      <ul class="cmp-list">
+        <li>
+          <svg class="cmp-li-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zM5 8l1.5 1.5L11 5.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          <span>Commission paid by the supplier to your broker</span>
+        </li>
+        <li>
+          <svg class="cmp-li-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zM5 8l1.5 1.5L11 5.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          <span>No legal obligation to disclose it</span>
+        </li>
+        <li>
+          <svg class="cmp-li-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zM5 8l1.5 1.5L11 5.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          <span>Recommends whoever pays the most</span>
+        </li>
+        <li>
+          <svg class="cmp-li-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zM5 8l1.5 1.5L11 5.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          <span>Your cost drifts up silently every term</span>
+        </li>
+      </ul>
     </div>
+
+    <div class="cmp good rv d1">
+      <div class="cmp-hdr">
+        <span class="cmp-label">Zero Drift</span>
+        <svg class="cmp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="cmp-bar-wrap">
+        <div class="cmp-bar"></div>
+        <div class="cmp-bar-lbl">Hidden annual cost</div>
+      </div>
+      <div class="cmp-big">£0</div>
+      <div class="cmp-caption">No fees. By design, not as an exception.</div>
+      <ul class="cmp-list">
+        <li>
+          <svg class="cmp-li-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l4 4 6-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>We charge you directly — nothing hidden</span>
+        </li>
+        <li>
+          <svg class="cmp-li-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l4 4 6-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Every penny in your rate is transparent</span>
+        </li>
+        <li>
+          <svg class="cmp-li-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l4 4 6-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>We work only for you</span>
+        </li>
+        <li>
+          <svg class="cmp-li-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l4 4 6-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Your cost stays at zero — every single term</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="problem-foot rv">
+    <p class="problem-note">£793 is the average annual hidden commission UK energy brokers earn from suppliers on SME contracts. Source: Citizens Advice / Ofgem.</p>
+    <a href="#contact" class="btn btn-green">Find out what you're overpaying <span class="arrow">→</span></a>
   </div>
 </section>
 
@@ -627,9 +763,7 @@ footer{
 <section class="about" id="about">
   <div class="about-copy">
     <div class="section-tag on-dark">About</div>
-    <h2 class="about-heading rv">
-      Built by someone who saw the<em> inside.</em>
-    </h2>
+    <h2 class="about-heading rv">Built by someone who saw the<em> inside.</em></h2>
     <div class="about-body rv d1">
       <p>I'm Tim. I spent years working inside the energy brokerage industry — watching brokers route clients to the deals that paid the biggest commissions, not the best rates. I saw the machine up close.</p>
       <p>Zero Drift is my answer to it. A brokerage with one rule: every decision gets made in the client's interest, with full transparency on every pound.</p>
@@ -646,9 +780,7 @@ footer{
   <div>
     <div class="svc-label">Service 01</div>
     <h2 class="svc-heading rv">Energy<br><em>Brokerage</em></h2>
-    <p class="svc-body rv d1">
-      We compare every supplier on the market and negotiate your contract directly. You get the best available rate — and we never take a cut from the supplier side.
-    </p>
+    <p class="svc-body rv d1">We compare every supplier on the market and negotiate your contract directly. You get the best available rate — and we never take a cut from the supplier side.</p>
     <ul class="svc-list rv d2">
       <li><div class="dot"></div><span>Full market comparison — gas, electricity, dual fuel</span></li>
       <li><div class="dot"></div><span>Fixed and flexible contract options</span></li>
@@ -656,7 +788,7 @@ footer{
       <li><div class="dot"></div><span>Switch managed end to end — you sign, we handle it</span></li>
       <li><div class="dot"></div><span>Renewal reminders and ongoing rate monitoring</span></li>
     </ul>
-    <a href="#contact" class="btn btn-green rv d3">Get a free energy review →</a>
+    <a href="#contact" class="btn btn-green rv d3">Get a free energy review <span class="arrow">→</span></a>
   </div>
   <div class="svc-aside">
     <div class="ghost-num" aria-hidden="true">01</div>
@@ -687,9 +819,7 @@ footer{
   <div>
     <div class="svc-label">Service 02</div>
     <h2 class="svc-heading rv">Card<br><em>Payments</em></h2>
-    <p class="svc-body rv d1">
-      If you take card payments, you're almost certainly overpaying. We audit your current processing costs, identify savings, and move you to a better deal — with no setup fees and no lock-in.
-    </p>
+    <p class="svc-body rv d1">If you take card payments, you're almost certainly overpaying. We audit your current costs, identify savings, and move you to a better deal — with no setup fees and no lock-in.</p>
     <ul class="svc-list rv d2">
       <li><div class="dot"></div><span>Free audit of your current processing costs</span></li>
       <li><div class="dot"></div><span>Access to wholesale interchange++ pricing</span></li>
@@ -697,7 +827,7 @@ footer{
       <li><div class="dot"></div><span>Terminal, online, and MOTO solutions</span></li>
       <li><div class="dot"></div><span>Same-day setup available</span></li>
     </ul>
-    <a href="#contact" class="btn btn-dark rv d3">Get a free payments audit →</a>
+    <a href="#contact" class="btn btn-dark rv d3">Get a free payments audit <span class="arrow">→</span></a>
   </div>
 </section>
 
@@ -710,7 +840,7 @@ footer{
       <div class="step-n">01</div>
       <div class="step-body">
         <div class="step-title">Tell us about your business</div>
-        <p class="step-desc">A two-minute form or a quick call. We need your current supplier, contract end date, and rough annual spend — that's it.</p>
+        <p class="step-desc">A two-minute form or a quick call. Current supplier, contract end date, and rough annual spend — that's it.</p>
       </div>
     </div>
     <div class="step rv d1">
@@ -731,7 +861,7 @@ footer{
       <div class="step-n">04</div>
       <div class="step-body">
         <div class="step-title">We handle everything else</div>
-        <p class="step-desc">Switch, contracts, transfer, setup — all handled by us. You just wait for the first lower bill to land.</p>
+        <p class="step-desc">Switch, contracts, transfer, setup — all handled by us. You just wait for the first lower bill.</p>
       </div>
     </div>
   </div>
@@ -759,9 +889,7 @@ footer{
     </div>
   </div>
   <div class="testimonial rv">
-    <blockquote class="tq">
-      "Switching was completely painless. Tim handled everything — I just got a cheaper bill the next month."
-    </blockquote>
+    <blockquote class="tq">"Switching was completely painless. Tim handled everything — I just got a cheaper bill the next month."</blockquote>
     <div class="ta">
       <div class="ta-name">Sarah K.</div>
       <div class="ta-co">Independent Retail, Manchester</div>
@@ -771,48 +899,74 @@ footer{
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
-  <div>
-    <div class="section-tag on-light">Get Started</div>
-    <h2 class="contact-heading rv">Let's find<br>your zero.</h2>
-    <p class="contact-sub rv d1">
-      Fill in the form and Tim will respond within one business day. No sales team. No scripts. Just a straight answer.
-    </p>
+  <div class="rv">
+    <div class="section-tag on-dark">Get Started</div>
+    <h2 class="contact-heading">Let's find<br>your<em> zero.</em></h2>
+    <p class="contact-sub">Fill in the form and Tim will reply personally within one business day. No sales team. No scripts.</p>
+    <div class="tim-card">
+      <div class="tim-card-photo">
+        <img src="assets/images/tim.jpg" alt="Tim">
+      </div>
+      <div class="tim-card-info">
+        <div class="tim-card-name">Tim</div>
+        <div class="tim-card-role">Founder, Zero Drift Energy</div>
+        <a href="mailto:tim@zerodrift.co.uk" class="tim-card-email">tim@zerodrift.co.uk</a>
+      </div>
+    </div>
+    <ul class="promises">
+      <li>
+        <svg class="promise-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l4 4 6-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Direct reply from Tim, not a sales team</span>
+      </li>
+      <li>
+        <svg class="promise-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l4 4 6-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Free, no-obligation review</span>
+      </li>
+      <li>
+        <svg class="promise-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l4 4 6-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Response within one business day</span>
+      </li>
+    </ul>
   </div>
-  <form class="form" id="contactForm" onsubmit="handleSubmit(event)">
-    <div class="fg">
-      <label for="name">Your Name</label>
-      <input type="text" id="name" name="name" placeholder="Jane Smith" required>
-    </div>
-    <div class="fg">
-      <label for="email">Email Address</label>
-      <input type="email" id="email" name="email" placeholder="jane@business.co.uk" required>
-    </div>
-    <div class="fg">
-      <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" name="phone" placeholder="07700 000000">
-    </div>
-    <div class="fg">
-      <label for="service">I need help with</label>
-      <select id="service" name="service">
-        <option value="">Energy, Payments, or Both</option>
-        <option value="energy">Energy</option>
-        <option value="payments">Card Payments</option>
-        <option value="both">Both</option>
-      </select>
-    </div>
-    <div class="fg">
-      <label for="message">Anything else?</label>
-      <textarea id="message" name="message" placeholder="Current supplier, contract end date, rough annual spend..."></textarea>
-    </div>
-    <button type="submit" class="form-btn">Send →</button>
-  </form>
+  <div class="form-wrap rv d1">
+    <form class="form" id="contactForm" onsubmit="handleSubmit(event)">
+      <div class="fg">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+      </div>
+      <div class="fg">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="jane@business.co.uk" required>
+      </div>
+      <div class="fg">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="07700 000000">
+      </div>
+      <div class="fg">
+        <label for="service">I need help with</label>
+        <select id="service" name="service">
+          <option value="">Energy, Payments, or Both</option>
+          <option value="energy">Energy</option>
+          <option value="payments">Card Payments</option>
+          <option value="both">Both</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label for="message">Anything else?</label>
+        <textarea id="message" name="message" placeholder="Current supplier, contract end date, rough annual spend..."></textarea>
+      </div>
+      <button type="submit" class="form-btn">Send Message →</button>
+    </form>
+  </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">
-    <img src="assets/images/logo-light.png" alt="Zero Drift Energy">
-  </div>
+  <a href="#" class="footer-wordmark">
+    <span class="wm-zero">ZERO</span>
+    <span class="wm-sep"></span>
+    <span class="wm-drift">DRIFT</span>
+  </a>
   <div class="footer-right">
     <ul class="footer-links">
       <li><a href="mailto:tim@zerodrift.co.uk">tim@zerodrift.co.uk</a></li>
@@ -824,7 +978,7 @@ footer{
 </footer>
 
 <script>
-// Nav scroll state
+// Nav scroll
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
@@ -832,19 +986,39 @@ window.addEventListener('scroll', () => {
 
 // Mobile menu
 function toggleMenu() {
-  document.getElementById('mobileMenu').classList.toggle('open');
-  document.body.style.overflow =
-    document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+  const m = document.getElementById('mobileMenu');
+  m.classList.toggle('open');
+  document.body.style.overflow = m.classList.contains('open') ? 'hidden' : '';
 }
 
+// Cursor glow
+const glow = document.getElementById('cursor-glow');
+document.addEventListener('mousemove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+}, {passive:true});
+
 // Scroll reveal
-const rvEls = document.querySelectorAll('.rv');
 const rvObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); rvObs.unobserve(e.target); }
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      rvObs.unobserve(e.target);
+    }
   });
-}, {threshold: 0.12});
-rvEls.forEach(el => rvObs.observe(el));
+}, {threshold: 0.1});
+document.querySelectorAll('.rv').forEach(el => rvObs.observe(el));
+
+// Band shimmer
+const bandObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      bandObs.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.5});
+document.querySelectorAll('.band-stat').forEach(el => bandObs.observe(el));
 
 // Counter animation
 function animateCount(el) {
@@ -852,7 +1026,7 @@ function animateCount(el) {
   const prefix = el.dataset.prefix || '';
   const suffix = el.dataset.suffix || '';
   if (target === 0) { el.textContent = prefix + '0' + suffix; return; }
-  const dur = 1400;
+  const dur = 1500;
   const t0 = performance.now();
   function tick(now) {
     const p = Math.min((now - t0) / dur, 1);
@@ -866,7 +1040,7 @@ const cntObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) { animateCount(e.target); cntObs.unobserve(e.target); }
   });
-}, {threshold: 0.5});
+}, {threshold: 0.4});
 document.querySelectorAll('[data-counter]').forEach(el => cntObs.observe(el));
 
 // Form submit
@@ -874,8 +1048,7 @@ function handleSubmit(e) {
   e.preventDefault();
   const btn = e.target.querySelector('.form-btn');
   btn.textContent = 'Sent ✓';
-  btn.style.background = '#00B383';
-  btn.style.color = '#0A0A0A';
+  btn.style.background = '#009970';
   btn.disabled = true;
 }
 </script>
