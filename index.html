@@ -20,12 +20,12 @@
 @font-face{font-family:"Space Mono";src:url("assets/fonts/SpaceMono-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
 
 :root{
-  --bg:#FAFCFA;--bg-alt:#F0F4F0;--bg-card:#FFFFFF;
+  --bg:#F8F9FA;--bg-alt:#F0F2F4;--bg-card:#FFFFFF;
   --dark:#0C1118;--graphite:#1A2332;--slate:#2E3D50;
   --green:#00B383;--green-dark:#009A70;--green-light:#E6F9F3;
-  --text:#1A2332;--text-light:#5A6B7D;--text-muted:#8A9BAD;
+  --text:#1A2332;--text-light:#4A5568;--text-muted:#718096;
   --red:#DC2626;--amber:#E8960A;
-  --border:rgba(0,0,0,0.06);
+  --border:rgba(0,0,0,0.08);
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -159,7 +159,7 @@ nav.scrolled{background:rgba(250,252,250,0.85);backdrop-filter:blur(24px);-webki
 .how-track{display:flex;gap:24px;padding:0 48px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none}
 .how-track::-webkit-scrollbar{display:none}
 .how-card{min-width:340px;max-width:340px;scroll-snap-align:start;background:var(--bg-card);border:1px solid var(--border);box-shadow:0 4px 20px rgba(0,0,0,0.06);border-radius:20px;padding:44px 36px;position:relative;overflow:hidden;transition:all 0.4s;flex-shrink:0}
-.how-card:hover{border-color:rgba(0,179,131,0.08);transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.how-card:hover{border-color:rgba(0,179,131,0.15);transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.1)}
 .how-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent);opacity:0;transition:opacity 0.4s}
 .how-card:hover::before{opacity:1}
 .how-num{font-family:'Bebas Neue',sans-serif;font-size:72px;color:rgba(0,179,131,0.1);line-height:1;margin-bottom:16px;transition:color 0.3s}
@@ -211,7 +211,7 @@ nav.scrolled{background:rgba(250,252,250,0.85);backdrop-filter:blur(24px);-webki
 .form-card{background:var(--bg-card);border:1px solid rgba(0,0,0,0.08);border-radius:24px;padding:44px;box-shadow:0 12px 40px rgba(0,0,0,0.1)}
 .form-group{margin-bottom:24px}
 .form-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;display:block}
-.form-input{width:100%;background:#F5F7F5;border:1px solid rgba(0,0,0,0.08);border-radius:12px;padding:16px 18px;font-size:15px;color:var(--white);font-family:'DM Sans',sans-serif;transition:all 0.3s;outline:none}
+.form-input{width:100%;background:#F5F7F5;border:1px solid rgba(0,0,0,0.08);border-radius:12px;padding:16px 18px;font-size:15px;color:var(--text);font-family:'DM Sans',sans-serif;transition:all 0.3s;outline:none}
 .form-input:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(0,179,131,0.1)}
 .form-input::placeholder{color:var(--text-muted)}
 textarea.form-input{resize:vertical;min-height:110px}
@@ -249,7 +249,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,0.05);paddin
 .hero-right{position:relative;z-index:2}
 
 /* Live dashboard illustration */
-.live-dash{background:rgba(22,29,40,0.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(0,179,131,0.06);border-radius:20px;padding:0;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.15);transform:perspective(1000px) rotateY(-2deg) rotateX(1deg);transition:transform 0.4s}
+.live-dash{background:rgba(15,20,30,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(0,179,131,0.12);border-radius:20px;padding:0;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.25),0 0 0 1px rgba(0,179,131,0.05);transform:perspective(1000px) rotateY(-2deg) rotateX(1deg);transition:transform 0.4s}
 .live-dash:hover{transform:perspective(1000px) rotateY(0deg) rotateX(0deg)}
 .live-dash-bar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(0,0,0,0.2);border-bottom:1px solid rgba(255,255,255,0.04)}
 .live-dash-dots{display:flex;gap:6px}
@@ -261,25 +261,25 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,0.05);paddin
 .live-dash-badge{font-family:'Space Mono',monospace;font-size:8px;color:var(--green);background:rgba(0,179,131,0.06);border:1px solid rgba(0,179,131,0.08);padding:2px 10px;border-radius:20px;display:flex;align-items:center;gap:6px}
 .live-dash-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);animation:badgePulse 2s infinite}
 .live-dash-body{padding:24px}
-.live-dash-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--border)}
-.live-dash-stat{padding:20px;text-align:center;border-right:1px solid rgba(255,255,255,0.04)}
+.live-dash-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid rgba(255,255,255,0.08)}
+.live-dash-stat{padding:20px;text-align:center;border-right:1px solid rgba(255,255,255,0.08)}
 .live-dash-stat:last-child{border-right:none}
 .live-dash-stat-num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--green);line-height:1}
-.live-dash-stat-label{font-size:10px;color:var(--muted);margin-top:4px}
+.live-dash-stat-label{font-size:10px;color:rgba(180,195,210,0.6);margin-top:4px}
 
 /* Comparison visual */
 .compare-visual{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .compare-card{border-radius:12px;padding:20px;position:relative}
-.compare-before{background:rgba(255,85,85,0.06);border:1px solid rgba(255,85,85,0.1)}
-.compare-after{background:rgba(0,200,150,0.06);border:1px solid rgba(0,179,131,0.06)}
-.compare-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:12px}
-.compare-before .compare-label{color:var(--red)}
-.compare-after .compare-label{color:var(--green)}
-.compare-line{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);margin-bottom:8px}
+.compare-before{background:rgba(255,85,85,0.1);border:1px solid rgba(255,85,85,0.2)}
+.compare-after{background:rgba(0,200,150,0.1);border:1px solid rgba(0,179,131,0.15)}
+.compare-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:12px;font-weight:700}
+.compare-before .compare-label{color:#FF5555}
+.compare-after .compare-label{color:#00C896}
+.compare-line{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:8px}
 .compare-line:last-child{margin-bottom:0}
 .compare-line .val{font-family:'Space Mono',monospace;font-size:11px}
-.compare-before .val{color:var(--red)}
-.compare-after .val{color:var(--green)}
+.compare-before .val{color:#FF5555;font-weight:600}
+.compare-after .val{color:#00C896;font-weight:600}
 
 /* Energy meter SVG illustration */
 .energy-illus,.card-illus{max-width:100%;height:auto;display:block;margin-bottom:24px}
@@ -287,7 +287,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,0.05);paddin
 /* About section - hero style */
 .about-hero{display:grid;grid-template-columns:400px 1fr;gap:80px;align-items:center}
 .about-photo-wrap{position:relative}
-.about-photo-wrap img{width:100%;height:auto;border-radius:24px;display:block;box-shadow:0 32px 80px rgba(0,0,0,0.5);aspect-ratio:1/1;object-fit:cover}
+.about-photo-wrap img{width:100%;height:auto;border-radius:24px;display:block;box-shadow:0 32px 80px rgba(0,0,0,0.15);aspect-ratio:1/1;object-fit:cover}
 .about-photo-wrap::before{content:'';position:absolute;inset:-6px;border-radius:30px;background:linear-gradient(135deg,rgba(0,200,150,0.2),transparent 50%,rgba(0,179,131,0.06));z-index:-1}
 .about-photo-wrap::after{content:'';position:absolute;bottom:-20px;right:-20px;width:100px;height:100px;border-radius:20px;background:rgba(0,200,150,0.06);border:1px solid rgba(0,179,131,0.06);z-index:-1}
 .about-quote{font-size:20px;color:var(--text);font-weight:300;line-height:1.8;font-style:italic;margin-bottom:24px;position:relative;padding-left:24px;border-left:3px solid var(--green)}
@@ -361,8 +361,10 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,0.05);paddin
   .ft-inner{grid-template-columns:1fr;gap:32px}
   .ft-bottom{flex-direction:column;gap:12px;align-items:flex-start}
   .float-cta{display:block}
+  .broker-strip-divider{display:none}
 }
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes drawLine{to{stroke-dashoffset:0}}
 </style>
 </head>
 <body>
@@ -412,26 +414,26 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,0.05);paddin
         </div>
         <div class="live-dash-body">
           <svg viewBox="0 0 420 160" style="width:100%;overflow:visible">
-            <line x1="0" y1="20" x2="420" y2="20" stroke="rgba(255,255,255,0.03)"/>
-            <line x1="0" y1="55" x2="420" y2="55" stroke="rgba(255,255,255,0.03)"/>
-            <line x1="0" y1="90" x2="420" y2="90" stroke="rgba(255,255,255,0.03)"/>
-            <line x1="0" y1="125" x2="420" y2="125" stroke="rgba(255,255,255,0.03)"/>
+            <line x1="0" y1="20" x2="420" y2="20" stroke="rgba(255,255,255,0.06)"/>
+            <line x1="0" y1="55" x2="420" y2="55" stroke="rgba(255,255,255,0.06)"/>
+            <line x1="0" y1="90" x2="420" y2="90" stroke="rgba(255,255,255,0.06)"/>
+            <line x1="0" y1="125" x2="420" y2="125" stroke="rgba(255,255,255,0.06)"/>
             <!-- Red rising area -->
-            <text x="4" y="16" fill="rgba(255,85,85,0.4)" font-size="8" font-family="Space Mono" letter-spacing="0.12em">WHAT YOU'RE PAYING</text>
-            <polygon points="0,120 60,112 120,100 180,85 240,68 300,50 360,34 420,18 420,140 0,140" fill="url(#hg1)" opacity="0.6"/>
-            <polyline points="0,120 60,112 120,100 180,85 240,68 300,50 360,34 420,18" fill="none" stroke="rgba(255,85,85,0.5)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="420" stroke-dashoffset="420" style="animation:drawLine 2.5s ease 1.5s forwards"/>
+            <text x="4" y="16" fill="rgba(255,85,85,0.7)" font-size="8" font-family="Space Mono" letter-spacing="0.12em">WHAT YOU'RE PAYING</text>
+            <polygon points="0,120 60,112 120,100 180,85 240,68 300,50 360,34 420,18 420,140 0,140" fill="url(#hg1)" opacity="1"/>
+            <polyline points="0,120 60,112 120,100 180,85 240,68 300,50 360,34 420,18" fill="none" stroke="#FF5555" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="600" stroke-dashoffset="600" style="animation:drawLine 2.5s ease 1.5s forwards"/>
             <!-- Green flat line -->
-            <text x="4" y="98" fill="rgba(0,200,150,0.5)" font-size="8" font-family="Space Mono" letter-spacing="0.12em">WHAT YOU SHOULD PAY</text>
-            <line x1="0" y1="118" x2="420" y2="118" stroke="rgba(0,200,150,0.08)" stroke-width="20" stroke-linecap="round"/>
+            <text x="4" y="98" fill="rgba(0,200,150,0.8)" font-size="8" font-family="Space Mono" letter-spacing="0.12em">WHAT YOU SHOULD PAY</text>
+            <line x1="0" y1="118" x2="420" y2="118" stroke="rgba(0,200,150,0.15)" stroke-width="20" stroke-linecap="round"/>
             <line x1="0" y1="118" x2="420" y2="118" stroke="#00C896" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="0" cy="118" r="4" fill="#00C896"/><circle cx="420" cy="118" r="4" fill="#00C896"/>
+            <circle cx="0" cy="118" r="5" fill="#00C896"/><circle cx="420" cy="118" r="5" fill="#00C896"/>
             <!-- Gap label -->
-            <line x1="380" y1="26" x2="380" y2="112" stroke="rgba(255,85,85,0.2)" stroke-width="1" stroke-dasharray="3 3"/>
-            <text x="392" y="72" fill="rgba(255,85,85,0.5)" font-size="9" font-family="Bebas Neue" letter-spacing="0.08em" transform="rotate(90,392,72)">DRIFT</text>
+            <line x1="380" y1="26" x2="380" y2="112" stroke="rgba(255,85,85,0.4)" stroke-width="1" stroke-dasharray="3 3"/>
+            <text x="392" y="72" fill="rgba(255,85,85,0.8)" font-size="9" font-family="Bebas Neue" letter-spacing="0.08em" transform="rotate(90,392,72)">DRIFT</text>
             <!-- Axis labels -->
-            <text x="0" y="152" fill="rgba(255,255,255,0.12)" font-size="8" font-family="DM Sans">Day 1</text>
-            <text x="388" y="152" text-anchor="end" fill="rgba(255,255,255,0.12)" font-size="8" font-family="DM Sans">Contract end</text>
-            <defs><linearGradient id="hg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(255,85,85,0.15)"/><stop offset="100%" stop-color="rgba(255,85,85,0)"/></linearGradient></defs>
+            <text x="0" y="152" fill="rgba(255,255,255,0.3)" font-size="8" font-family="DM Sans">Day 1</text>
+            <text x="388" y="152" text-anchor="end" fill="rgba(255,255,255,0.3)" font-size="8" font-family="DM Sans">Contract end</text>
+            <defs><linearGradient id="hg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(255,85,85,0.3)"/><stop offset="100%" stop-color="rgba(255,85,85,0)"/></linearGradient></defs>
           </svg>
           <!-- Before/After comparison cards -->
           <div class="compare-visual">
@@ -462,7 +464,25 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,0.05);paddin
   
 </div>
 
-<!-- Stats now integrated into hero dashboard -->
+<!-- BROKER TRUST STRIP -->
+<div style="background:linear-gradient(135deg,#0C1118 0%,#162032 100%);padding:28px 48px;text-align:center;position:relative;z-index:1">
+  <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:10px">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke="#00C896" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span style="font-family:'DM Sans',sans-serif;font-size:14px;color:rgba(255,255,255,0.8)"><strong style="color:#00C896">100% Independent</strong> — we work for you, not the suppliers</span>
+    </div>
+    <div class="broker-strip-divider" style="width:1px;height:20px;background:rgba(255,255,255,0.1)"></div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="#00C896" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span style="font-family:'DM Sans',sans-serif;font-size:14px;color:rgba(255,255,255,0.8)"><strong style="color:#00C896">Whole market</strong> — every supplier, every deal, every time</span>
+    </div>
+    <div class="broker-strip-divider" style="width:1px;height:20px;background:rgba(255,255,255,0.1)"></div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8V7z" stroke="#00C896" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span style="font-family:'DM Sans',sans-serif;font-size:14px;color:rgba(255,255,255,0.8)"><strong style="color:#00C896">Price locked</strong> — day one rate guaranteed to the end</span>
+    </div>
+  </div>
+</div>
 
 <!-- ===== PROBLEM - SPLIT SCREEN ===== -->
 <div class="problem-split">
@@ -622,7 +642,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,0.05);paddin
         <p class="about-text">So I built Zero Drift. One person, completely independent, focused on two things: your energy costs and your card processing fees. I benchmark what you're paying, negotiate something better, and make sure the price stays exactly where we agreed. <strong>No drift. That's the promise.</strong></p>
         <div style="margin-top:32px;display:flex;align-items:center;gap:16px">
           <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:0.03em">Tim Jackson</div>
-          <div style="width:1px;height:24px;background:rgba(255,255,255,0.1)"></div>
+          <div style="width:1px;height:24px;background:var(--border)"></div>
           <div style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--green);text-transform:uppercase">Director &amp; Cost Consultant</div>
         </div>
         <p style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(156,171,186,0.4);letter-spacing:0.08em;margin-top:12px">Based in Northern Ireland &middot; Working across the UK &amp; Ireland</p>
@@ -659,7 +679,7 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,0.05);paddin
 </div>
 
 <!-- ===== FOOTER ===== -->
-<footer id="about">
+<footer>
   <div class="ft-inner">
     <div><div class="ft-logo"><img src="assets/images/logo-compact.png" alt="Zero Drift" height="24"></div><p class="ft-tag">Cost certainty for your business</p></div>
     <div class="ft-col"><h4>Navigate</h4><a href="#how">How it works</a><a href="#services">Services</a><a href="#contact">Contact</a></div>
