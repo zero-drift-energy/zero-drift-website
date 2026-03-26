@@ -3,19 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zero Drift — Your Costs, Locked Down</title>
-<meta name="description" content="Independent energy and card processing broker. We search the whole market, negotiate the best deal, and guarantee the price never moves. UK & Ireland.">
-<meta property="og:title" content="Zero Drift — Your Costs, Locked Down">
-<meta property="og:description" content="Independent cost advisory for energy and card processing. Fixed pricing, guaranteed.">
+<title>Zero Drift Energy — Stop Paying Broker Fees</title>
+<meta name="description" content="Independent UK energy and card payments broker. We work for you — not the supplier. Zero hidden fees, zero conflict of interest.">
+<meta property="og:title" content="Zero Drift Energy — Stop Paying Broker Fees">
+<meta property="og:description" content="Zero Drift connects UK businesses directly to the market. No broker markup. No hidden fees.">
 <meta property="og:image" content="assets/images/og-image.png">
 <meta property="og:type" content="website">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="assets/images/favicon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
-/* ============================================
-   FONTS
-   ============================================ */
 @font-face{font-family:"Bebas Neue";src:url("assets/fonts/BebasNeue-Regular.woff2") format("woff2");font-display:swap}
 @font-face{font-family:"DM Sans";src:url("assets/fonts/DMSans-Light.woff2") format("woff2");font-weight:300;font-display:swap}
 @font-face{font-family:"DM Sans";src:url("assets/fonts/DMSans-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
@@ -23,778 +20,864 @@
 @font-face{font-family:"Space Mono";src:url("assets/fonts/SpaceMono-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Space Mono";src:url("assets/fonts/SpaceMono-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
 
-/* ============================================
-   DESIGN TOKENS
-   ============================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
 :root{
-  /* Dark palette */
-  --midnight:#020617;
-  --graphite:#0f172a;
-  --slate:#1e293b;
-  --slate-light:#334155;
-  /* Light palette */
-  --white:#ffffff;
-  --offwhite:#f8fafc;
-  --light-gray:#f1f5f9;
-  --mid-gray:#e2e8f0;
-  /* Brand */
-  --green:#00B383;
-  --green-dark:#009A70;
-  --green-glow:rgba(0,179,131,0.15);
-  /* Semantic */
-  --red:#ef4444;
-  --red-soft:rgba(239,68,68,0.1);
-  --amber:#f59e0b;
-  /* Text on dark */
-  --text-on-dark:#f8fafc;
-  --text-on-dark-muted:#94a3b8;
-  --text-on-dark-faint:#64748b;
-  /* Text on light */
-  --text-primary:#0f172a;
-  --text-secondary:#475569;
-  --text-muted:#64748b;
-  --text-faint:#94a3b8;
-  /* Borders */
-  --border-dark:rgba(255,255,255,0.08);
-  --border-light:rgba(0,0,0,0.08);
+  --black: #0A0A0A;
+  --ink: #111111;
+  --green: #00B383;
+  --green-dim: rgba(0,179,131,0.12);
+  --green-dark: #009970;
+  --cream: #F4EFE8;
+  --cream-dark: #EAE4DC;
+  --white: #FFFFFF;
+  --red: #C42B00;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'Space Mono', monospace;
 }
 
-/* ============================================
-   RESET & BASE
-   ============================================ */
-*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;color:var(--text-primary);background:var(--white)}
-img{max-width:100%;height:auto;display:block}
-a{text-decoration:none;color:inherit}
-button{font-family:inherit;cursor:pointer}
 
-/* ============================================
-   TYPOGRAPHY
-   ============================================ */
-.font-display{font-family:'Bebas Neue',sans-serif;letter-spacing:0.02em;line-height:0.92}
-.font-mono{font-family:'Space Mono',monospace}
-.tag{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:400}
+body{
+  font-family:var(--font-body);
+  background:var(--black);
+  color:var(--white);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
 
-/* ============================================
-   LAYOUT
-   ============================================ */
-.container{max-width:1200px;margin:0 auto;padding:0 24px}
-@media(min-width:768px){.container{padding:0 48px}}
-.section{padding:80px 0}
-@media(min-width:768px){.section{padding:120px 0}}
-
-/* ============================================
-   SCROLL PROGRESS
-   ============================================ */
-.scroll-progress{position:fixed;top:0;left:0;height:3px;background:var(--green);z-index:200;width:0%;pointer-events:none}
-
-/* ============================================
-   NAV
-   ============================================ */
-.nav{position:fixed;top:0;left:0;right:0;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:150;transition:all 0.4s ease}
-@media(min-width:768px){.nav{padding:0 48px}}
-.nav.scrolled{background:rgba(2,6,23,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--border-dark)}
-.nav-logo img{height:28px;transition:opacity 0.3s}
-.nav-links{display:none;align-items:center;gap:32px}
-@media(min-width:768px){.nav-links{display:flex}}
-.nav-links a{font-size:13px;color:var(--text-on-dark-muted);letter-spacing:0.04em;transition:color 0.3s;font-weight:400}
-.nav-links a:hover{color:var(--text-on-dark)}
-.nav-cta{background:var(--green)!important;color:var(--white)!important;padding:10px 24px!important;border-radius:8px!important;font-weight:500!important;font-size:13px!important;transition:all 0.3s!important}
-.nav-cta:hover{background:var(--green-dark)!important;box-shadow:0 0 20px var(--green-glow)!important}
-
-/* Mobile menu toggle */
-.menu-toggle{display:flex;flex-direction:column;gap:5px;background:none;border:none;padding:8px;cursor:pointer}
-@media(min-width:768px){.menu-toggle{display:none}}
-.menu-toggle span{display:block;width:22px;height:2px;background:var(--text-on-dark);border-radius:1px;transition:all 0.3s}
-.menu-toggle.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-.menu-toggle.open span:nth-child(2){opacity:0}
-.menu-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-
-/* Mobile menu */
-.mobile-menu{display:none;position:fixed;top:72px;left:0;right:0;bottom:0;background:var(--midnight);z-index:140;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+/* ── NAV ── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:20px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background 0.3s ease, border-color 0.3s ease, padding 0.3s ease;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(10,10,10,0.93);
+  backdrop-filter:blur(16px);
+  border-color:rgba(255,255,255,0.06);
+  padding:14px 48px;
+}
+.nav-logo img{height:30px;width:auto;display:block}
+.nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+.nav-links a{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;
+  text-transform:uppercase;color:rgba(255,255,255,0.55);
+  text-decoration:none;transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--white)}
+.nav-cta-link{
+  color:var(--green) !important;
+  border:1px solid rgba(0,179,131,0.4);
+  padding:9px 20px;
+  transition:background 0.2s, color 0.2s !important;
+}
+.nav-cta-link:hover{background:var(--green);color:var(--black) !important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);transition:all 0.3s}
+.mobile-menu{
+  display:none;position:fixed;inset:0;background:var(--black);z-index:99;
+  flex-direction:column;align-items:flex-start;justify-content:flex-end;
+  padding:48px;
+}
 .mobile-menu.open{display:flex}
-.mobile-menu a{font-size:20px;color:var(--text-on-dark);font-weight:400}
+.mobile-close{
+  position:absolute;top:20px;right:24px;
+  font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.4);
+  letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;
+  background:none;border:none;color:inherit;
+}
+.mobile-menu nav{display:flex;flex-direction:column;gap:8px;width:100%}
+.mobile-menu a{
+  font-family:var(--font-display);font-size:clamp(40px,10vw,72px);
+  color:var(--white);text-decoration:none;letter-spacing:0.01em;
+  line-height:1.1;border-bottom:1px solid rgba(255,255,255,0.06);
+  padding-bottom:16px;
+  transition:color 0.2s;
+}
+.mobile-menu a:hover{color:var(--green)}
+.mobile-menu a:last-child{border-bottom:none}
 
-/* ============================================
-   BUTTONS
-   ============================================ */
-.btn{display:inline-flex;align-items:center;gap:8px;font-weight:500;font-size:16px;padding:16px 32px;border-radius:10px;border:none;transition:all 0.3s;font-family:'DM Sans',sans-serif}
-.btn-primary{background:var(--green);color:var(--white)}
-.btn-primary:hover{background:var(--green-dark);box-shadow:0 8px 32px rgba(0,179,131,0.3);transform:translateY(-1px)}
-.btn-outline-light{background:transparent;color:var(--text-on-dark);border:1px solid var(--border-dark)}
-.btn-outline-light:hover{border-color:var(--green);background:rgba(0,179,131,0.05)}
-.btn-outline-dark{background:transparent;color:var(--text-primary);border:1px solid var(--border-light)}
-.btn-outline-dark:hover{border-color:var(--green);background:rgba(0,179,131,0.05)}
-.btn svg{transition:transform 0.3s}
-.btn:hover svg{transform:translateX(3px)}
+/* ── HERO ── */
+.hero{
+  min-height:100svh;
+  background:var(--black);
+  display:grid;
+  grid-template-rows:1fr auto;
+  padding:0 48px 56px;
+  position:relative;
+  overflow:hidden;
+}
+.hero-ghost{
+  position:absolute;
+  bottom:-0.15em;right:-0.05em;
+  font-family:var(--font-display);
+  font-size:clamp(200px,32vw,560px);
+  color:rgba(255,255,255,0.025);
+  line-height:1;letter-spacing:-0.02em;
+  user-select:none;pointer-events:none;white-space:nowrap;
+}
+.hero-main{
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  padding-top:120px;
+  position:relative;z-index:1;
+}
+.eyebrow{
+  font-family:var(--font-mono);font-size:10px;
+  color:var(--green);letter-spacing:0.2em;text-transform:uppercase;
+  display:flex;align-items:center;gap:12px;margin-bottom:28px;
+}
+.eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--green)}
+.hero-headline{
+  font-family:var(--font-display);
+  font-size:clamp(80px,14vw,220px);
+  line-height:0.88;letter-spacing:-0.01em;
+  color:var(--white);
+  max-width:12ch;
+  margin-bottom:0;
+}
+.hero-headline em{font-style:normal;color:var(--green)}
+.hero-foot{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:flex-end;
+  gap:40px;
+  position:relative;z-index:1;
+}
+.hero-sub{
+  font-size:18px;line-height:1.65;
+  color:rgba(255,255,255,0.55);
+  max-width:440px;
+}
+.hero-actions{display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+.btn{
+  display:inline-block;
+  font-family:var(--font-mono);font-size:11px;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;padding:15px 28px;
+  transition:all 0.2s;white-space:nowrap;
+}
+.btn-green{background:var(--green);color:var(--black)}
+.btn-green:hover{background:var(--green-dark);transform:translateY(-2px)}
+.btn-outline{border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.7)}
+.btn-outline:hover{border-color:rgba(255,255,255,0.5);color:var(--white)}
+.btn-dark{background:var(--black);color:var(--white)}
+.btn-dark:hover{background:var(--green);color:var(--black)}
+.btn-cream{background:var(--cream);color:var(--black)}
+.btn-cream:hover{background:var(--white)}
 
-/* ============================================
-   REVEAL ANIMATION
-   ============================================ */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease}
-.reveal.visible{opacity:1;transform:none}
-.reveal-d1{transition-delay:0.1s}
-.reveal-d2{transition-delay:0.2s}
-.reveal-d3{transition-delay:0.3s}
-.reveal-d4{transition-delay:0.4s}
+/* ── GREEN BAND ── */
+.green-band{
+  background:var(--green);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+}
+.band-stat{
+  padding:44px 48px;
+  border-right:1px solid rgba(0,0,0,0.12);
+  display:flex;flex-direction:column;gap:10px;
+}
+.band-stat:last-child{border-right:none}
+.band-number{
+  font-family:var(--font-display);
+  font-size:clamp(56px,7vw,88px);
+  color:var(--black);line-height:1;letter-spacing:-0.01em;
+}
+.band-label{
+  font-family:var(--font-mono);font-size:10px;
+  color:rgba(0,0,0,0.55);letter-spacing:0.12em;text-transform:uppercase;
+}
 
-/* ============================================
-   HERO — DARK
-   ============================================ */
-.hero{background:var(--midnight);color:var(--text-on-dark);padding:140px 0 80px;position:relative;overflow:hidden;min-height:100vh;display:flex;align-items:center}
-.hero::before{content:'';position:absolute;top:-20%;right:-10%;width:60vw;height:60vw;background:radial-gradient(circle,rgba(0,179,131,0.06),transparent 70%);pointer-events:none}
-.hero-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center}
-@media(min-width:900px){.hero-grid{grid-template-columns:1fr 1fr;gap:64px}}
-.hero-content{position:relative;z-index:2}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:100px;background:rgba(0,179,131,0.08);border:1px solid rgba(0,179,131,0.15);margin-bottom:32px}
-.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,179,131,0.4)}50%{box-shadow:0 0 0 8px rgba(0,179,131,0)}}
-.hero-badge span{color:var(--green)}
-.hero h1{font-size:clamp(48px,8vw,88px);margin-bottom:24px;color:var(--text-on-dark)}
-.hero h1 em{font-style:normal;color:var(--green);position:relative}
-.hero h1 em::after{content:'';position:absolute;bottom:2px;left:0;right:0;height:4px;background:var(--green);opacity:0.3;border-radius:2px}
-.hero-desc{font-size:18px;color:var(--text-on-dark-muted);font-weight:300;line-height:1.8;max-width:520px;margin-bottom:40px}
-.hero-desc strong{color:var(--text-on-dark);font-weight:500}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+/* ── PROBLEM ── */
+.problem{
+  background:var(--cream);color:var(--black);
+  padding:112px 48px;
+}
+.section-tag{
+  font-family:var(--font-mono);font-size:10px;
+  letter-spacing:0.2em;text-transform:uppercase;
+  margin-bottom:20px;
+}
+.section-tag.on-dark{color:rgba(255,255,255,0.3)}
+.section-tag.on-light{color:rgba(10,10,10,0.35)}
+.section-tag.on-green{color:rgba(0,0,0,0.45)}
+.problem-layout{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:96px;align-items:start;margin-top:48px;
+}
+.problem-heading{
+  font-family:var(--font-display);
+  font-size:clamp(56px,7vw,100px);
+  line-height:0.93;letter-spacing:-0.01em;color:var(--black);
+}
+.problem-heading em{font-style:normal;color:var(--red)}
+.problem-body{
+  font-size:18px;line-height:1.7;
+  color:rgba(10,10,10,0.6);margin-top:32px;
+}
+.problem-body+.problem-body{margin-top:16px}
+.data-table{display:flex;flex-direction:column}
+.data-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:22px 0;
+  border-bottom:1px solid rgba(10,10,10,0.1);
+}
+.data-row:first-child{border-top:1px solid rgba(10,10,10,0.1)}
+.data-label{
+  font-family:var(--font-mono);font-size:10px;
+  color:rgba(10,10,10,0.45);letter-spacing:0.08em;text-transform:uppercase;
+}
+.data-value{
+  font-family:var(--font-display);
+  font-size:clamp(28px,3.5vw,42px);
+  letter-spacing:-0.01em;line-height:1;
+}
+.data-value.bad{color:var(--red)}
+.data-value.good{color:var(--green)}
+.data-value.neutral{color:var(--black)}
+.problem-note{
+  font-size:14px;line-height:1.6;
+  color:rgba(10,10,10,0.5);
+  margin-top:32px;font-style:italic;
+}
 
-/* Hero dashboard mockup */
-.hero-visual{position:relative;z-index:2}
-.dash-mock{background:var(--graphite);border:1px solid var(--border-dark);border-radius:16px;overflow:hidden;box-shadow:0 32px 64px rgba(0,0,0,0.4)}
-.dash-topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(0,0,0,0.3);border-bottom:1px solid var(--border-dark)}
-.dash-dots{display:flex;gap:6px}
-.dash-dots i{width:8px;height:8px;border-radius:50%}
-.dash-dots i:nth-child(1){background:#ef4444}
-.dash-dots i:nth-child(2){background:#f59e0b}
-.dash-dots i:nth-child(3){background:#22c55e}
-.dash-topbar-title{font-size:10px;letter-spacing:0.15em;color:var(--text-on-dark-faint);text-transform:uppercase}
-.dash-live{font-size:9px;color:var(--green);display:flex;align-items:center;gap:6px;background:rgba(0,179,131,0.08);border:1px solid rgba(0,179,131,0.12);padding:3px 10px;border-radius:20px}
-.dash-live::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
-.dash-body{padding:20px}
-.dash-chart{margin-bottom:16px}
-.dash-compare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:0}
-@media(max-width:500px){.dash-compare{grid-template-columns:1fr}}
-.dash-card{border-radius:10px;padding:16px}
-.dash-card-bad{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.15)}
-.dash-card-good{background:rgba(0,179,131,0.08);border:1px solid rgba(0,179,131,0.12)}
-.dash-card-label{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:10px;font-weight:700}
-.dash-card-bad .dash-card-label{color:var(--red)}
-.dash-card-good .dash-card-label{color:var(--green)}
-.dash-card-row{display:flex;justify-content:space-between;font-size:12px;color:var(--text-on-dark-muted);margin-bottom:6px}
-.dash-card-row:last-child{margin-bottom:0}
-.dash-card-bad .dash-card-val{color:var(--red);font-weight:600}
-.dash-card-good .dash-card-val{color:var(--green);font-weight:600}
-.dash-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border-dark)}
-.dash-stat{padding:16px;text-align:center;border-right:1px solid var(--border-dark)}
-.dash-stat:last-child{border-right:none}
-.dash-stat-num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--green);line-height:1}
-.dash-stat-label{font-size:9px;color:var(--text-on-dark-faint);margin-top:2px;letter-spacing:0.06em}
+/* ── ABOUT ── */
+.about{
+  background:var(--ink);color:var(--white);
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:75vh;
+}
+.about-copy{
+  padding:96px 60px 96px 48px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.about-heading{
+  font-family:var(--font-display);
+  font-size:clamp(52px,5.5vw,80px);
+  line-height:0.93;color:var(--white);
+  margin-top:20px;margin-bottom:36px;
+}
+.about-heading em{font-style:normal;color:var(--green)}
+.about-body{font-size:17px;line-height:1.75;color:rgba(255,255,255,0.55)}
+.about-body p+p{margin-top:16px}
+.about-photo{overflow:hidden;position:relative}
+.about-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
 
-/* ============================================
-   TRUST STRIP — DARK
-   ============================================ */
-.trust-strip{background:var(--graphite);border-top:1px solid var(--border-dark);border-bottom:1px solid var(--border-dark);padding:24px 0}
-.trust-strip-inner{display:flex;flex-direction:column;gap:16px;align-items:center}
-@media(min-width:768px){.trust-strip-inner{flex-direction:row;justify-content:center;gap:48px}}
-.trust-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-on-dark-muted)}
-.trust-item svg{color:var(--green);flex-shrink:0}
-.trust-item strong{color:var(--green);font-weight:600}
+/* ── SERVICE BLOCKS ── */
+.svc{
+  padding:100px 48px;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:center;
+}
+.svc.dark{background:var(--black);color:var(--white)}
+.svc.cream{background:var(--cream);color:var(--black)}
+.svc-label{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;
+  text-transform:uppercase;margin-bottom:18px;
+}
+.svc.dark .svc-label{color:rgba(255,255,255,0.3)}
+.svc.cream .svc-label{color:rgba(10,10,10,0.35)}
+.svc-heading{
+  font-family:var(--font-display);
+  font-size:clamp(52px,6.5vw,88px);
+  line-height:0.93;margin-bottom:32px;
+}
+.svc.dark .svc-heading{color:var(--white)}
+.svc.cream .svc-heading{color:var(--black)}
+.svc-heading em{font-style:normal;color:var(--green)}
+.svc-body{font-size:17px;line-height:1.7;margin-bottom:36px}
+.svc.dark .svc-body{color:rgba(255,255,255,0.55)}
+.svc.cream .svc-body{color:rgba(10,10,10,0.6)}
+.svc-list{display:flex;flex-direction:column;gap:14px;margin-bottom:40px;list-style:none}
+.svc-list li{display:flex;align-items:flex-start;gap:14px;font-size:16px}
+.svc.dark .svc-list li{color:rgba(255,255,255,0.7)}
+.svc.cream .svc-list li{color:rgba(10,10,10,0.7)}
+.dot{width:5px;height:5px;background:var(--green);border-radius:50%;flex-shrink:0;margin-top:9px}
+.svc-aside{display:flex;flex-direction:column;gap:0}
+.ghost-num{
+  font-family:var(--font-display);
+  font-size:clamp(140px,18vw,240px);
+  line-height:0.85;letter-spacing:-0.02em;
+  user-select:none;pointer-events:none;
+}
+.svc.dark .ghost-num{color:rgba(255,255,255,0.03)}
+.svc.cream .ghost-num{color:rgba(10,10,10,0.04)}
+.metric{
+  padding:24px 28px;
+  border-top:1px solid;
+}
+.svc.dark .metric{border-color:rgba(255,255,255,0.06)}
+.svc.cream .metric{border-color:rgba(10,10,10,0.08)}
+.metric-val{
+  font-family:var(--font-display);
+  font-size:52px;color:var(--green);
+  letter-spacing:-0.01em;line-height:1;
+}
+.metric-lbl{
+  font-family:var(--font-mono);font-size:10px;
+  letter-spacing:0.1em;text-transform:uppercase;margin-top:6px;
+}
+.svc.dark .metric-lbl{color:rgba(255,255,255,0.35)}
+.svc.cream .metric-lbl{color:rgba(10,10,10,0.4)}
 
-/* ============================================
-   PROBLEM — LIGHT
-   ============================================ */
-.problem{background:var(--white)}
-.problem-header{text-align:center;margin-bottom:64px}
-.problem-header .tag{color:var(--red);margin-bottom:16px;display:block}
-.problem-header h2{font-size:clamp(36px,5vw,56px);color:var(--text-primary);margin-bottom:16px}
-.problem-header p{font-size:18px;color:var(--text-secondary);max-width:600px;margin:0 auto;font-weight:300;line-height:1.8}
+/* ── HOW IT WORKS ── */
+.how{
+  background:var(--green);color:var(--black);
+  padding:100px 48px;
+}
+.how-heading{
+  font-family:var(--font-display);
+  font-size:clamp(64px,10vw,140px);
+  line-height:0.88;color:var(--black);
+  margin-bottom:72px;
+}
+.steps{display:flex;flex-direction:column}
+.step{
+  display:grid;grid-template-columns:72px 1fr;
+  gap:0;align-items:start;
+  border-top:1px solid rgba(0,0,0,0.14);
+  padding:32px 0;
+}
+.step:last-child{border-bottom:1px solid rgba(0,0,0,0.14)}
+.step-n{
+  font-family:var(--font-display);
+  font-size:56px;color:rgba(0,0,0,0.14);line-height:1;
+}
+.step-body{padding-top:8px}
+.step-title{
+  font-family:var(--font-display);
+  font-size:clamp(28px,3vw,40px);
+  color:var(--black);margin-bottom:10px;line-height:1;
+}
+.step-desc{
+  font-size:16px;line-height:1.65;
+  color:rgba(0,0,0,0.6);max-width:520px;
+}
 
-.pain-grid{display:grid;grid-template-columns:1fr;gap:20px}
-@media(min-width:768px){.pain-grid{grid-template-columns:repeat(3,1fr);gap:24px}}
-.pain-card{background:var(--offwhite);border:1px solid var(--border-light);border-radius:16px;padding:32px 28px;transition:all 0.3s;position:relative;overflow:hidden}
-.pain-card:hover{border-color:rgba(239,68,68,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.06)}
-.pain-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);opacity:0;transition:opacity 0.3s}
-.pain-card:hover::before{opacity:1}
-.pain-num{font-family:'Bebas Neue',sans-serif;font-size:56px;color:rgba(239,68,68,0.08);line-height:1;margin-bottom:8px}
-.pain-card:hover .pain-num{color:rgba(239,68,68,0.15)}
-.pain-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.03em;margin-bottom:8px;color:var(--text-primary)}
-.pain-text{font-size:14px;color:var(--text-secondary);line-height:1.7}
+/* ── PROOF ── */
+.proof{background:var(--black);padding:112px 48px}
+.proof-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;margin:48px 0 80px;
+  border-top:1px solid rgba(255,255,255,0.06);
+  border-left:1px solid rgba(255,255,255,0.06);
+}
+.proof-cell{
+  padding:44px 36px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  border-right:1px solid rgba(255,255,255,0.06);
+}
+.proof-big{
+  font-family:var(--font-display);
+  font-size:clamp(56px,7vw,96px);
+  color:var(--green);line-height:1;margin-bottom:10px;
+}
+.proof-lbl{
+  font-family:var(--font-mono);font-size:10px;
+  color:rgba(255,255,255,0.35);
+  letter-spacing:0.1em;text-transform:uppercase;
+}
+.testimonial{
+  border-top:1px solid rgba(255,255,255,0.06);
+  padding-top:64px;
+  display:grid;grid-template-columns:1fr auto;
+  align-items:flex-end;gap:48px;
+}
+.tq{
+  font-family:var(--font-display);
+  font-size:clamp(36px,4.5vw,60px);
+  color:var(--white);line-height:1.05;
+}
+.ta{text-align:right}
+.ta-name{
+  font-family:var(--font-mono);font-size:11px;
+  color:var(--green);letter-spacing:0.1em;text-transform:uppercase;
+}
+.ta-co{
+  font-family:var(--font-mono);font-size:10px;
+  color:rgba(255,255,255,0.28);letter-spacing:0.05em;margin-top:6px;
+}
 
-/* Fee breakdown callout */
-.fee-callout{margin-top:48px;background:var(--offwhite);border:1px solid var(--border-light);border-radius:16px;padding:32px;max-width:640px;margin-left:auto;margin-right:auto}
-.fee-callout-title{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:24px}
-.fee-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-.fee-row:last-of-type{margin-bottom:0}
-.fee-label{font-size:13px;color:var(--text-secondary);width:200px;flex-shrink:0}
-.fee-bar{flex:1;height:6px;background:var(--mid-gray);border-radius:3px;overflow:hidden}
-.fee-bar-fill{height:100%;border-radius:3px;transition:width 1.2s cubic-bezier(0.16,1,0.3,1)}
-.fee-bar-red{background:linear-gradient(90deg,var(--red),rgba(239,68,68,0.6))}
-.fee-bar-amber{background:linear-gradient(90deg,var(--amber),rgba(245,158,11,0.6))}
-.fee-val{font-size:12px;font-weight:600;width:60px;text-align:right;flex-shrink:0}
-.fee-val-red{color:var(--red)}
-.fee-val-amber{color:var(--amber)}
-.fee-total{margin-top:24px;padding-top:20px;border-top:1px solid var(--border-light);display:flex;justify-content:space-between;align-items:flex-end}
-.fee-total-label{font-size:14px;color:var(--text-secondary)}
-.fee-total-sub{font-size:11px;color:var(--text-muted);margin-top:2px}
-.fee-total-num{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--red);line-height:1}
+/* ── CONTACT ── */
+.contact{
+  background:var(--cream);color:var(--black);
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;padding:112px 48px;
+}
+.contact-heading{
+  font-family:var(--font-display);
+  font-size:clamp(64px,9vw,128px);
+  line-height:0.88;color:var(--black);
+  margin-top:20px;margin-bottom:28px;
+}
+.contact-sub{
+  font-size:17px;line-height:1.65;
+  color:rgba(10,10,10,0.5);max-width:360px;
+}
+.form{display:flex;flex-direction:column}
+.fg{
+  border-bottom:1px solid rgba(10,10,10,0.14);
+  padding:0;
+}
+.fg:first-child{border-top:1px solid rgba(10,10,10,0.14)}
+.fg label{
+  display:block;font-family:var(--font-mono);font-size:9px;
+  color:rgba(10,10,10,0.38);letter-spacing:0.16em;text-transform:uppercase;
+  padding-top:18px;
+}
+.fg input,.fg select,.fg textarea{
+  width:100%;background:transparent;border:none;outline:none;
+  font-family:var(--font-body);font-size:17px;color:var(--black);
+  padding:6px 0 18px;-webkit-appearance:none;appearance:none;
+}
+.fg textarea{resize:none;min-height:72px}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(10,10,10,0.25)}
+.fg select option{background:var(--cream)}
+.form-btn{
+  margin-top:32px;align-self:flex-start;
+  background:var(--black);color:var(--white);border:none;
+  font-family:var(--font-mono);font-size:11px;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;
+  padding:18px 36px;cursor:pointer;
+  transition:background 0.2s,color 0.2s;
+}
+.form-btn:hover{background:var(--green);color:var(--black)}
 
-/* ============================================
-   HOW IT WORKS — LIGHT ALT
-   ============================================ */
-.how{background:var(--offwhite)}
-.how-header{text-align:center;margin-bottom:64px}
-.how-header .tag{color:var(--green);margin-bottom:16px;display:block}
-.how-header h2{font-size:clamp(36px,5vw,56px);color:var(--text-primary);margin-bottom:16px}
-.how-header p{font-size:18px;color:var(--text-secondary);max-width:560px;margin:0 auto;font-weight:300;line-height:1.8}
-.steps{display:grid;grid-template-columns:1fr;gap:20px}
-@media(min-width:768px){.steps{grid-template-columns:repeat(4,1fr);gap:24px}}
-.step{background:var(--white);border:1px solid var(--border-light);border-radius:16px;padding:32px 24px;text-align:center;transition:all 0.3s;position:relative}
-.step:hover{border-color:rgba(0,179,131,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.06);transform:translateY(-4px)}
-.step::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--green);opacity:0;transition:opacity 0.3s;border-radius:16px 16px 0 0}
-.step:hover::before{opacity:1}
-.step-icon{width:56px;height:56px;border-radius:14px;background:var(--green-glow);display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
-.step-icon svg{color:var(--green)}
-.step-num{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-faint);letter-spacing:0.1em;margin-bottom:8px}
-.step-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.03em;margin-bottom:8px;color:var(--text-primary)}
-.step-text{font-size:14px;color:var(--text-secondary);line-height:1.7}
+/* ── FOOTER ── */
+footer{
+  background:var(--ink);
+  display:grid;grid-template-columns:1fr auto;
+  align-items:center;padding:56px 48px;
+  border-top:1px solid rgba(255,255,255,0.05);
+}
+.footer-logo img{height:26px;width:auto;opacity:0.6;display:block}
+.footer-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.footer-links{display:flex;gap:28px;list-style:none}
+.footer-links a{
+  font-family:var(--font-mono);font-size:10px;
+  color:rgba(255,255,255,0.28);text-decoration:none;
+  letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;
+}
+.footer-links a:hover{color:var(--green)}
+.footer-copy{
+  font-family:var(--font-mono);font-size:9px;
+  color:rgba(255,255,255,0.18);letter-spacing:0.05em;
+}
 
-/* ============================================
-   SERVICES — LIGHT
-   ============================================ */
-.services{background:var(--white)}
-.services-header{text-align:center;margin-bottom:64px}
-.services-header .tag{color:var(--green);margin-bottom:16px;display:block}
-.services-header h2{font-size:clamp(36px,5vw,56px);color:var(--text-primary);margin-bottom:16px}
-.services-header p{font-size:18px;color:var(--text-secondary);max-width:620px;margin:0 auto;font-weight:300;line-height:1.8}
-.services-grid{display:grid;grid-template-columns:1fr;gap:24px}
-@media(min-width:768px){.services-grid{grid-template-columns:1fr 1fr;gap:24px}}
-.service-card{background:var(--offwhite);border:1px solid var(--border-light);border-radius:16px;padding:40px 32px;transition:all 0.3s;position:relative;overflow:hidden}
-.service-card:hover{box-shadow:0 12px 40px rgba(0,0,0,0.06)}
-.service-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:24px}
-.service-icon-energy{background:var(--red-soft)}
-.service-icon-energy svg{color:var(--red)}
-.service-icon-card{background:var(--green-glow)}
-.service-icon-card svg{color:var(--green)}
-.service-card h3{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:0.03em;margin-bottom:12px;color:var(--text-primary)}
-.service-card p{font-size:15px;color:var(--text-secondary);line-height:1.7;margin-bottom:24px}
-.service-list{list-style:none;display:flex;flex-direction:column;gap:10px}
-.service-list li{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text-secondary);line-height:1.5}
-.service-check{width:20px;height:20px;border-radius:50%;background:var(--green-glow);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.service-check svg{color:var(--green)}
-.service-tag{margin-top:28px;padding-top:20px;border-top:1px solid var(--border-light);font-size:11px;letter-spacing:0.12em;color:var(--green);text-transform:uppercase;display:flex;align-items:center;gap:10px}
-.service-tag .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2.5s infinite}
+/* ── SCROLL REVEAL ── */
+.rv{opacity:0;transform:translateY(36px);transition:opacity 0.7s ease,transform 0.7s ease}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:0.1s}.d2{transition-delay:0.2s}
+.d3{transition-delay:0.3s}.d4{transition-delay:0.4s}
 
-/* ============================================
-   PROOF — LIGHT ALT
-   ============================================ */
-.proof{background:var(--offwhite)}
-.proof-numbers{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-bottom:64px}
-@media(min-width:768px){.proof-numbers{grid-template-columns:repeat(4,1fr)}}
-.proof-stat{text-align:center}
-.proof-stat-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,72px);color:var(--green);line-height:1}
-.proof-stat-label{font-size:13px;color:var(--text-secondary);margin-top:4px;max-width:160px;margin-left:auto;margin-right:auto;line-height:1.4}
-.testimonial{max-width:720px;margin:0 auto;background:var(--white);border:1px solid var(--border-light);border-radius:16px;padding:40px;text-align:center;position:relative}
-.testimonial::before{content:'';position:absolute;top:-1px;left:20%;right:20%;height:3px;background:linear-gradient(90deg,transparent,var(--green),transparent);border-radius:0 0 3px 3px}
-.testimonial blockquote{font-size:clamp(18px,2.5vw,24px);color:var(--text-primary);font-weight:300;line-height:1.6;margin-bottom:20px;font-style:italic}
-.testimonial cite{font-style:normal;font-size:14px;color:var(--text-muted)}
-.testimonial cite strong{color:var(--text-primary);font-weight:500}
-
-/* ============================================
-   ABOUT — LIGHT
-   ============================================ */
-.about{background:var(--white)}
-.about-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center}
-@media(min-width:900px){.about-grid{grid-template-columns:340px 1fr;gap:64px}}
-.about-photo{position:relative;max-width:340px;margin:0 auto}
-.about-photo img{border-radius:20px;box-shadow:0 24px 64px rgba(0,0,0,0.12);aspect-ratio:1/1;object-fit:cover;width:100%}
-.about-photo::before{content:'';position:absolute;inset:-4px;border-radius:24px;background:linear-gradient(135deg,rgba(0,179,131,0.15),transparent 50%);z-index:-1}
-.about-content .tag{color:var(--green);margin-bottom:16px;display:block}
-.about-content h2{font-size:clamp(36px,5vw,52px);color:var(--text-primary);margin-bottom:24px}
-.about-content h2 em{font-style:normal;color:var(--green)}
-.about-quote{font-size:18px;color:var(--text-primary);font-weight:300;line-height:1.8;font-style:italic;margin-bottom:20px;padding-left:20px;border-left:3px solid var(--green)}
-.about-text{font-size:15px;color:var(--text-secondary);line-height:1.8;margin-bottom:16px}
-.about-text strong{color:var(--text-primary);font-weight:500}
-.about-sig{margin-top:28px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.about-sig-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.03em}
-.about-sig-role{font-size:10px;letter-spacing:0.12em;color:var(--green);text-transform:uppercase}
-.about-sig-loc{font-size:11px;color:var(--text-faint);margin-top:8px;letter-spacing:0.06em}
-
-/* ============================================
-   CONTACT — DARK
-   ============================================ */
-.contact{background:var(--midnight);color:var(--text-on-dark)}
-.contact-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:start}
-@media(min-width:900px){.contact-grid{grid-template-columns:1fr 1fr;gap:64px;align-items:center}}
-.contact-content .tag{color:var(--green);margin-bottom:16px;display:block}
-.contact-content h2{font-size:clamp(36px,5vw,52px);margin-bottom:20px}
-.contact-content h2 em{font-style:normal;color:var(--green)}
-.contact-content>p{font-size:16px;color:var(--text-on-dark-muted);line-height:1.8;margin-bottom:32px;font-weight:300}
-.contact-promise{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-on-dark-muted);margin-bottom:12px}
-.contact-promise svg{color:var(--green);flex-shrink:0}
-.contact-email{margin-top:28px;padding-top:20px;border-top:1px solid var(--border-dark)}
-.contact-email a{font-size:14px;color:var(--text-on-dark-faint);display:flex;align-items:center;gap:8px;transition:color 0.3s}
-.contact-email a:hover{color:var(--green)}
-
-/* Form */
-.form-card{background:var(--graphite);border:1px solid var(--border-dark);border-radius:16px;padding:32px}
-@media(min-width:768px){.form-card{padding:40px}}
-.form-group{margin-bottom:20px}
-.form-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-on-dark-faint);margin-bottom:8px;display:block}
-.form-input{width:100%;background:var(--slate);border:1px solid var(--border-dark);border-radius:10px;padding:14px 16px;font-size:15px;color:var(--text-on-dark);font-family:'DM Sans',sans-serif;transition:all 0.3s;outline:none}
-.form-input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(0,179,131,0.15)}
-.form-input::placeholder{color:var(--text-on-dark-faint)}
-textarea.form-input{resize:vertical;min-height:100px}
-.form-btn{width:100%;background:var(--green);color:var(--white);font-weight:600;padding:16px;border-radius:10px;border:none;font-family:'Bebas Neue',sans-serif;letter-spacing:0.08em;font-size:18px;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:8px}
-.form-btn:hover{background:var(--green-dark);box-shadow:0 8px 32px rgba(0,179,131,0.3)}
-.form-fine{font-size:11px;color:var(--text-on-dark-faint);text-align:center;margin-top:12px;letter-spacing:0.06em}
-
-/* ============================================
-   FOOTER — DARK
-   ============================================ */
-.footer{background:var(--midnight);border-top:1px solid var(--border-dark);padding:48px 0 32px}
-.footer-inner{display:grid;grid-template-columns:1fr;gap:32px}
-@media(min-width:768px){.footer-inner{grid-template-columns:1fr auto auto;gap:64px}}
-.footer-brand img{height:24px;margin-bottom:8px}
-.footer-brand p{font-size:13px;color:var(--text-on-dark-faint)}
-.footer-col h4{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-on-dark-faint);margin-bottom:12px}
-.footer-col a{font-size:13px;color:var(--text-on-dark-muted);display:block;margin-bottom:8px;transition:color 0.3s}
-.footer-col a:hover{color:var(--green)}
-.footer-bottom{margin-top:32px;padding-top:20px;border-top:1px solid var(--border-dark);font-size:10px;color:var(--text-on-dark-faint);letter-spacing:0.08em}
-
-/* ============================================
-   FLOATING MOBILE CTA
-   ============================================ */
-.float-cta{display:none;position:fixed;bottom:20px;left:16px;right:16px;z-index:99}
-.float-cta a{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--green);color:var(--white);font-weight:600;font-size:15px;padding:16px;border-radius:12px;box-shadow:0 8px 32px rgba(0,179,131,0.4)}
-@media(max-width:767px){.float-cta.show{display:block}}
+/* ── MOBILE ── */
+@media(max-width:900px){
+  .nav{padding:16px 24px}
+  .nav.scrolled{padding:13px 24px}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .hero{padding:0 24px 48px}
+  .hero-foot{grid-template-columns:1fr;gap:28px}
+  .hero-actions{align-items:flex-start;flex-direction:row;flex-wrap:wrap}
+  .green-band{grid-template-columns:1fr}
+  .band-stat{padding:28px 24px;border-right:none;border-bottom:1px solid rgba(0,0,0,0.1)}
+  .band-stat:last-child{border-bottom:none}
+  .problem{padding:80px 24px}
+  .problem-layout{grid-template-columns:1fr;gap:56px}
+  .about{grid-template-columns:1fr}
+  .about-photo{height:380px;order:-1}
+  .about-copy{padding:64px 24px}
+  .svc{grid-template-columns:1fr;padding:80px 24px;gap:48px}
+  .svc-aside{order:-1}
+  .ghost-num{font-size:clamp(100px,24vw,160px)}
+  .how{padding:80px 24px}
+  .proof{padding:80px 24px}
+  .proof-grid{grid-template-columns:repeat(2,1fr)}
+  .proof-cell{padding:28px 20px}
+  .testimonial{grid-template-columns:1fr}
+  .ta{text-align:left}
+  .contact{grid-template-columns:1fr;padding:80px 24px;gap:56px}
+  footer{grid-template-columns:1fr;gap:28px;padding:40px 24px}
+  .footer-right{align-items:flex-start}
+}
+@media(max-width:480px){
+  .hero-headline{font-size:clamp(68px,18vw,120px)}
+  .btn{padding:13px 22px;font-size:10px}
+  .proof-grid{grid-template-columns:1fr 1fr}
+  .proof-big{font-size:clamp(40px,10vw,64px)}
+}
 </style>
 </head>
 <body>
 
-<!-- SCROLL PROGRESS -->
-<div class="scroll-progress" id="scrollProg"></div>
-
 <!-- NAV -->
-<nav class="nav" id="nav">
-  <a href="#" class="nav-logo"><img src="assets/images/logo-compact.png" alt="Zero Drift"></a>
-  <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
-  <div class="nav-links">
-    <a href="#how">How it works</a>
-    <a href="#services">Services</a>
-    <a href="#about">About</a>
-    <a href="#contact" class="nav-cta">Get your free benchmark</a>
-  </div>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#how">How it works</a>
-  <a href="#services">Services</a>
-  <a href="#about">About</a>
-  <a href="#contact" class="btn btn-primary">Get your free benchmark</a>
+<header class="nav" id="nav">
+  <a href="#" class="nav-logo">
+    <img src="assets/images/logo-light.png" alt="Zero Drift Energy">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#problem">The Problem</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta-link">Free Review</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true">
+  <button class="mobile-close" onclick="toggleMenu()">Close ×</button>
+  <nav>
+    <a href="#problem" onclick="toggleMenu()">Problem</a>
+    <a href="#services" onclick="toggleMenu()">Services</a>
+    <a href="#how" onclick="toggleMenu()">How It Works</a>
+    <a href="#about" onclick="toggleMenu()">About</a>
+    <a href="#contact" onclick="toggleMenu()" style="color:var(--green)">Free Review →</a>
+  </nav>
 </div>
 
-<!-- ============================================
-     HERO
-     ============================================ -->
+<!-- HERO -->
 <section class="hero">
-  <div class="container">
-    <div class="hero-grid">
-      <div class="hero-content">
-        <div class="hero-badge tag reveal">
-          <span class="dot"></span>
-          <span>Independent broker &middot; UK &amp; Ireland</span>
-        </div>
-        <h1 class="font-display reveal reveal-d1">YOUR COSTS<br>SHOULD NEVER<br><em>SURPRISE YOU</em></h1>
-        <p class="hero-desc reveal reveal-d2">Energy bills creeping up. Card processing fees that don't match what you signed. <strong>We fix that.</strong> As an independent broker, we search the entire market, negotiate the best deal, and lock the price in. For good.</p>
-        <div class="hero-actions reveal reveal-d3">
-          <a href="#contact" class="btn btn-primary">Get a free benchmark <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          <a href="#how" class="btn btn-outline-light">See how it works</a>
-        </div>
-      </div>
-      <div class="hero-visual reveal reveal-d2">
-        <div class="dash-mock">
-          <div class="dash-topbar">
-            <div class="dash-dots"><i></i><i></i><i></i></div>
-            <span class="dash-topbar-title font-mono">Cost Overview</span>
-            <span class="dash-live font-mono">Live</span>
-          </div>
-          <div class="dash-body">
-            <div class="dash-chart">
-              <svg viewBox="0 0 400 130" width="100%" style="overflow:visible">
-                <line x1="0" y1="20" x2="400" y2="20" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-                <line x1="0" y1="50" x2="400" y2="50" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-                <line x1="0" y1="80" x2="400" y2="80" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-                <line x1="0" y1="110" x2="400" y2="110" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-                <text x="4" y="14" fill="rgba(239,68,68,0.7)" font-size="8" font-family="Space Mono" letter-spacing="0.1em">WHAT YOU PAY NOW</text>
-                <defs><linearGradient id="rg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(239,68,68,0.25)"/><stop offset="100%" stop-color="rgba(239,68,68,0)"/></linearGradient></defs>
-                <polygon points="0,100 57,95 114,86 171,74 228,60 285,44 342,28 400,12 400,120 0,120" fill="url(#rg)"/>
-                <polyline points="0,100 57,95 114,86 171,74 228,60 285,44 342,28 400,12" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round" class="draw-line"/>
-                <text x="4" y="84" fill="rgba(0,179,131,0.7)" font-size="8" font-family="Space Mono" letter-spacing="0.1em">WHAT YOU SHOULD PAY</text>
-                <line x1="0" y1="100" x2="400" y2="100" stroke="rgba(0,179,131,0.12)" stroke-width="16" stroke-linecap="round"/>
-                <line x1="0" y1="100" x2="400" y2="100" stroke="#00B383" stroke-width="2.5" stroke-linecap="round"/>
-                <circle cx="0" cy="100" r="4" fill="#00B383"/><circle cx="400" cy="100" r="4" fill="#00B383"/>
-                <line x1="360" y1="18" x2="360" y2="95" stroke="rgba(239,68,68,0.3)" stroke-width="1" stroke-dasharray="3 3"/>
-                <text x="372" y="60" fill="rgba(239,68,68,0.7)" font-size="9" font-family="Bebas Neue" letter-spacing="0.08em" transform="rotate(90,372,60)">DRIFT</text>
-                <text x="0" y="130" fill="rgba(255,255,255,0.25)" font-size="8" font-family="DM Sans">Day 1</text>
-                <text x="370" y="130" fill="rgba(255,255,255,0.25)" font-size="8" font-family="DM Sans">Contract end</text>
-              </svg>
-            </div>
-            <div class="dash-compare">
-              <div class="dash-card dash-card-bad">
-                <div class="dash-card-label font-mono">Without Zero Drift</div>
-                <div class="dash-card-row"><span>Unit rate</span><span class="dash-card-val font-mono">+18% over term</span></div>
-                <div class="dash-card-row"><span>Standing charge</span><span class="dash-card-val font-mono">+£42/yr</span></div>
-                <div class="dash-card-row"><span>Card fees</span><span class="dash-card-val font-mono">+0.32% creep</span></div>
-                <div class="dash-card-row"><span>Surprises</span><span class="dash-card-val font-mono">4 per year</span></div>
-              </div>
-              <div class="dash-card dash-card-good">
-                <div class="dash-card-label font-mono">With Zero Drift</div>
-                <div class="dash-card-row"><span>Unit rate</span><span class="dash-card-val font-mono">Fixed</span></div>
-                <div class="dash-card-row"><span>Standing charge</span><span class="dash-card-val font-mono">Included</span></div>
-                <div class="dash-card-row"><span>Card fees</span><span class="dash-card-val font-mono">Locked</span></div>
-                <div class="dash-card-row"><span>Surprises</span><span class="dash-card-val font-mono">Zero</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="dash-stats">
-            <div class="dash-stat"><div class="dash-stat-num" data-count="100" data-suffix="%">0%</div><div class="dash-stat-label font-mono">Price locked</div></div>
-            <div class="dash-stat"><div class="dash-stat-num" data-count="2">0</div><div class="dash-stat-label font-mono">Cost lines</div></div>
-            <div class="dash-stat"><div class="dash-stat-num" data-count="0" data-prefix="£">£0</div><div class="dash-stat-label font-mono">Surprises</div></div>
-          </div>
-        </div>
-      </div>
+  <div class="hero-ghost" aria-hidden="true">ZERO</div>
+  <div class="hero-main">
+    <div class="eyebrow">UK Energy &amp; Payments Brokerage</div>
+    <h1 class="hero-headline">Stop paying<br>broker<em> fees.</em></h1>
+  </div>
+  <div class="hero-foot">
+    <p class="hero-sub">
+      Zero Drift works exclusively for your business — not the supplier. We find you the best rate, manage the switch, and charge you absolutely nothing.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-green">Get a free review →</a>
+      <a href="#how" class="btn btn-outline">How it works</a>
     </div>
   </div>
 </section>
 
-<!-- ============================================
-     TRUST STRIP
-     ============================================ -->
-<div class="trust-strip">
-  <div class="container">
-    <div class="trust-strip-inner">
-      <div class="trust-item">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span><strong>100% independent</strong> — we work for you, not the suppliers</span>
-      </div>
-      <div class="trust-item">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <span><strong>Whole market</strong> — every supplier, every deal, every time</span>
-      </div>
-      <div class="trust-item">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span><strong>Price locked</strong> — day one rate, guaranteed to the last</span>
-      </div>
-    </div>
+<!-- GREEN BAND -->
+<div class="green-band">
+  <div class="band-stat">
+    <div class="band-number" data-counter="0" data-prefix="£">£0</div>
+    <div class="band-label">Broker fees — ever</div>
+  </div>
+  <div class="band-stat">
+    <div class="band-number" data-counter="100" data-suffix="%">100%</div>
+    <div class="band-label">Transparent pricing</div>
+  </div>
+  <div class="band-stat">
+    <div class="band-number" data-counter="2">2</div>
+    <div class="band-label">Minutes to get your quote</div>
   </div>
 </div>
 
-<!-- ============================================
-     PROBLEM
-     ============================================ -->
-<section class="problem section" id="problem">
-  <div class="container">
-    <div class="problem-header">
-      <span class="tag reveal">The problem</span>
-      <h2 class="font-display reveal reveal-d1">THEY'RE COUNTING ON<br>YOU NOT CHECKING</h2>
-      <p class="reveal reveal-d2">The price you signed up for isn't the price you're paying. Somewhere between day one and today, the numbers shifted. That wasn't an accident.</p>
+<!-- THE PROBLEM -->
+<section class="problem" id="problem">
+  <div class="section-tag on-light">The Problem</div>
+  <div class="problem-layout">
+    <div>
+      <h2 class="problem-heading rv">
+        Your broker is working for the<em> supplier.</em>
+      </h2>
+      <p class="problem-body rv d1">
+        Most UK energy brokers earn hidden commissions from the suppliers they recommend. Those commissions come directly from your unit rate — sometimes over £700 a year — with no legal obligation to disclose them.
+      </p>
+      <p class="problem-body rv d2">
+        That's not brokerage. It's a conflict of interest dressed up as advice.
+      </p>
+      <a href="#contact" class="btn btn-dark rv d3" style="margin-top:40px;display:inline-block">Find out what you're overpaying →</a>
     </div>
-    <div class="pain-grid">
-      <div class="pain-card reveal">
-        <div class="pain-num font-display">01</div>
-        <h3 class="pain-title font-display">ENERGY BILLS THAT CREEP</h3>
-        <p class="pain-text">Your supplier quietly added charges you never agreed to. When renewal came, they rolled you onto a worse rate. You were busy running a business. They were busy running up your bill.</p>
-      </div>
-      <div class="pain-card reveal reveal-d1">
-        <div class="pain-num font-display">02</div>
-        <h3 class="pain-title font-display">CARD FEES NOBODY EXPLAINS</h3>
-        <p class="pain-text">Interchange, scheme fees, PCI charges, authorisation fees. They pile on line items knowing you won't question them. Most business owners have no idea what they actually pay per transaction.</p>
-      </div>
-      <div class="pain-card reveal reveal-d2">
-        <div class="pain-num font-display">03</div>
-        <h3 class="pain-title font-display">YOU CAN'T BUDGET BLIND</h3>
-        <p class="pain-text">When your costs shift every month, you can't plan. You can't forecast. You can't grow with confidence. One fixed number changes everything.</p>
-      </div>
-    </div>
-    <div class="fee-callout reveal">
-      <p class="fee-callout-title font-mono">What's hiding in a typical card statement</p>
-      <div class="fee-row"><span class="fee-label">Acquirer markup</span><div class="fee-bar"><div class="fee-bar-fill fee-bar-red" data-width="80%"></div></div><span class="fee-val fee-val-red font-mono">+0.4%</span></div>
-      <div class="fee-row"><span class="fee-label">Scheme fee rises (Visa/MC)</span><div class="fee-bar"><div class="fee-bar-fill fee-bar-red" data-width="50%"></div></div><span class="fee-val fee-val-red font-mono">+0.12%</span></div>
-      <div class="fee-row"><span class="fee-label">PCI non-compliance charge</span><div class="fee-bar"><div class="fee-bar-fill fee-bar-amber" data-width="65%"></div></div><span class="fee-val fee-val-amber font-mono">£15/mo</span></div>
-      <div class="fee-row"><span class="fee-label">Terminal rental</span><div class="fee-bar"><div class="fee-bar-fill fee-bar-amber" data-width="55%"></div></div><span class="fee-val fee-val-amber font-mono">£25/mo</span></div>
-      <div class="fee-row"><span class="fee-label">Authorisation fees</span><div class="fee-bar"><div class="fee-bar-fill fee-bar-red" data-width="35%"></div></div><span class="fee-val fee-val-red font-mono">3p/txn</span></div>
-      <div class="fee-total">
-        <div><div class="fee-total-label">Typical annual overpayment</div><div class="fee-total-sub font-mono">Based on 1.75% effective vs 1.2% achievable</div></div>
-        <div class="fee-total-num font-display" data-count="2400" data-prefix="£">£0</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================
-     HOW IT WORKS
-     ============================================ -->
-<section class="how section" id="how">
-  <div class="container">
-    <div class="how-header">
-      <span class="tag reveal">How it works</span>
-      <h2 class="font-display reveal reveal-d1">FOUR STEPS.<br>ZERO HASSLE.</h2>
-      <p class="reveal reveal-d2">No jargon. No ties to any supplier. Just an honest look at your costs and a better deal if one exists.</p>
-    </div>
-    <div class="steps">
-      <div class="step reveal">
-        <div class="step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 12h6m-3-3v6M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        <div class="step-num font-mono">Step 01</div>
-        <h3 class="step-title font-display">SEND US A BILL</h3>
-        <p class="step-text">Any recent energy bill or card processing statement. That's all we need to get started.</p>
-      </div>
-      <div class="step reveal reveal-d1">
-        <div class="step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        <div class="step-num font-mono">Step 02</div>
-        <h3 class="step-title font-display">WE BENCHMARK IT</h3>
-        <p class="step-text">We compare what you're paying against the whole market. No guesswork. Just data.</p>
-      </div>
-      <div class="step reveal reveal-d2">
-        <div class="step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="step-num font-mono">Step 03</div>
-        <h3 class="step-title font-display">PRICE GETS LOCKED</h3>
-        <p class="step-text">We negotiate the best deal and lock the rate in. Day one price = last day price. Done.</p>
-      </div>
-      <div class="step reveal reveal-d3">
-        <div class="step-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="step-num font-mono">Step 04</div>
-        <h3 class="step-title font-display">WE WATCH IT</h3>
-        <p class="step-text">We manage the contract so you never get caught on an auto-renewal. When it's time, we renegotiate.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================
-     SERVICES
-     ============================================ -->
-<section class="services section" id="services">
-  <div class="container">
-    <div class="services-header">
-      <span class="tag reveal">What we do</span>
-      <h2 class="font-display reveal reveal-d1">TWO COST LINES.<br>ONE EXPERT.</h2>
-      <p class="reveal reveal-d2">Energy and card processing. Two bills every business pays — and two bills almost every business overpays. We're not tied to any supplier, so we'll always find the deal that's right for you.</p>
-    </div>
-    <div class="services-grid">
-      <div class="service-card reveal">
-        <div class="service-icon service-icon-energy"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3 class="font-display">BUSINESS ENERGY</h3>
-        <p>We look at your gas and electricity, find out what the market is actually charging, and lock you into a rate that doesn't move. When renewal comes, we handle it before your supplier gets the chance to roll you over.</p>
-        <ul class="service-list">
-          <li><span class="service-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M13 5L6.5 11.5 3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Gas &amp; electricity for commercial premises</li>
-          <li><span class="service-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M13 5L6.5 11.5 3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Multi-site and group contracts</li>
-          <li><span class="service-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M13 5L6.5 11.5 3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Fixed unit rate for the full term</li>
-          <li><span class="service-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M13 5L6.5 11.5 3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Renewal managed before contract ends</li>
-        </ul>
-        <div class="service-tag font-mono"><span class="dot"></span>One price. Full stop.</div>
-      </div>
-      <div class="service-card reveal reveal-d1">
-        <div class="service-icon service-icon-card"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 10h20" stroke="currentColor" stroke-width="1.5"/><path d="M6 15h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        <h3 class="font-display">CARD PROCESSING</h3>
-        <p>We pull apart your merchant statement line by line. Every interchange fee, every scheme charge, every margin your processor has quietly added. Then we negotiate a single, fixed effective rate that stays fixed.</p>
-        <ul class="service-list">
-          <li><span class="service-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M13 5L6.5 11.5 3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Full statement audit — see exactly what you pay</li>
-          <li><span class="service-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M13 5L6.5 11.5 3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Fixed effective rate agreed upfront</li>
-          <li><span class="service-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M13 5L6.5 11.5 3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>No scheme fee surprises mid-contract</li>
-          <li><span class="service-check"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M13 5L6.5 11.5 3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>PCI compliance included</li>
-        </ul>
-        <div class="service-tag font-mono"><span class="dot"></span>One rate. Agreed. Locked.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================
-     PROOF
-     ============================================ -->
-<section class="proof section">
-  <div class="container">
-    <div class="proof-numbers">
-      <div class="proof-stat reveal"><div class="proof-stat-num font-display" data-count="100" data-suffix="%">0%</div><div class="proof-stat-label">Independent. No ties to any supplier.</div></div>
-      <div class="proof-stat reveal reveal-d1"><div class="proof-stat-num font-display" data-count="0" data-prefix="£">£0</div><div class="proof-stat-label">Surprise charges during your term.</div></div>
-      <div class="proof-stat reveal reveal-d2"><div class="proof-stat-num font-display" data-count="24" data-suffix="hrs">0</div><div class="proof-stat-label">Average time to your first benchmark.</div></div>
-      <div class="proof-stat reveal reveal-d3"><div class="proof-stat-num font-display" data-count="2">0</div><div class="proof-stat-label">Cost lines we specialise in. Energy &amp; cards.</div></div>
-    </div>
-    <div class="testimonial reveal">
-      <blockquote>"We had no idea we were overpaying until Tim showed us the benchmark. Switched both energy and card processing — saved over three grand in year one."</blockquote>
-      <cite><strong>Sarah M.</strong> &mdash; Restaurant owner, Belfast</cite>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================
-     ABOUT
-     ============================================ -->
-<section class="about section" id="about">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-photo reveal">
-        <img src="assets/images/tim.jpg" alt="Tim Jackson, Founder of Zero Drift" width="400" height="400" loading="lazy">
-      </div>
-      <div class="about-content">
-        <span class="tag reveal font-mono">The person behind Zero Drift</span>
-        <h2 class="font-display reveal reveal-d1">NOT A COMPANY.<br>A PERSON WHO<br><em>GIVES A DAMN.</em></h2>
-        <p class="about-quote reveal reveal-d2">"I started Zero Drift because I've been exactly where you are. I ran a business, trusted my suppliers, and assumed the price I signed was the price I was paying. It wasn't."</p>
-        <p class="about-text reveal reveal-d3">When I finally looked into it, I found charges I'd never agreed to, rates that had crept up without notice, and renewal terms designed to catch me out. I wasn't angry — I was frustrated that <strong>nobody was looking out for businesses like mine.</strong></p>
-        <p class="about-text reveal reveal-d3">So I built Zero Drift. One person, completely independent, focused on two things: your energy costs and your card processing fees. I benchmark what you're paying, negotiate something better, and make sure the price stays exactly where we agreed. <strong>No drift. That's the promise.</strong></p>
-        <div class="about-sig reveal reveal-d4">
-          <div>
-            <div class="about-sig-name font-display">Tim Jackson</div>
-            <div class="about-sig-role font-mono">Director &amp; Cost Consultant</div>
-          </div>
+    <div class="rv d1">
+      <div class="data-table">
+        <div class="data-row">
+          <span class="data-label">Hidden broker commission (avg)</span>
+          <span class="data-value bad">£793/yr</span>
         </div>
-        <p class="about-sig-loc font-mono reveal reveal-d4">Based in Northern Ireland &middot; Working across UK &amp; Ireland</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================
-     CONTACT
-     ============================================ -->
-<section class="contact section" id="contact">
-  <div class="container">
-    <div class="contact-grid">
-      <div class="contact-content">
-        <span class="tag reveal font-mono">Let's talk</span>
-        <h2 class="font-display reveal reveal-d1">FIVE MINUTES.<br>ONE CONVERSATION.<br><em>REAL ANSWERS.</em></h2>
-        <p class="reveal reveal-d2">Tell us what you're paying. We'll tell you what you should be paying. If we can save you money, we'll show you exactly how. If we can't, you'll know your deal is already solid.</p>
-        <div class="reveal reveal-d3">
-          <div class="contact-promise"><svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M13 5L6.5 11.5 3 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Free benchmark — no strings attached</div>
-          <div class="contact-promise"><svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M13 5L6.5 11.5 3 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>We'll call you back within one business day</div>
-          <div class="contact-promise"><svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M13 5L6.5 11.5 3 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>No obligation — keep the insights either way</div>
+        <div class="data-row">
+          <span class="data-label">Required to disclose it</span>
+          <span class="data-value bad">No</span>
         </div>
-        <div class="contact-email reveal reveal-d4">
-          <a href="mailto:tim@zerodrift.energy"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4l6 4.5L14 4M2 4v8h12V4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>tim@zerodrift.energy</a>
+        <div class="data-row">
+          <span class="data-label">Working for you or the supplier</span>
+          <span class="data-value bad">Supplier</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Zero Drift fee</span>
+          <span class="data-value good">£0</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Who we work for</span>
+          <span class="data-value good">You</span>
         </div>
       </div>
-      <div class="reveal reveal-d2">
-        <form class="form-card" action="https://formspree.io/f/placeholder" method="POST">
-          <div class="form-group"><label class="form-label font-mono" for="name">Your name</label><input class="form-input" type="text" id="name" name="name" placeholder="e.g. Sarah Murphy" required></div>
-          <div class="form-group"><label class="form-label font-mono" for="email">Email</label><input class="form-input" type="email" id="email" name="email" placeholder="sarah@company.co.uk" required></div>
-          <div class="form-group"><label class="form-label font-mono" for="phone">Phone (optional)</label><input class="form-input" type="tel" id="phone" name="phone" placeholder="+44 7700 000000"></div>
-          <div class="form-group"><label class="form-label font-mono" for="message">What can we help with?</label><textarea class="form-input" id="message" name="message" placeholder="e.g. I think we're overpaying on energy but I'm not sure by how much..."></textarea></div>
-          <button type="submit" class="form-btn font-display">GET MY FREE BENCHMARK <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <p class="form-fine font-mono">No spam. No hard sell. Just clarity.</p>
-        </form>
+      <p class="problem-note">
+        £793 is the average annual hidden commission UK energy brokers receive from suppliers on SME contracts. Source: Citizens Advice / Ofgem research.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT TIM -->
+<section class="about" id="about">
+  <div class="about-copy">
+    <div class="section-tag on-dark">About</div>
+    <h2 class="about-heading rv">
+      Built by someone who saw the<em> inside.</em>
+    </h2>
+    <div class="about-body rv d1">
+      <p>I'm Tim. I spent years working inside the energy brokerage industry — watching brokers route clients to the deals that paid the biggest commissions, not the best rates. I saw the machine up close.</p>
+      <p>Zero Drift is my answer to it. A brokerage with one rule: every decision gets made in the client's interest, with full transparency on every pound.</p>
+      <p>I handle your account personally. No call centre, no junior account manager. Just direct, honest advice from someone who knows exactly how the market works — and where the bodies are buried.</p>
+    </div>
+  </div>
+  <div class="about-photo">
+    <img src="assets/images/tim.jpg" alt="Tim — Founder, Zero Drift Energy" loading="lazy">
+  </div>
+</section>
+
+<!-- SERVICES: ENERGY -->
+<section class="svc dark" id="services">
+  <div>
+    <div class="svc-label">Service 01</div>
+    <h2 class="svc-heading rv">Energy<br><em>Brokerage</em></h2>
+    <p class="svc-body rv d1">
+      We compare every supplier on the market and negotiate your contract directly. You get the best available rate — and we never take a cut from the supplier side.
+    </p>
+    <ul class="svc-list rv d2">
+      <li><div class="dot"></div><span>Full market comparison — gas, electricity, dual fuel</span></li>
+      <li><div class="dot"></div><span>Fixed and flexible contract options</span></li>
+      <li><div class="dot"></div><span>Zero supplier commission — by design, not just policy</span></li>
+      <li><div class="dot"></div><span>Switch managed end to end — you sign, we handle it</span></li>
+      <li><div class="dot"></div><span>Renewal reminders and ongoing rate monitoring</span></li>
+    </ul>
+    <a href="#contact" class="btn btn-green rv d3">Get a free energy review →</a>
+  </div>
+  <div class="svc-aside">
+    <div class="ghost-num" aria-hidden="true">01</div>
+    <div class="metric rv">
+      <div class="metric-val" data-counter="793" data-prefix="£">£793</div>
+      <div class="metric-lbl">Average annual saving vs commission broker</div>
+    </div>
+    <div class="metric rv d1">
+      <div class="metric-val" data-counter="0" data-prefix="£">£0</div>
+      <div class="metric-lbl">Cost to your business</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES: CARD PAYMENTS -->
+<section class="svc cream">
+  <div class="svc-aside">
+    <div class="ghost-num" aria-hidden="true">02</div>
+    <div class="metric rv">
+      <div class="metric-val" data-counter="18" data-suffix="bps">18bps</div>
+      <div class="metric-lbl">Typical processing rate we achieve</div>
+    </div>
+    <div class="metric rv d1">
+      <div class="metric-val" data-counter="0" data-prefix="£">£0</div>
+      <div class="metric-lbl">Setup or hidden fees</div>
+    </div>
+  </div>
+  <div>
+    <div class="svc-label">Service 02</div>
+    <h2 class="svc-heading rv">Card<br><em>Payments</em></h2>
+    <p class="svc-body rv d1">
+      If you take card payments, you're almost certainly overpaying. We audit your current processing costs, identify savings, and move you to a better deal — with no setup fees and no lock-in.
+    </p>
+    <ul class="svc-list rv d2">
+      <li><div class="dot"></div><span>Free audit of your current processing costs</span></li>
+      <li><div class="dot"></div><span>Access to wholesale interchange++ pricing</span></li>
+      <li><div class="dot"></div><span>All card types: Visa, Mastercard, Amex</span></li>
+      <li><div class="dot"></div><span>Terminal, online, and MOTO solutions</span></li>
+      <li><div class="dot"></div><span>Same-day setup available</span></li>
+    </ul>
+    <a href="#contact" class="btn btn-dark rv d3">Get a free payments audit →</a>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="section-tag on-green">How It Works</div>
+  <h2 class="how-heading rv">Four steps<br>to zero.</h2>
+  <div class="steps">
+    <div class="step rv">
+      <div class="step-n">01</div>
+      <div class="step-body">
+        <div class="step-title">Tell us about your business</div>
+        <p class="step-desc">A two-minute form or a quick call. We need your current supplier, contract end date, and rough annual spend — that's it.</p>
+      </div>
+    </div>
+    <div class="step rv d1">
+      <div class="step-n">02</div>
+      <div class="step-body">
+        <div class="step-title">We search the whole market</div>
+        <p class="step-desc">We run a full comparison across every supplier and tariff available. This takes us hours — it costs you nothing.</p>
+      </div>
+    </div>
+    <div class="step rv d2">
+      <div class="step-n">03</div>
+      <div class="step-body">
+        <div class="step-title">You pick the best option</div>
+        <p class="step-desc">We present your options clearly — every number explained, no jargon, no pressure. You make the call. We back it.</p>
+      </div>
+    </div>
+    <div class="step rv d3">
+      <div class="step-n">04</div>
+      <div class="step-body">
+        <div class="step-title">We handle everything else</div>
+        <p class="step-desc">Switch, contracts, transfer, setup — all handled by us. You just wait for the first lower bill to land.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================
-     FOOTER
-     ============================================ -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-brand"><img src="assets/images/logo-compact.png" alt="Zero Drift"><p>Cost certainty for your business.</p></div>
-      <div class="footer-col"><h4 class="font-mono">Navigate</h4><a href="#how">How it works</a><a href="#services">Services</a><a href="#about">About</a><a href="#contact">Contact</a></div>
-      <div class="footer-col"><h4 class="font-mono">Get in touch</h4><a href="mailto:tim@zerodrift.energy">tim@zerodrift.energy</a><a href="#">zerodrift.energy</a></div>
+<!-- PROOF -->
+<section class="proof">
+  <div class="section-tag on-dark">Why Businesses Choose Zero Drift</div>
+  <div class="proof-grid">
+    <div class="proof-cell rv">
+      <div class="proof-big" data-counter="793" data-prefix="£">£793</div>
+      <div class="proof-lbl">Average annual saving</div>
     </div>
-    <div class="footer-bottom font-mono">&copy; 2026 Zero Drift Advisory &middot; Registered in Northern Ireland</div>
+    <div class="proof-cell rv d1">
+      <div class="proof-big" data-counter="100" data-suffix="%">100%</div>
+      <div class="proof-lbl">Transparent pricing — always</div>
+    </div>
+    <div class="proof-cell rv d2">
+      <div class="proof-big" data-counter="0" data-prefix="£">£0</div>
+      <div class="proof-lbl">Cost to your business</div>
+    </div>
+    <div class="proof-cell rv d3">
+      <div class="proof-big" data-counter="2">2</div>
+      <div class="proof-lbl">Days to complete your switch</div>
+    </div>
+  </div>
+  <div class="testimonial rv">
+    <blockquote class="tq">
+      "Switching was completely painless. Tim handled everything — I just got a cheaper bill the next month."
+    </blockquote>
+    <div class="ta">
+      <div class="ta-name">Sarah K.</div>
+      <div class="ta-co">Independent Retail, Manchester</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div>
+    <div class="section-tag on-light">Get Started</div>
+    <h2 class="contact-heading rv">Let's find<br>your zero.</h2>
+    <p class="contact-sub rv d1">
+      Fill in the form and Tim will respond within one business day. No sales team. No scripts. Just a straight answer.
+    </p>
+  </div>
+  <form class="form" id="contactForm" onsubmit="handleSubmit(event)">
+    <div class="fg">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+    </div>
+    <div class="fg">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="jane@business.co.uk" required>
+    </div>
+    <div class="fg">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" placeholder="07700 000000">
+    </div>
+    <div class="fg">
+      <label for="service">I need help with</label>
+      <select id="service" name="service">
+        <option value="">Energy, Payments, or Both</option>
+        <option value="energy">Energy</option>
+        <option value="payments">Card Payments</option>
+        <option value="both">Both</option>
+      </select>
+    </div>
+    <div class="fg">
+      <label for="message">Anything else?</label>
+      <textarea id="message" name="message" placeholder="Current supplier, contract end date, rough annual spend..."></textarea>
+    </div>
+    <button type="submit" class="form-btn">Send →</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="assets/images/logo-light.png" alt="Zero Drift Energy">
+  </div>
+  <div class="footer-right">
+    <ul class="footer-links">
+      <li><a href="mailto:tim@zerodrift.co.uk">tim@zerodrift.co.uk</a></li>
+      <li><a href="#problem">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <p class="footer-copy">© 2025 Zero Drift Energy Ltd. Registered in England &amp; Wales.</p>
   </div>
 </footer>
 
-<!-- FLOATING MOBILE CTA -->
-<div class="float-cta" id="floatCta">
-  <a href="#contact">Get your free benchmark <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-</div>
-
-<!-- ============================================
-     JS
-     ============================================ -->
 <script>
-// Scroll reveals
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      // Trigger fee bar animations
-      entry.target.querySelectorAll('[data-width]').forEach(bar => {
-        bar.style.width = bar.dataset.width;
-      });
-      // Trigger counters
-      entry.target.querySelectorAll('[data-count]').forEach(startCount);
-    }
-  });
-}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// Nav scroll state
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, {passive:true});
 
-// Also observe fee-callout and dash-stats for counters
-document.querySelectorAll('.fee-callout, .dash-stats, .proof-stat').forEach(el => observer.observe(el));
+// Mobile menu
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.body.style.overflow =
+    document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+}
+
+// Scroll reveal
+const rvEls = document.querySelectorAll('.rv');
+const rvObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); rvObs.unobserve(e.target); }
+  });
+}, {threshold: 0.12});
+rvEls.forEach(el => rvObs.observe(el));
 
 // Counter animation
-const counted = new Set();
-function startCount(el) {
-  if (counted.has(el)) return;
-  counted.add(el);
-  const target = parseInt(el.dataset.count);
+function animateCount(el) {
+  const target = parseInt(el.dataset.counter, 10);
   const prefix = el.dataset.prefix || '';
   const suffix = el.dataset.suffix || '';
-  const duration = 1500;
-  const start = performance.now();
+  if (target === 0) { el.textContent = prefix + '0' + suffix; return; }
+  const dur = 1400;
+  const t0 = performance.now();
   function tick(now) {
-    const progress = Math.min((now - start) / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
-    el.textContent = prefix + Math.round(target * eased) + suffix;
-    if (progress < 1) requestAnimationFrame(tick);
+    const p = Math.min((now - t0) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = prefix + Math.round(eased * target).toLocaleString() + suffix;
+    if (p < 1) requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
 }
+const cntObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { animateCount(e.target); cntObs.unobserve(e.target); }
+  });
+}, {threshold: 0.5});
+document.querySelectorAll('[data-counter]').forEach(el => cntObs.observe(el));
 
-// Trigger hero counters after delay
-setTimeout(() => {
-  document.querySelectorAll('.dash-stats [data-count]').forEach(startCount);
-}, 1800);
-
-// Scroll progress + nav
-const prog = document.getElementById('scrollProg');
-window.addEventListener('scroll', () => {
-  const s = window.scrollY;
-  const h = document.documentElement.scrollHeight - window.innerHeight;
-  prog.style.width = (s / h * 100) + '%';
-  document.getElementById('nav').classList.toggle('scrolled', s > 50);
-  // Float CTA
-  const heroBottom = document.querySelector('.hero').getBoundingClientRect().bottom;
-  const contactTop = document.getElementById('contact').getBoundingClientRect().top;
-  const fc = document.getElementById('floatCta');
-  fc.classList.toggle('show', heroBottom < 0 && contactTop > window.innerHeight);
-}, { passive: true });
-
-// Mobile menu
-const toggle = document.getElementById('menuToggle');
-const menu = document.getElementById('mobileMenu');
-toggle.addEventListener('click', () => {
-  toggle.classList.toggle('open');
-  menu.classList.toggle('open');
-});
-menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-  toggle.classList.remove('open');
-  menu.classList.remove('open');
-}));
-
-// Draw line animation
-const drawLine = document.querySelector('.draw-line');
-if (drawLine) {
-  const length = drawLine.getTotalLength();
-  drawLine.style.strokeDasharray = length;
-  drawLine.style.strokeDashoffset = length;
-  const dashObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        drawLine.style.transition = 'stroke-dashoffset 2.5s ease';
-        drawLine.style.strokeDashoffset = '0';
-      }
-    });
-  }, { threshold: 0.3 });
-  dashObs.observe(drawLine.closest('.dash-chart'));
+// Form submit
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-btn');
+  btn.textContent = 'Sent ✓';
+  btn.style.background = '#00B383';
+  btn.style.color = '#0A0A0A';
+  btn.disabled = true;
 }
 </script>
-
 </body>
 </html>
