@@ -188,23 +188,23 @@ body{font-family:var(--font-body);background:var(--black);color:var(--white);ove
 .hero{
   min-height:100svh;
   background:var(--black);
-  display:grid;grid-template-rows:1fr auto;
+  display:flex;flex-direction:column;justify-content:flex-end;
   padding:0 48px 56px;
   position:relative;overflow:hidden;
 }
 .hero::before{
   content:'';position:absolute;inset:0;
-  background-image:radial-gradient(circle,rgba(255,255,255,0.035) 1px,transparent 1px);
+  background-image:radial-gradient(circle,rgba(255,255,255,0.04) 1px,transparent 1px);
   background-size:44px 44px;
   pointer-events:none;z-index:0;
   mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 100%);
   -webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 100%);
 }
 .hero-ghost{
-  position:absolute;bottom:-0.15em;right:-0.05em;
+  position:absolute;bottom:-0.15em;left:-0.05em;
   font-family:var(--font-display);
   font-size:clamp(200px,32vw,560px);
-  color:rgba(255,255,255,0.025);
+  color:rgba(255,255,255,0.022);
   line-height:1;letter-spacing:-0.02em;
   user-select:none;pointer-events:none;white-space:nowrap;
   animation:ghost-drift 22s ease-in-out infinite;
@@ -219,33 +219,115 @@ body{font-family:var(--font-body);background:var(--black);color:var(--white);ove
   animation:float-up linear infinite;
   will-change:transform,opacity;
 }
-.hero-main{
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding-top:120px;position:relative;z-index:1;
+@keyframes bar-broker{from{width:0}to{width:92%}}
+@keyframes bar-zero{from{width:0}to{width:76%}}
+@keyframes card-enter{from{opacity:0;transform:translateY(44px) scale(0.97)}to{opacity:1;transform:none}}
+@keyframes live-pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+@keyframes scan{0%{transform:translateY(-100%)}100%{transform:translateY(400%)}}
+.hero-content{
+  display:grid;grid-template-columns:54% 46%;
+  gap:72px;align-items:flex-end;
+  position:relative;z-index:1;
+  padding-top:120px;
 }
+.hero-text{display:flex;flex-direction:column}
 .eyebrow{
   font-family:var(--font-mono);font-size:10px;
   color:var(--green);letter-spacing:0.2em;text-transform:uppercase;
-  display:flex;align-items:center;gap:12px;margin-bottom:28px;
+  display:flex;align-items:center;gap:12px;margin-bottom:24px;
   animation:fade-up 0.8s 0.2s cubic-bezier(0.16,1,0.3,1) both;
 }
 .eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--green)}
 .hero-headline{
   font-family:var(--font-display);
-  font-size:clamp(80px,14vw,220px);
+  font-size:clamp(68px,8.5vw,128px);
   line-height:0.88;letter-spacing:-0.01em;
-  color:var(--white);max-width:12ch;margin-bottom:0;
+  color:var(--white);margin-bottom:0;
   animation:fade-up 0.9s 0.35s cubic-bezier(0.16,1,0.3,1) both;
 }
 .hero-headline em{font-style:normal;color:var(--green)}
-.hero-foot{
-  display:grid;grid-template-columns:1fr auto;
-  align-items:flex-end;gap:40px;
-  position:relative;z-index:1;
-  animation:fade-up 0.9s 0.55s cubic-bezier(0.16,1,0.3,1) both;
+.hero-sub{
+  font-size:17px;line-height:1.7;color:rgba(255,255,255,0.45);
+  max-width:440px;margin-top:24px;
+  animation:fade-up 0.9s 0.5s cubic-bezier(0.16,1,0.3,1) both;
 }
-.hero-sub{font-size:18px;line-height:1.65;color:rgba(255,255,255,0.5);max-width:440px}
-.hero-actions{display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+.hero-actions{
+  display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;
+  margin-top:28px;
+  animation:fade-up 0.9s 0.62s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+/* ── HERO CARD ── */
+.hero-card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  padding:32px;
+  position:relative;overflow:hidden;
+  animation:card-enter 1.1s 0.75s cubic-bezier(0.16,1,0.3,1) both;
+  will-change:transform;
+  box-shadow:0 24px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,179,131,0.06), inset 0 1px 0 rgba(255,255,255,0.07);
+}
+.hero-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent 0%,rgba(0,179,131,0.6) 40%,rgba(0,179,131,0.6) 60%,transparent 100%);
+}
+.hero-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(0,179,131,0.015) 0%,transparent 30%,transparent 70%,rgba(0,179,131,0.015) 100%);
+  animation:scan 6s 2s linear infinite;
+  pointer-events:none;
+}
+.hc-header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:28px;
+}
+.hc-title{
+  font-family:var(--font-mono);font-size:9px;
+  color:rgba(255,255,255,0.3);letter-spacing:0.22em;text-transform:uppercase;
+}
+.hc-live{
+  font-family:var(--font-mono);font-size:9px;
+  color:var(--green);letter-spacing:0.12em;text-transform:uppercase;
+  display:flex;align-items:center;gap:6px;
+}
+.hc-live-dot{
+  display:block;width:6px;height:6px;border-radius:50%;
+  background:var(--green);
+  animation:live-pulse 2s ease-in-out infinite;
+}
+.hc-row{margin-bottom:20px}
+.hc-row-meta{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:10px;
+}
+.hc-row-label{font-family:var(--font-mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase}
+.hc-row.bad .hc-row-label{color:rgba(255,255,255,0.32)}
+.hc-row.good .hc-row-label{color:rgba(0,179,131,0.75)}
+.hc-row-val{font-family:var(--font-display);font-size:26px;letter-spacing:0.01em;line-height:1}
+.hc-row.bad .hc-row-val{color:var(--red)}
+.hc-row.good .hc-row-val{color:var(--green)}
+.hc-bar{height:3px;background:rgba(255,255,255,0.06);position:relative;overflow:hidden}
+.hc-bar-fill{height:100%;width:0}
+.hc-bar-fill.bad{background:linear-gradient(90deg,#8b1a00,var(--red));animation:bar-broker 1.4s 1.1s cubic-bezier(0.16,1,0.3,1) forwards}
+.hc-bar-fill.good{background:linear-gradient(90deg,var(--green-dark),var(--green));animation:bar-zero 1.4s 1.35s cubic-bezier(0.16,1,0.3,1) forwards}
+.hc-divider{height:1px;background:rgba(255,255,255,0.07);margin:22px 0}
+.hc-saving{
+  display:flex;justify-content:space-between;align-items:center;
+}
+.hc-saving-label{font-family:var(--font-mono);font-size:9px;color:rgba(255,255,255,0.28);letter-spacing:0.18em;text-transform:uppercase}
+.hc-saving-val{
+  font-family:var(--font-display);font-size:44px;
+  color:var(--green);letter-spacing:-0.01em;line-height:1;
+  text-shadow:0 0 30px rgba(0,179,131,0.4);
+}
+.hc-tags{display:flex;gap:6px;margin-top:20px;flex-wrap:wrap}
+.hc-tag{
+  font-family:var(--font-mono);font-size:8px;
+  letter-spacing:0.12em;text-transform:uppercase;
+  padding:5px 10px;
+  border:1px solid rgba(0,179,131,0.22);
+  color:rgba(0,179,131,0.55);
+}
 
 /* ── GREEN BAND ── */
 .green-band{background:var(--green);display:grid;grid-template-columns:repeat(3,1fr)}
@@ -630,7 +712,9 @@ footer{
   .nav{padding:16px 24px}.nav.scrolled{padding:13px 24px}
   .nav-links{display:none}.hamburger{display:flex}
   .hero{padding:0 24px 48px}
-  .hero-foot{grid-template-columns:1fr;gap:28px}
+  .hero-content{grid-template-columns:1fr;gap:32px;padding-top:100px}
+  .hero-card{padding:24px}
+  .hc-saving-val{font-size:36px}
   .hero-actions{align-items:flex-start;flex-direction:row;flex-wrap:wrap}
   .green-band{grid-template-columns:1fr}
   .band-stat{padding:28px 24px;border-right:none;border-bottom:1px solid rgba(0,0,0,0.1)}
@@ -707,17 +791,45 @@ footer{
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-ghost" aria-hidden="true">ZERO</div>
-  <div class="hero-main">
-    <div class="eyebrow">UK Energy &amp; Payments Brokerage</div>
-    <h1 class="hero-headline">Stop paying<br>broker<em> fees.</em></h1>
-  </div>
-  <div class="hero-foot">
-    <p class="hero-sub">
-      Zero Drift works exclusively for your business — not the supplier. We find you the best rate, manage the switch, and charge you absolutely nothing.
-    </p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn btn-green">Get a free review <span class="arrow">→</span></a>
-      <a href="#how" class="btn btn-outline">How it works</a>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="eyebrow">UK Energy &amp; Payments Brokerage</div>
+      <h1 class="hero-headline">Stop paying<br>broker<em> fees.</em></h1>
+      <p class="hero-sub">Zero Drift works exclusively for your business — not the supplier. We find you the best rate, manage the switch, and charge you absolutely nothing.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-green">Get a free review <span class="arrow">→</span></a>
+        <a href="#how" class="btn btn-outline">How it works</a>
+      </div>
+    </div>
+    <div class="hero-card" id="heroCard">
+      <div class="hc-header">
+        <span class="hc-title">Energy Cost Audit</span>
+        <span class="hc-live"><span class="hc-live-dot"></span>Live</span>
+      </div>
+      <div class="hc-row bad">
+        <div class="hc-row-meta">
+          <span class="hc-row-label">Typical Broker</span>
+          <span class="hc-row-val">£9,493<small style="font-size:0.45em;opacity:0.6">/yr</small></span>
+        </div>
+        <div class="hc-bar"><div class="hc-bar-fill bad"></div></div>
+      </div>
+      <div class="hc-row good">
+        <div class="hc-row-meta">
+          <span class="hc-row-label">Zero Drift</span>
+          <span class="hc-row-val">£8,700<small style="font-size:0.45em;opacity:0.6">/yr</small></span>
+        </div>
+        <div class="hc-bar"><div class="hc-bar-fill good"></div></div>
+      </div>
+      <div class="hc-divider"></div>
+      <div class="hc-saving">
+        <span class="hc-saving-label">Your annual saving</span>
+        <span class="hc-saving-val">£793</span>
+      </div>
+      <div class="hc-tags">
+        <span class="hc-tag">£0 commission</span>
+        <span class="hc-tag">100% transparent</span>
+        <span class="hc-tag">Free review</span>
+      </div>
     </div>
   </div>
 </section>
@@ -1119,24 +1231,48 @@ document.addEventListener('mousemove', e => {
 /* ── HERO PARTICLES ── */
 (function spawnParticles() {
   const hero = document.getElementById('hero');
-  for (let i = 0; i < 18; i++) {
+  const sizes = [1.5,2,2.5,3,3.5,4,5,6];
+  for (let i = 0; i < 24; i++) {
     const p = document.createElement('div');
     p.className = 'particle';
-    const size = 2 + Math.random() * 3;
-    const left = 5 + Math.random() * 90;
-    const bottom = 10 + Math.random() * 80;
-    const dur = 10 + Math.random() * 10;
+    const size = sizes[Math.floor(Math.random() * sizes.length)];
+    const left = 3 + Math.random() * 94;
+    const bottom = 5 + Math.random() * 85;
+    const dur = 8 + Math.random() * 12;
     const delay = -(Math.random() * dur);
-    const opacity = 0.2 + Math.random() * 0.4;
-    p.style.cssText = `
-      width:${size}px;height:${size}px;
-      left:${left}%;bottom:${bottom}px;
-      opacity:${opacity};
-      animation-duration:${dur}s;
-      animation-delay:${delay}s;
-    `;
+    const opacity = 0.3 + Math.random() * 0.5;
+    // Some particles slightly lighter for depth
+    const col = Math.random() > 0.7 ? 'rgba(0,230,170,' + opacity + ')' : 'rgba(0,179,131,' + opacity + ')';
+    p.style.cssText = `width:${size}px;height:${size}px;left:${left}%;bottom:${bottom}px;background:${col};animation-duration:${dur}s;animation-delay:${delay}s;`;
+    if (size >= 4) p.style.boxShadow = `0 0 ${size * 3}px rgba(0,179,131,0.5)`;
     hero.appendChild(p);
   }
+})();
+
+/* ── HERO CARD 3D TILT ── */
+(function() {
+  const heroCard = document.getElementById('heroCard');
+  const heroEl = document.getElementById('hero');
+  if (!heroCard || window.matchMedia('(max-width:900px)').matches) return;
+  let animFrame;
+  heroEl.addEventListener('mousemove', (e) => {
+    cancelAnimationFrame(animFrame);
+    animFrame = requestAnimationFrame(() => {
+      const rect = heroCard.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = (e.clientX - cx) / (rect.width * 0.8);
+      const dy = (e.clientY - cy) / (rect.height * 0.8);
+      const rx = Math.max(-8, Math.min(8, -dy * 7));
+      const ry = Math.max(-10, Math.min(10, dx * 10));
+      heroCard.style.transition = 'transform 0.08s ease';
+      heroCard.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    });
+  }, {passive:true});
+  heroEl.addEventListener('mouseleave', () => {
+    heroCard.style.transition = 'transform 0.7s cubic-bezier(0.16,1,0.3,1)';
+    heroCard.style.transform = '';
+  });
 })();
 
 /* ── SCROLL REVEAL ── */
