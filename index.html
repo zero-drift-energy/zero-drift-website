@@ -9,76 +9,52 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --blk:#080808;
-  --cream:#F4F1EA;
-  --grn:#00B383;
-  --grn-d:#009168;
+  --blk:#060606;
+  --cream:#F5F3EE;
+  --grn:#19C559;
+  --grn-d:#14A44E;
   --red:#E8240A;
-  --red-g:rgba(232,36,10,.18);
-  --wht:#EDEBE5;
-  --g1:#181818;
-  --g2:#282828;
-  --g3:#444;
-  --g4:#666;
-  --g5:#aaa;
+  --wht:#F0F0EE;
+  --g1:#0B0E0B;
+  --g2:#111611;
+  --g3:#1A2A1C;
+  --g4:#7A8C7A;
+  --g5:#4E5E50;
   --fd:'Bebas Neue',sans-serif;
   --fb:'DM Sans',sans-serif;
   --fm:'Space Mono',monospace;
   --E:cubic-bezier(.16,1,.3,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{cursor:none;scroll-behavior:smooth}
-body{
-  background:var(--blk);
-  color:var(--wht);
-  font-family:var(--fb);
-  line-height:1.6;
-  overflow-x:hidden;
-}
+html{scroll-behavior:smooth}
+body{background:var(--blk);color:var(--wht);font-family:var(--fb);line-height:1.6;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
-button{background:none;border:none;cursor:none;font-family:inherit;color:inherit}
+button{background:none;border:none;cursor:pointer;font-family:inherit;color:inherit}
 input,textarea{font-family:var(--fb)}
 
 /* GRAIN */
 body::after{
-  content:'';
-  position:fixed;inset:0;
+  content:'';position:fixed;inset:0;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23f)'/%3E%3C/svg%3E");
-  background-size:200px;opacity:.025;
-  pointer-events:none;z-index:9997;mix-blend-mode:overlay;
+  background-size:200px;opacity:.025;pointer-events:none;z-index:9997;mix-blend-mode:overlay;
 }
 
-/* CURSOR */
-#dot{position:fixed;width:9px;height:9px;background:var(--grn);border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);mix-blend-mode:difference}
-#ring{position:fixed;width:34px;height:34px;border:1px solid rgba(0,179,131,.45);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s var(--E),height .25s var(--E),border-color .25s}
-body:has(a:hover) #ring,body:has(button:hover) #ring{width:54px;height:54px;border-color:var(--grn)}
 
 /* PRELOADER */
-#loader{
-  position:fixed;inset:0;background:var(--blk);z-index:20000;
-  display:grid;place-items:center;
-  transition:opacity .8s var(--E),visibility .8s;
-}
+#loader{position:fixed;inset:0;background:var(--blk);z-index:20000;display:grid;place-items:center;transition:opacity .8s var(--E),visibility .8s}
 #loader.out{opacity:0;visibility:hidden}
 .lw{font-family:var(--fd);font-size:clamp(28px,5vw,56px);letter-spacing:.2em;display:flex}
 .lc{display:inline-block;opacity:0;transform:translateY(50%) skewY(6deg);transition:opacity .45s var(--E),transform .45s var(--E)}
-.lc.g{color:var(--grn)}
-.lc.sp{width:.55em}
-.lc.in{opacity:1;transform:none}
+.lc.g{color:var(--grn)}.lc.sp{width:.55em}.lc.in{opacity:1;transform:none}
 .lb{width:0;height:1px;background:linear-gradient(to right,transparent,var(--grn),transparent);transition:width 1.5s var(--E);margin-top:36px}
 
-/* NAV */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  padding:22px 52px;
-  display:flex;align-items:center;justify-content:space-between;
-  transition:padding .4s var(--E),background .4s,border-color .4s;
-  border-bottom:1px solid transparent;
-}
-nav.up{padding:14px 52px;background:rgba(8,8,8,.93);backdrop-filter:blur(20px);border-bottom-color:var(--g1)}
+/* ═══ NAV ═══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px 52px;display:flex;align-items:center;justify-content:space-between;transition:padding .4s var(--E),background .4s,border-color .4s;border-bottom:1px solid transparent}
+nav.up{padding:14px 52px;background:rgba(6,6,6,.94);backdrop-filter:blur(20px);border-bottom-color:var(--g1)}
 .logo{font-family:var(--fd);font-size:18px;letter-spacing:.14em;display:flex;align-items:center;gap:8px}
-.logo-dot{width:5px;height:5px;background:var(--grn);border-radius:50%}
+.logo-dot{width:5px;height:5px;background:var(--grn);border-radius:50%;animation:ldpulse 3s ease-in-out infinite}
+@keyframes ldpulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(25,197,89,0)}50%{transform:scale(1.8);box-shadow:0 0 0 4px rgba(25,197,89,.12)}}
 .logo-d{color:var(--grn)}
 .nav-links{display:flex;gap:32px;align-items:center}
 .nav-links a{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--g4);transition:color .2s}
@@ -95,178 +71,150 @@ nav.up{padding:14px 52px;background:rgba(8,8,8,.93);backdrop-filter:blur(20px);b
 .mmenu a{font-family:var(--fd);font-size:52px;letter-spacing:.04em;transition:color .2s}
 .mmenu a:hover{color:var(--grn)}
 
-/* ═══════════════════════════════════
-   HERO — THE NUMBER
-═══════════════════════════════════ */
+/* ═══ SECTION PILL LABELS — ChronoTask pattern ═══ */
+.pill{display:inline-flex;align-items:center;gap:8px;padding:5px 14px 5px 5px;border:1px solid var(--g2);border-radius:100px;margin-bottom:28px;width:fit-content}
+.pill-dot{width:18px;height:18px;border-radius:50%;background:var(--g2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pill-dot.active{background:var(--grn)}
+.pill-dot.red{background:var(--red)}
+.pill-dot.dim{background:rgba(0,0,0,.15)}
+.pill span{font-family:var(--fm);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--g4)}
+.pill.light .pill-dot{background:rgba(0,0,0,.15)}
+.pill.light span{color:rgba(0,0,0,.4)}
+
+/* ═══ HERO ═══ */
 #hero{
-  position:relative;
-  min-height:100vh;
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:0 52px 80px;
-  overflow:hidden;
-  background:var(--blk);
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:120px 52px 80px;overflow:hidden;background:var(--blk);
 }
-/* Full-bleed bg canvas */
 #bg-canvas{position:absolute;inset:0;z-index:0;pointer-events:none}
-/* The BIG number */
-.hero-number{
-  position:absolute;
-  top:50%;left:52px;
-  transform:translateY(-55%);
-  z-index:1;
-  pointer-events:none;
-  line-height:.85;
+
+/* Pill badge in hero */
+.hero-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 16px 6px 6px;border:1px solid var(--g2);border-radius:100px;
+  margin-bottom:36px;width:fit-content;position:relative;z-index:2;
+  opacity:0;transform:translateY(12px);transition:opacity .6s .2s var(--E),transform .6s .2s var(--E);
 }
-.hn-val{
-  display:block;
+.hero-pill.in{opacity:1;transform:none}
+.hp-dot{width:16px;height:16px;border-radius:50%;background:var(--grn)}
+.hero-pill span{font-family:var(--fm);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--g4)}
+
+/* Hero headline */
+.hero-hed{
   font-family:var(--fd);
-  font-size:clamp(160px,26vw,420px);
-  color:var(--red);
-  letter-spacing:-.02em;
-  opacity:0;
-  transform:translateY(60px) scale(1.08);
-  transition:opacity 1.1s .25s var(--E),transform 1.1s .25s var(--E);
-  filter:drop-shadow(0 0 80px rgba(232,36,10,.35));
-  animation:redpulse 4s ease-in-out infinite;
-}
-.hn-sym{
-  display:block;
-  font-family:var(--fd);
-  font-size:clamp(60px,10vw,160px);
-  color:var(--red);
-  opacity:.5;
-  letter-spacing:-.01em;
-}
-.hn-val.in{opacity:1;transform:translateY(0) scale(1)}
-@keyframes redpulse{
-  0%,100%{filter:drop-shadow(0 0 60px rgba(232,36,10,.3))}
-  50%{filter:drop-shadow(0 0 120px rgba(232,36,10,.55))}
-}
-/* Hero content on top */
-.hero-content{
+  font-size:clamp(68px,11vw,190px);
+  line-height:.88;letter-spacing:-.02em;
   position:relative;z-index:2;
-  max-width:560px;
+  opacity:0;transform:translateY(40px);
+  transition:opacity 1.1s .3s var(--E),transform 1.1s .3s var(--E);
 }
-.h-eyebrow{
-  font-family:var(--fm);font-size:10px;letter-spacing:.28em;text-transform:uppercase;
-  color:var(--g5);margin-bottom:20px;
-  opacity:0;transform:translateY(10px);
-  transition:opacity .5s .8s var(--E),transform .5s .8s var(--E);
+.hero-hed.in{opacity:1;transform:none}
+
+/* Inline 45% framed block — HackerRank inline-icon pattern */
+.hed-block{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:clamp(90px,12vw,210px);height:clamp(58px,8.5vw,148px);
+  border:2px solid var(--red);border-radius:8px;
+  vertical-align:middle;position:relative;top:-.04em;
+  margin:0 .05em;flex-shrink:0;
+  transition:transform .4s var(--E);
+  animation:rpulse 4s ease-in-out infinite;
 }
-.h-eyebrow.in{opacity:1;transform:none}
-.h-sub{
-  font-size:clamp(15px,1.4vw,18px);line-height:1.7;color:var(--g4);
-  margin-bottom:40px;
-  opacity:0;transform:translateY(10px);
-  transition:opacity .5s .9s var(--E),transform .5s .9s var(--E);
+@keyframes rpulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(232,36,10,0),inset 0 0 30px rgba(232,36,10,.05)}
+  50%{box-shadow:0 0 50px rgba(232,36,10,.2),inset 0 0 60px rgba(232,36,10,.1)}
 }
-.h-sub.in{opacity:1;transform:none}
-.h-btns{
-  display:flex;gap:18px;align-items:center;flex-wrap:wrap;
-  opacity:0;transform:translateY(10px);
-  transition:opacity .5s 1s var(--E),transform .5s 1s var(--E);
+.hed-block-inner{
+  display:flex;flex-direction:column;align-items:center;gap:0;
+  font-family:var(--fd);line-height:1;
 }
-.h-btns.in{opacity:1;transform:none}
-.btn-fill{
-  display:inline-flex;align-items:center;gap:10px;padding:16px 32px;
-  background:var(--grn);color:var(--blk);
-  font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  position:relative;overflow:hidden;transition:color .3s;
+.hed-block-val{font-size:clamp(28px,3.8vw,68px);color:var(--red);letter-spacing:.01em}
+.hed-block-sub{font-family:var(--fm);font-size:clamp(6px,0.7vw,11px);letter-spacing:.14em;text-transform:uppercase;color:rgba(232,36,10,.55);margin-top:2px}
+
+/* Hero body row — sub + CTA */
+.hero-row{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:40px;margin-top:44px;position:relative;z-index:2;
+  opacity:0;transform:translateY(18px);
+  transition:opacity .7s .85s var(--E),transform .7s .85s var(--E);
 }
+.hero-row.in{opacity:1;transform:none}
+.hero-sub{max-width:460px;font-size:clamp(14px,1.25vw,17px);line-height:1.78;color:var(--g4)}
+.hero-actions{display:flex;flex-direction:column;align-items:flex-end;gap:14px;flex-shrink:0}
+
+/* Buttons */
+.btn-fill{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:var(--grn);color:var(--blk);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;position:relative;overflow:hidden;transition:color .3s}
 .btn-fill::before{content:'';position:absolute;inset:0;background:var(--blk);transform:translateX(-101%);transition:transform .4s var(--E)}
 .btn-fill:hover::before{transform:translateX(0)}
 .btn-fill:hover{color:var(--grn)}
 .btn-fill span{position:relative;z-index:1}
-.btn-ghost{font-size:12px;color:var(--g4);display:flex;align-items:center;gap:8px;transition:color .2s}
+.btn-ghost{font-size:11px;color:var(--g4);display:flex;align-items:center;gap:8px;transition:color .2s;font-family:var(--fm);letter-spacing:.06em;text-transform:uppercase}
 .btn-ghost:hover{color:var(--wht)}
 .btn-ghost svg{transition:transform .25s}
 .btn-ghost:hover svg{transform:translateX(5px)}
-/* Brand mark bottom right */
-.hero-brand{
-  position:absolute;bottom:80px;right:52px;z-index:2;
-  font-family:var(--fd);font-size:clamp(20px,2.5vw,32px);
-  letter-spacing:.14em;display:flex;align-items:center;gap:10px;
-  opacity:0;transition:opacity .8s 1.2s var(--E);
-}
-.hero-brand.in{opacity:1}
-.hb-dot{width:6px;height:6px;background:var(--grn);border-radius:50%}
-.hb-d{color:var(--grn)}
 
-/* ═══════════════════════════════════
-   MARQUEE
-═══════════════════════════════════ */
-.mq{background:var(--grn);padding:13px 0;overflow:hidden}
+/* ═══ FLOATING WIDGET CARDS — ChronoTask pattern ═══ */
+.hw-wrap{position:absolute;right:0;top:0;bottom:0;width:45%;pointer-events:none;z-index:1}
+.hw{
+  position:absolute;padding:20px 24px;
+  background:rgba(20,20,20,.9);border:1px solid var(--g2);
+  backdrop-filter:blur(28px);min-width:200px;border-radius:6px;
+}
+.hw-r{border-color:rgba(232,36,10,.28);background:rgba(22,8,6,.88)}
+.hw-g{border-color:rgba(25,197,89,.28);background:rgba(6,20,14,.88)}
+.hw-lbl{font-family:var(--fm);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--g4);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.hw-dot-s{width:5px;height:5px;border-radius:50%;display:inline-block;flex-shrink:0}
+.hw-r .hw-dot-s{background:var(--red)}
+.hw-g .hw-dot-s{background:var(--grn)}
+.hw-val{font-family:var(--fd);font-size:32px;line-height:1;margin-bottom:4px}
+.hw-r .hw-val{color:var(--red)}
+.hw-g .hw-val{color:var(--grn)}
+.hw-meta{font-size:11px;color:var(--g5);font-family:var(--fb)}
+
+@keyframes float1{0%,100%{transform:rotate(-5deg) translateY(0)}50%{transform:rotate(-5deg) translateY(-10px)}}
+@keyframes float2{0%,100%{transform:rotate(4deg) translateY(0)}50%{transform:rotate(4deg) translateY(-8px)}}
+@keyframes float3{0%,100%{transform:rotate(-2deg) translateY(0)}50%{transform:rotate(-2deg) translateY(-12px)}}
+@keyframes float4{0%,100%{transform:rotate(6deg) translateY(0)}50%{transform:rotate(6deg) translateY(-7px)}}
+
+/* ═══ MARQUEE ═══ */
+.mq{background:var(--grn);padding:13px 0;overflow:hidden;animation:mqglow 4s ease-in-out infinite}
+@keyframes mqglow{0%,100%{box-shadow:0 3px 24px rgba(25,197,89,.12),0 -3px 24px rgba(25,197,89,.12)}50%{box-shadow:0 3px 48px rgba(25,197,89,.28),0 -3px 48px rgba(25,197,89,.28)}}
 .mq-t{display:flex;width:max-content;animation:mq 22s linear infinite}
 .mq-t:hover{animation-play-state:paused}
 .mq-i{display:flex;align-items:center;gap:20px;padding:0 36px;font-family:var(--fd);font-size:14px;letter-spacing:.14em;color:var(--blk);white-space:nowrap}
 .mq-i::after{content:'';width:5px;height:5px;background:rgba(0,0,0,.25);border-radius:50%;display:inline-block}
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* ═══════════════════════════════════
-   STATS — CREAM
-═══════════════════════════════════ */
-.stats{background:var(--cream);border-bottom:1px solid rgba(0,0,0,.1)}
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid rgba(0,0,0,.1)}
-.st{
-  padding:72px 52px;border-right:1px solid rgba(0,0,0,.1);
-  position:relative;overflow:hidden;
-  background:var(--cream);
-}
+/* ═══ STATS — CREAM, asymmetric bento ═══ */
+.stats{background:var(--cream)}
+.stats-row{display:grid;grid-template-columns:2fr 1fr 1fr;border-left:1px solid rgba(0,0,0,.1)}
+.st{padding:80px 52px;border-right:1px solid rgba(0,0,0,.1);border-bottom:1px solid rgba(0,0,0,.1);position:relative;overflow:hidden;background:var(--cream)}
 .st::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--grn);transform:scaleX(0);transform-origin:left;transition:transform .9s var(--E)}
 .st.in::after{transform:scaleX(1)}
-.st-n{font-family:var(--fd);font-size:clamp(56px,7vw,88px);line-height:1;color:#0A0A0A;margin-bottom:14px}
+.st-n{font-family:var(--fd);font-size:clamp(56px,7vw,100px);line-height:1;color:#0A0A0A;margin-bottom:14px}
 .st-n em{color:var(--grn);font-style:normal}
 .st-l{font-family:var(--fm);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(0,0,0,.45);line-height:1.7}
 
-/* ═══════════════════════════════════
-   PROBLEM — ANIMATED SPLIT
-═══════════════════════════════════ */
-#problem{background:var(--blk);border-bottom:1px solid var(--g1)}
-.prob-header{
-  padding:96px 52px 64px;border-bottom:1px solid var(--g1);
-  display:flex;align-items:flex-end;justify-content:space-between;gap:40px;
-}
-.prob-hed{font-family:var(--fd);font-size:clamp(44px,6vw,88px);line-height:.93}
+/* ═══ PROBLEM ═══ */
+#problem{background:var(--blk);border-top:1px solid rgba(25,197,89,.07)}
+.prob-header{padding:100px 52px 64px;border-bottom:1px solid var(--g1);display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+.prob-hed{font-family:var(--fd);font-size:clamp(44px,6.5vw,96px);line-height:.9}
 .prob-sub{max-width:340px;font-size:14px;color:var(--g4);line-height:1.75}
-.prob-eyebrow{font-family:var(--fm);font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--grn);margin-bottom:16px}
-
-/* Live drift meters */
-.drift-meters{
-  display:grid;grid-template-columns:1fr 1fr;
-  border-top:none;
-}
-.dm{
-  padding:72px 52px;
-  position:relative;overflow:hidden;
-}
-.dm-broker{
-  background:linear-gradient(180deg,rgba(30,5,0,.8) 0%,rgba(8,8,8,1) 100%);
-  border-right:1px solid var(--g1);
-}
-.dm-zd{
-  background:linear-gradient(180deg,rgba(0,20,12,.8) 0%,rgba(8,8,8,1) 100%);
-}
-.dm-label{
-  font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;
-  display:inline-flex;align-items:center;gap:9px;padding:5px 12px;border:1px solid;
-  margin-bottom:40px;
-}
-.dm-broker .dm-label{border-color:var(--red);color:var(--red)}
-.dm-zd .dm-label{border-color:var(--grn);color:var(--grn)}
-.dm-rate{
-  font-family:var(--fd);
-  font-size:clamp(80px,12vw,180px);
-  line-height:.9;
-  display:flex;align-items:flex-start;gap:.04em;
-  margin-bottom:28px;
-}
+.drift-meters{display:grid;grid-template-columns:1fr 1fr}
+.dm{padding:72px 52px;position:relative;overflow:hidden;transition:box-shadow .5s}
+.dm-broker{background:linear-gradient(180deg,rgba(30,5,0,.8) 0%,rgba(6,6,6,1) 100%);border-right:1px solid rgba(25,197,89,.08)}
+.dm-zd{background:linear-gradient(180deg,rgba(0,20,12,.8) 0%,rgba(6,6,6,1) 100%)}
+.dm-broker:hover{box-shadow:inset 0 0 120px rgba(232,36,10,.07)}
+.dm-zd:hover{box-shadow:inset 0 0 120px rgba(25,197,89,.07)}
+.dm-lbl{font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;display:inline-flex;align-items:center;gap:9px;padding:5px 12px;border:1px solid;margin-bottom:40px}
+.dm-broker .dm-lbl{border-color:var(--red);color:var(--red)}
+.dm-zd .dm-lbl{border-color:var(--grn);color:var(--grn)}
+.dm-rate{font-family:var(--fd);font-size:clamp(80px,12vw,180px);line-height:.9;display:flex;align-items:flex-start;gap:.04em;margin-bottom:28px}
 .dm-broker .dm-rate{color:var(--red)}
 .dm-zd .dm-rate{color:var(--grn)}
 .dm-rate .sym{font-size:.45em;margin-top:.12em;opacity:.6}
-.dm-status{
-  font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
-  display:flex;align-items:center;gap:10px;margin-bottom:36px;
-}
+.dm-status{font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:36px}
 .dm-broker .dm-status{color:var(--red)}
 .dm-zd .dm-status{color:var(--grn)}
 .status-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
@@ -279,48 +227,29 @@ nav.up{padding:14px 52px;background:rgba(8,8,8,.93);backdrop-filter:blur(20px);b
 .dm-broker .dm-list li::before{background:var(--red)}
 .dm-zd .dm-list li::before{background:var(--grn)}
 
-/* ═══════════════════════════════════
-   SERVICES
-═══════════════════════════════════ */
-#services{background:var(--g1);border-bottom:1px solid var(--g2)}
-.srv-head{padding:96px 52px 56px;border-bottom:1px solid var(--g2);display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
-.sec-tag{font-family:var(--fm);font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--grn);margin-bottom:16px}
+/* ═══ SERVICES BENTO — Puzzle/CoreShift pattern ═══ */
+#services{background:var(--blk);border-top:1px solid rgba(25,197,89,.06)}
+.srv-head{padding:100px 52px 64px;border-bottom:1px solid var(--g1);display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
 .sec-h{font-family:var(--fd);font-size:clamp(44px,6vw,80px);line-height:.93}
-.sscroll{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-ms-overflow-style:none}
-.sscroll::-webkit-scrollbar{display:none}
-.strack{display:flex;width:max-content;border-bottom:1px solid var(--g2)}
-.scard{
-  width:300px;flex-shrink:0;border-right:1px solid var(--g2);padding:44px 36px;
-  position:relative;overflow:hidden;transition:background .3s;
-}
-.scard:hover{background:var(--g2)}
-.sg-n2{position:absolute;top:8px;right:10px;font-family:var(--fd);font-size:90px;line-height:1;color:rgba(255,255,255,.025);pointer-events:none}
-.si{width:40px;height:40px;border:1px solid var(--g2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--grn);margin-bottom:24px;transition:border-color .3s,background .3s}
-.scard:hover .si{border-color:var(--grn);background:rgba(0,179,131,.1)}
-.sn{font-family:var(--fd);font-size:26px;letter-spacing:.02em;margin-bottom:10px}
-.sd{font-size:13px;color:var(--g4);line-height:1.75;margin-bottom:20px}
-.sm{display:inline-flex;flex-direction:column;gap:3px;padding:11px 14px;background:rgba(0,179,131,.07);border:1px solid rgba(0,179,131,.15)}
-.sm-v{font-family:var(--fd);font-size:22px;color:var(--grn)}
-.sm-l{font-family:var(--fm);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--g4)}
-.shint{padding:14px 52px;display:flex;align-items:center;gap:12px;font-family:var(--fm);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--g3)}
-.arr{display:flex;gap:3px}
-.arr span{width:14px;height:1px;background:var(--g3);display:block;animation:aa 1.6s ease infinite}
-.arr span:nth-child(2){animation-delay:.12s}
-.arr span:nth-child(3){animation-delay:.24s}
-@keyframes aa{0%,100%{opacity:.2}50%{opacity:.8}}
+.srv-bento{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(25,197,89,.08);border-left:1px solid rgba(25,197,89,.08)}
+.bc{border-right:1px solid rgba(25,197,89,.08);border-bottom:1px solid rgba(25,197,89,.08);padding:52px 44px;position:relative;overflow:hidden;transition:background .35s;background:linear-gradient(160deg,rgba(8,16,10,.7) 0%,rgba(6,6,6,.95) 100%)}
+.bc:hover{background:rgba(25,197,89,.03)}
+.bc-wide{grid-column:span 2}
+/* Top green line draw on hover */
+.bc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--grn),rgba(25,197,89,.2));transform:scaleX(0);transform-origin:left;transition:transform .55s var(--E)}
+.bc:hover::before{transform:scaleX(1)}
+.bc-num{position:absolute;bottom:-8px;right:18px;font-family:var(--fd);font-size:130px;line-height:1;color:rgba(255,255,255,.022);pointer-events:none;user-select:none}
+.bc-icon{width:44px;height:44px;border:1px solid var(--g1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--grn);margin-bottom:28px;transition:border-color .3s,background .3s}
+.bc:hover .bc-icon{border-color:var(--grn);background:rgba(25,197,89,.09)}
+.bc-title{font-family:var(--fd);font-size:30px;letter-spacing:.02em;margin-bottom:10px}
+.bc-desc{font-size:13px;color:var(--g4);line-height:1.8;margin-bottom:24px}
+.bc-stat{display:inline-flex;flex-direction:column;gap:3px;padding:12px 16px;background:rgba(25,197,89,.055);border:1px solid rgba(25,197,89,.14)}
+.bc-sv{font-family:var(--fd);font-size:24px;color:var(--grn)}
+.bc-sl{font-family:var(--fm);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--g4)}
 
-/* ═══════════════════════════════════
-   HOW — FULL GREEN
-═══════════════════════════════════ */
-#how{
-  background:var(--grn);padding:100px 0;
-  position:relative;overflow:hidden;
-}
-.how-ghost{
-  position:absolute;top:50%;left:-.02em;transform:translateY(-50%);
-  font-family:var(--fd);font-size:38vw;line-height:1;
-  color:rgba(0,0,0,.06);pointer-events:none;white-space:nowrap;
-}
+/* ═══ HOW — FULL GREEN ═══ */
+#how{background:var(--grn);padding:100px 0;position:relative;overflow:hidden}
+.how-ghost{position:absolute;top:50%;left:-.02em;transform:translateY(-50%);font-family:var(--fd);font-size:38vw;line-height:1;color:rgba(0,0,0,.06);pointer-events:none;white-space:nowrap}
 .how-in{max-width:1200px;margin:0 auto;padding:0 52px}
 .how-hd{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:64px;gap:40px}
 .how-title{font-family:var(--fd);font-size:clamp(44px,6vw,80px);line-height:.93;color:var(--blk)}
@@ -336,58 +265,63 @@ nav.up{padding:14px 52px;background:rgba(8,8,8,.93);backdrop-filter:blur(20px);b
 .step-t{font-family:var(--fd);font-size:23px;color:var(--blk);margin-bottom:10px}
 .step-d{font-size:13px;color:rgba(0,0,0,.5);line-height:1.75}
 
-/* ═══════════════════════════════════
-   ABOUT — CREAM
-═══════════════════════════════════ */
-#about{
-  display:grid;grid-template-columns:1fr 1fr;
-  min-height:80vh;border-top:1px solid rgba(0,0,0,.08);
-}
+/* ═══ ABOUT — CREAM ═══ */
+#about{display:grid;grid-template-columns:1fr 1fr;min-height:80vh;border-top:1px solid rgba(0,0,0,.08)}
 .about-img{position:relative;overflow:hidden}
 .about-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(15%);transition:filter .5s,transform .9s var(--E)}
 .about-img:hover img{filter:grayscale(0);transform:scale(1.03)}
-.about-txt{
-  background:var(--cream);
-  padding:96px 64px 96px 52px;
-  display:flex;flex-direction:column;justify-content:center;
-  border-left:1px solid rgba(0,0,0,.1);
-}
-.a-tag{font-family:var(--fm);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--g3);margin-bottom:20px}
+.about-txt{background:var(--cream);padding:96px 64px 96px 52px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid rgba(0,0,0,.1)}
 .a-name{font-family:var(--fd);font-size:clamp(56px,7vw,96px);line-height:.92;color:#0A0A0A;margin-bottom:28px}
 .a-bio{font-size:16px;line-height:1.8;color:rgba(0,0,0,.6);margin-bottom:40px;max-width:440px}
 .a-creds{display:flex;flex-direction:column;gap:12px}
 .ac{display:flex;align-items:center;gap:14px;font-size:14px;color:rgba(0,0,0,.55)}
 .ac::before{content:'';width:20px;height:1px;background:var(--grn);flex-shrink:0}
 
-/* ═══════════════════════════════════
-   PROOF — FULL-SCREEN QUOTE
-═══════════════════════════════════ */
-#proof{
-  background:var(--blk);
-  padding:120px 0;
-  border-top:1px solid var(--g1);border-bottom:1px solid var(--g1);
-}
+/* ═══ PROOF ═══ */
+#proof{background:var(--cream);padding:120px 0;border-top:1px solid rgba(0,0,0,.08);border-bottom:1px solid rgba(0,0,0,.08);color:#0A0A0A}
 .proof-in{max-width:1200px;margin:0 auto;padding:0 52px}
 .proof-hd{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:72px;gap:40px}
-.proof-hed{font-family:var(--fd);font-size:clamp(44px,6vw,80px);line-height:.93}
-.proof-grid{display:grid;grid-template-columns:3fr 2fr;border:1px solid var(--g1)}
-.pq{padding:72px;border-right:1px solid var(--g1)}
-.big-q{font-family:var(--fd);font-size:140px;line-height:.65;color:var(--grn);opacity:.2;display:block;margin-bottom:24px}
-.q-t{font-size:clamp(16px,1.8vw,22px);line-height:1.6;font-weight:300;color:var(--wht);margin-bottom:40px}
+.proof-hed{font-family:var(--fd);font-size:clamp(44px,6vw,80px);line-height:.93;color:#0A0A0A}
+.proof-grid{display:grid;grid-template-columns:3fr 2fr;border:1px solid rgba(0,0,0,.1)}
+.pq{padding:72px;border-right:1px solid rgba(0,0,0,.1)}
+.big-q{font-family:var(--fd);font-size:140px;line-height:.65;color:var(--grn);opacity:.14;display:block;margin-bottom:24px}
+.q-t{font-size:clamp(16px,1.8vw,22px);line-height:1.6;font-weight:300;color:rgba(255,255,255,.85);margin-bottom:40px}
 .q-a{display:flex;align-items:center;gap:14px}
 .q-av{width:44px;height:44px;border-radius:50%;background:var(--g2)}
-.q-nm{font-weight:600;font-size:14px;margin-bottom:3px}
-.q-ro{font-family:var(--fm);font-size:10px;letter-spacing:.08em;color:var(--g4)}
+.q-nm{font-weight:600;font-size:14px;margin-bottom:3px;color:#fff}
+.q-ro{font-family:var(--fm);font-size:10px;letter-spacing:.08em;color:rgba(255,255,255,.5)}
 .proof-nums{display:grid;grid-template-rows:1fr 1fr}
-.pn{padding:52px 40px;border-bottom:1px solid var(--g1);display:flex;flex-direction:column;justify-content:flex-end}
+.pn{padding:52px 40px;border-bottom:1px solid rgba(0,0,0,.1);display:flex;flex-direction:column;justify-content:flex-end;transition:background .35s}
 .pn:last-child{border-bottom:none}
-.pn-n{font-family:var(--fd);font-size:clamp(52px,6.5vw,80px);line-height:1;margin-bottom:10px;color:var(--wht)}
+.pn:hover{background:rgba(25,197,89,.03)}
+.pn-n{font-family:var(--fd);font-size:clamp(52px,6.5vw,80px);line-height:1;margin-bottom:10px;transition:transform .35s var(--E),color .35s;color:#0A0A0A}
 .pn-n em{color:var(--grn);font-style:normal}
-.pn-l{font-family:var(--fm);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--g4);line-height:1.6}
+.pn:hover .pn-n{transform:scale(1.06);color:var(--grn)}
+.pn-l{font-family:var(--fm);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.5);line-height:1.6}
 
-/* ═══════════════════════════════════
-   CONTACT — DARK + CREAM SPLIT
-═══════════════════════════════════ */
+/* ═══ COVERAGE ═══ */
+#coverage{background:var(--blk);padding:120px 0;border-top:1px solid var(--g1)}
+.cov-in{max-width:1200px;margin:0 auto;padding:0 52px;display:grid;grid-template-columns:1fr 1.5fr;gap:100px;align-items:center}
+.cov-hed{font-family:var(--fd);font-size:clamp(52px,6.5vw,80px);line-height:.93;margin-bottom:24px}
+.cov-sub{font-size:15px;color:var(--g4);line-height:1.75;max-width:300px;margin-bottom:36px}
+.cov-pills{display:flex;flex-wrap:wrap;gap:8px}
+.cov-pill{font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--grn);padding:6px 14px;border:1px solid rgba(25,197,89,.2);transition:background .2s,border-color .2s}
+.cov-pill.hl{background:rgba(25,197,89,.1);border-color:var(--grn)}
+.cov-map-wrap{position:relative}
+.cov-svg{width:100%;height:auto}
+.cov-tag{text-align:center;font-family:var(--fm);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--grn);height:18px;margin-top:14px;opacity:0;transition:opacity .15s}
+.cov-tag.show{opacity:1}
+.cov-ni-svg .county-grp{cursor:pointer}
+.cov-ni-svg .county-grp .cp{transition:fill .18s,filter .18s}
+.cov-ni-svg .county-grp:hover .cp{fill:rgba(25,197,89,.42)!important;filter:drop-shadow(0 0 10px rgba(25,197,89,.4))}
+.cov-ni-svg .county-grp .cl{fill:rgba(25,197,89,.38);pointer-events:none;transition:fill .18s}
+.cov-ni-svg .county-grp:hover .cl{fill:rgba(25,197,89,1)}
+.cov-ni-svg:has(.county-grp:hover) .county-grp:not(:hover) .cp{fill:rgba(25,197,89,.04)!important}
+.cov-ni-svg:has(.county-grp:hover) .county-grp:not(:hover) .cl{fill:rgba(25,197,89,.1)}
+@media(max-width:960px){.cov-in{grid-template-columns:1fr;gap:48px}}
+@media(max-width:600px){.cov-in{padding:0 24px}}
+
+/* ═══ CONTACT ═══ */
 #contact{display:grid;grid-template-columns:1fr 1fr;min-height:90vh;border-bottom:1px solid var(--g1)}
 .con-l{background:var(--blk);padding:96px 64px 80px 52px;border-right:1px solid var(--g1);display:flex;flex-direction:column;justify-content:space-between}
 .con-r{background:var(--cream);padding:96px 52px 80px 64px;display:flex;flex-direction:column;justify-content:center}
@@ -399,37 +333,27 @@ nav.up{padding:14px 52px;background:rgba(8,8,8,.93);backdrop-filter:blur(20px);b
 .cp-n{font-weight:600;font-size:15px;margin-bottom:3px}
 .cp-r{font-family:var(--fm);font-size:10px;letter-spacing:.08em;color:var(--g4);margin-bottom:6px}
 .cp-e{font-size:13px;color:var(--grn)}
-/* Form — cream bg */
 .fg{margin-bottom:22px}
 .fl{display:block;font-family:var(--fm);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(0,0,0,.45);margin-bottom:9px}
-.fi{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(0,0,0,.18);padding:10px 0;color:#0A0A0A;font-size:15px;outline:none;transition:border-color .3s}
-.fi:focus{border-bottom-color:var(--grn)}
+.fi{
+  width:100%;background:transparent;border:none;border-bottom:1px solid rgba(0,0,0,.18);
+  padding:10px 0;color:#0A0A0A;font-size:15px;outline:none;
+  background:linear-gradient(to right,var(--grn) 0%,var(--grn) 100%) no-repeat;
+  background-size:0% 1px;background-position:0 100%;
+  transition:border-color .3s,background-size .45s var(--E);
+}
+.fi:focus{border-bottom-color:transparent;background-size:100% 1px}
 .fi::placeholder{color:rgba(0,0,0,.3)}
 textarea.fi{resize:none;min-height:80px}
-.f-sub{
-  display:inline-flex;align-items:center;gap:10px;padding:16px 32px;
-  background:var(--grn);color:var(--blk);
-  font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  border:none;cursor:none;margin-top:8px;
-  position:relative;overflow:hidden;transition:color .3s;
-}
+.f-sub{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:var(--grn);color:var(--blk);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;margin-top:8px;position:relative;overflow:hidden;transition:color .3s}
 .f-sub::before{content:'';position:absolute;inset:0;background:var(--blk);transform:translateX(-101%);transition:transform .4s var(--E)}
 .f-sub:hover::before{transform:translateX(0)}
 .f-sub:hover{color:var(--grn)}
 .f-sub span{position:relative;z-index:1}
 
-/* ═══════════════════════════════════
-   FOOTER — CREAM
-═══════════════════════════════════ */
+/* ═══ FOOTER ═══ */
 footer{background:var(--cream);padding:80px 52px 40px}
-.fw{
-  font-family:var(--fd);
-  font-size:clamp(60px,16.5vw,240px);
-  line-height:.85;letter-spacing:-.025em;
-  margin-bottom:56px;
-  display:flex;align-items:center;flex-wrap:wrap;
-  gap:0 clamp(14px,2.2vw,36px);
-}
+.fw{font-family:var(--fd);font-size:clamp(60px,16.5vw,240px);line-height:.85;letter-spacing:-.025em;margin-bottom:56px;display:flex;align-items:center;flex-wrap:wrap;gap:0 clamp(14px,2.2vw,36px)}
 .fw-a{color:rgba(0,0,0,.1);transition:color .3s}
 .fw-a:hover{color:rgba(0,0,0,.25)}
 .fw-dot{width:clamp(10px,1.6vw,24px);height:clamp(10px,1.6vw,24px);background:var(--grn);border-radius:50%;display:inline-block}
@@ -440,31 +364,146 @@ footer{background:var(--cream);padding:80px 52px 40px}
 .foot-links a{font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(0,0,0,.35);transition:color .2s}
 .foot-links a:hover{color:#0A0A0A}
 
-/* ═══════════════════════════════════
-   SCROLL REVEAL
-═══════════════════════════════════ */
+/* ═══ ENERGY IMAGERY ═══ */
+
+/* Hero background image — energy worker, prominent */
+.hero-energy-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.hero-energy-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(6,6,6,.88) 0%,rgba(8,22,10,.75) 55%,rgba(6,6,6,.92) 100%)}
+.hero-energy-bg img{width:100%;height:100%;object-fit:cover;opacity:.55;filter:grayscale(20%)}
+
+/* Problem section — commercial building imagery */
+.dm-energy-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.dm-energy-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(14,8,6,.88) 0%,rgba(50,10,0,.75) 100%)}
+.dm-energy-bg img{width:100%;height:100%;object-fit:cover;opacity:.45;filter:grayscale(30%)}
+.dm-broker>:not(.dm-energy-bg){position:relative;z-index:1}
+
+/* Services image card */
+.bc-energy{padding:0;overflow:hidden;position:relative;min-height:320px}
+.bc-energy img{width:100%;height:100%;object-fit:cover;filter:grayscale(20%);transition:filter .6s var(--E),transform .9s var(--E)}
+.bc-energy:hover img{filter:grayscale(0);transform:scale(1.04)}
+.bc-energy-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(6,6,6,.85) 0%,rgba(6,6,6,.5) 50%,rgba(25,197,89,.1) 100%);z-index:1}
+.bc-energy-content{position:absolute;inset:0;z-index:2;padding:52px 44px;display:flex;flex-direction:column;justify-content:flex-end}
+.bc-energy .bc-num{position:absolute;bottom:-8px;right:18px;z-index:3}
+
+/* How steps — thumbnail image above each step */
+.step-img{width:100%;height:120px;overflow:hidden;margin-bottom:20px;position:relative}
+.step-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(30%);transition:filter .5s var(--E),transform .7s var(--E)}
+.step-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(0,0,0,.25) 100%)}
+.step:hover .step-img img{filter:grayscale(0);transform:scale(1.05)}
+
+/* Proof quote — business photo background */
+.pq{position:relative;overflow:hidden}
+.pq-img{position:absolute;inset:0;pointer-events:none}
+.pq-img::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(6,6,6,.92) 0%,rgba(6,6,6,.75) 100%)}
+.pq-img img{width:100%;height:100%;object-fit:cover;opacity:.35;filter:grayscale(40%)}
+.pq>:not(.pq-img){position:relative;z-index:1}
+
+/* Contact left — background imagery */
+.con-l{position:relative;overflow:hidden}
+.con-l-img{position:absolute;inset:0;pointer-events:none;z-index:0}
+.con-l-img::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(6,6,6,.9) 0%,rgba(6,6,6,.8) 100%)}
+.con-l-img img{width:100%;height:100%;object-fit:cover;opacity:.3;filter:grayscale(25%)}
+.con-l>:not(.con-l-img){position:relative;z-index:1}
+
+/* ═══ INTERACTIVITY ═══ */
+
+/* Nav links — underline sweep */
+nav a{position:relative}
+nav a::after{content:'';position:absolute;bottom:-2px;left:0;width:100%;height:1px;background:var(--grn);transform:scaleX(0);transform-origin:right;transition:transform .3s var(--E)}
+nav a:hover::after{transform:scaleX(1);transform-origin:left}
+
+/* Pill hover */
+.pill{transition:background .25s,border-color .25s;cursor:default}
+.pill:hover{background:rgba(25,197,89,.06);border-color:rgba(25,197,89,.3)}
+
+/* Stats — number scale + background tint on hover */
+.st{cursor:default;transition:background .3s}
+.st:hover{background:#edeae2}
+.st-n{transition:transform .35s var(--E),color .3s}
+.st:hover .st-n{transform:scale(1.05);color:var(--grn)}
+
+/* Problem list items — slide right + brighten */
+.dm-list li{transition:transform .2s var(--E),color .2s;cursor:default}
+.dm-list li:hover{transform:translateX(8px);color:var(--wht)}
+
+/* Problem rate number — pulse on hover */
+.dm-rate{transition:transform .3s var(--E)}
+.dm:hover .dm-rate{transform:scale(1.03)}
+
+/* Services — bc-stat lifts + glows on card hover */
+.bc-stat{transition:background .25s,border-color .25s,transform .3s var(--E)}
+.bc:hover .bc-stat{background:rgba(25,197,89,.12);border-color:rgba(25,197,89,.35);transform:translateY(-3px)}
+.bc-sv{transition:color .25s}
+.bc:hover .bc-sv{color:var(--wht)}
+
+/* Services — icon spin on hover */
+.bc-icon svg{transition:transform .5s var(--E)}
+.bc:hover .bc-icon svg{transform:rotate(15deg) scale(1.1)}
+
+/* How steps — number pops, title lifts */
+.step-n{transition:transform .3s var(--E),color .25s,font-size .3s var(--E)}
+.step:hover .step-n{color:rgba(0,0,0,.85);transform:scale(1.3);transform-origin:left top}
+.step-t{transition:transform .3s var(--E)}
+.step:hover .step-t{transform:translateY(-3px)}
+.step-d{transition:color .25s}
+.step:hover .step-d{color:rgba(0,0,0,.65)}
+
+/* About credentials — line extends, row shifts */
+.ac{transition:color .2s,transform .2s var(--E);cursor:default}
+.ac::before{transition:width .35s var(--E)}
+.ac:hover{color:rgba(0,0,0,.85);transform:translateX(6px)}
+.ac:hover::before{width:36px}
+
+/* Proof quote — quote mark brightens */
+.pq{transition:background .35s}
+.pq:hover{background:rgba(255,255,255,.018)}
+.big-q{transition:opacity .4s,transform .5s var(--E)}
+.pq:hover .big-q{opacity:.24;transform:scale(1.04) translateY(-4px)}
+
+/* Proof stats — already has scale/color, add glow */
+.pn{transition:background .35s,box-shadow .35s}
+.pn:hover{background:rgba(25,197,89,.04);box-shadow:inset 0 0 60px rgba(25,197,89,.04)}
+
+/* Coverage pills — pointer cursor (interactive) */
+.cov-pill{cursor:pointer}
+
+/* Contact card — border glow on hover */
+.con-card{transition:border-color .3s,background .3s,transform .3s var(--E)}
+.con-card:hover{border-color:var(--grn);background:rgba(25,197,89,.04);transform:translateY(-3px)}
+
+/* Contact email link — grow + brighten */
+.cp-e{transition:color .2s,letter-spacing .3s}
+.con-card:hover .cp-e{color:#5dffa0;letter-spacing:.01em}
+
+/* Form submit — already has hover, enhance label */
+.fl{transition:color .25s}
+.fi:focus~label .fl,.fg:focus-within .fl{color:var(--grn)}
+
+/* ═══ SCROLL REVEAL ═══ */
 .rv{opacity:0;transform:translateY(30px);transition:opacity .85s var(--E),transform .85s var(--E)}
 .rv.in{opacity:1;transform:none}
 .rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}.rv.d4{transition-delay:.4s}
+@keyframes ripple-out{to{width:380px;height:380px;opacity:0}}
 
-/* ═══════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════ */
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1100px){.hw-wrap{display:none}}
 @media(max-width:960px){
   nav{padding:18px 24px}
   nav.up{padding:13px 24px}
   .nav-links a:not(.n-cta){display:none}
   .mbtn{display:flex}
-  #hero{padding:0 24px 60px}
-  .hero-number{left:24px}
-  .hero-brand{right:24px;bottom:64px}
+  #hero{padding:100px 24px 60px}
+  .hero-row{flex-direction:column;align-items:flex-start}
+  .hero-actions{align-items:flex-start}
   .stats-row{grid-template-columns:1fr}
-  .st{padding:44px 24px;border-right:none;border-bottom:1px solid rgba(0,0,0,.1)}
+  .st{padding:52px 24px}
   .prob-header{flex-direction:column;align-items:flex-start;padding:64px 24px 44px}
-  .drift-meters{grid-template-columns:1fr;border:none}
-  .dm{padding:56px 24px;border-right:none;border-bottom:1px solid var(--g1)}
+  .drift-meters{grid-template-columns:1fr}
+  .dm{padding:56px 24px}
+  .dm-broker{border-right:none;border-bottom:1px solid var(--g1)}
   .srv-head{flex-direction:column;align-items:flex-start;padding:80px 24px 44px}
-  .shint{padding:14px 24px}
+  .srv-bento{grid-template-columns:1fr}
+  .bc-wide{grid-column:span 1}
   .how-in{padding:0 24px}
   .steps{grid-template-columns:1fr 1fr}
   .step:nth-child(2){border-right:none}
@@ -484,82 +523,17 @@ footer{background:var(--cream);padding:80px 52px 40px}
   footer{padding:60px 24px 36px}
 }
 @media(max-width:600px){
-  .hn-val{font-size:clamp(120px,36vw,200px)}
+  .hero-hed{font-size:clamp(52px,16vw,100px)}
+  .hed-block{width:clamp(70px,20vw,110px);height:clamp(46px,13vw,72px)}
   .steps{grid-template-columns:1fr}
   .step{border-right:none!important;border-bottom:1px solid rgba(0,0,0,.15)}
   .proof-hd{flex-direction:column;align-items:flex-start}
-}
-
-/* CURSOR GLOW */
-#glow{
-  position:fixed;
-  width:700px;height:700px;
-  background:radial-gradient(circle,rgba(0,179,131,.065) 0%,transparent 65%);
-  pointer-events:none;z-index:9;
-  transform:translate(-50%,-50%);
-  will-change:left,top;
-  transition:left .18s cubic-bezier(.16,1,.3,1),top .18s cubic-bezier(.16,1,.3,1);
-}
-
-/* LOGO DOT PULSE */
-.logo-dot{animation:ldpulse 3s ease-in-out infinite}
-@keyframes ldpulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(0,179,131,0)}50%{transform:scale(1.8);box-shadow:0 0 0 4px rgba(0,179,131,.12)}}
-
-/* TICKER GLOW */
-.mq{animation:mqglow 4s ease-in-out infinite}
-@keyframes mqglow{
-  0%,100%{box-shadow:0 3px 24px rgba(0,179,131,.12),0 -3px 24px rgba(0,179,131,.12)}
-  50%{box-shadow:0 3px 48px rgba(0,179,131,.28),0 -3px 48px rgba(0,179,131,.28)}
-}
-
-/* HERO NUMBER 3D TILT — handled via JS, enable perspective on container */
-.hero-number{transform-style:preserve-3d;perspective:1000px}
-
-/* SERVICE CARD TOP LINE */
-.scard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--grn),rgba(0,179,131,.3));transform:scaleX(0);transform-origin:left;transition:transform .5s var(--E)}
-.scard:hover::before{transform:scaleX(1)}
-
-/* PROOF STAT HOVER */
-.pn{transition:background .35s}
-.pn:hover{background:rgba(0,179,131,.03)}
-.pn-n{transition:transform .35s var(--E),color .35s}
-.pn:hover .pn-n{transform:scale(1.06);color:var(--grn)}
-
-/* PROBLEM METER HOVER GLOW */
-.dm{transition:box-shadow .5s}
-.dm-broker:hover{box-shadow:inset 0 0 100px rgba(232,36,10,.06)}
-.dm-zd:hover{box-shadow:inset 0 0 100px rgba(0,179,131,.06)}
-
-/* RIPPLE */
-@keyframes ripple-out{to{width:380px;height:380px;opacity:0}}
-
-/* SECTION GRADIENT TRANSITIONS */
-#problem{
-  border-top:1px solid rgba(0,179,131,.08);
-}
-#services{
-  border-top:1px solid rgba(0,179,131,.06);
-}
-
-/* FORM INPUT FOCUS SWEEP */
-.fi{
-  background:linear-gradient(to right,var(--grn) 0%,var(--grn) 100%) no-repeat;
-  background-size:0% 1px;
-  background-position:0 100%;
-  transition:border-color .3s, background-size .45s var(--E);
-}
-.fi:focus{
-  border-bottom-color:transparent;
-  background-size:100% 1px;
 }
 </style>
 </head>
 <body>
 
 <canvas id="bg-canvas"></canvas>
-<div id="dot"></div>
-<div id="ring"></div>
-<div id="glow"></div>
 
 <!-- PRELOADER -->
 <div id="loader">
@@ -595,24 +569,66 @@ footer{background:var(--cream);padding:80px 52px 40px}
 
 <!-- ═══ HERO ═══ -->
 <section id="hero">
-  <div class="hero-number">
-    <span class="hn-val" id="hn-val">45</span>
-    <span class="hn-sym">%</span>
+
+  <!-- Energy background imagery -->
+  <div class="hero-energy-bg" aria-hidden="true">
+    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=75" alt="">
   </div>
-  <div class="hero-content">
-    <p class="h-eyebrow">The out-of-contract energy penalty</p>
-    <p class="h-sub">Your supplier charges up to 45% above contracted rates the moment your deal expires — and they will never tell you. Zero Drift makes sure it never happens to you. At zero cost.</p>
-    <div class="h-btns">
+
+  <!-- Floating widget cards — ChronoTask pattern -->
+  <div class="hw-wrap" aria-hidden="true">
+    <div class="hw hw-r" style="top:20%;left:10%;animation:float1 6s ease-in-out infinite">
+      <div class="hw-lbl"><span class="hw-dot-s"></span>Out of contract — live</div>
+      <div class="hw-val">+£793</div>
+      <div class="hw-meta">monthly overpayment</div>
+    </div>
+    <div class="hw hw-g" style="top:50%;left:28%;animation:float2 7.2s ease-in-out infinite;animation-delay:.9s">
+      <div class="hw-lbl"><span class="hw-dot-s"></span>Zero Drift client</div>
+      <div class="hw-val">LOCKED</div>
+      <div class="hw-meta">contract managed</div>
+    </div>
+    <div class="hw" style="top:72%;left:8%;animation:float3 5.5s ease-in-out infinite;animation-delay:1.5s">
+      <div class="hw-lbl" style="color:var(--g4)">Time out of contract</div>
+      <div class="hw-val" style="font-size:26px;color:var(--g5)">8 months</div>
+      <div class="hw-meta">before we found them</div>
+    </div>
+    <div class="hw hw-g" style="top:34%;left:55%;animation:float4 8s ease-in-out infinite;animation-delay:2.4s">
+      <div class="hw-lbl"><span class="hw-dot-s"></span>Saving secured</div>
+      <div class="hw-val">28%</div>
+      <div class="hw-meta">below out-of-contract rate</div>
+    </div>
+  </div>
+
+  <!-- Hero pill badge -->
+  <div class="hero-pill" id="hero-pill">
+    <span class="hp-dot"></span>
+    <span>No fee · Full market · All suppliers</span>
+  </div>
+
+  <!-- Headline with inline framed 45% — HackerRank pattern -->
+  <h1 class="hero-hed" id="hero-hed">
+    STOP PAYING<br>
+    <span class="hed-block" aria-label="45% above rate">
+      <span class="hed-block-inner">
+        <span class="hed-block-val">45%</span>
+        <span class="hed-block-sub">above rate</span>
+      </span>
+    </span>
+    ABOVE YOUR<br>CONTRACT RATE
+  </h1>
+
+  <!-- Sub + CTA row -->
+  <div class="hero-row" id="hero-row">
+    <p class="hero-sub">Your supplier charges up to 45% above contracted rates the moment your deal expires — and they will never tell you. Zero Drift makes sure it never happens to you. At zero cost.</p>
+    <div class="hero-actions">
       <a href="#contact" class="btn-fill magnetic"><span>Get Protected Free</span><span>→</span></a>
       <a href="#problem" class="btn-ghost">
         How it works
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
   </div>
-  <div class="hero-brand" id="hbrand">
-    <span>ZERO</span><span class="hb-dot"></span><span class="hb-d">DRIFT</span>
-  </div>
+
 </section>
 
 <!-- ═══ MARQUEE ═══ -->
@@ -623,7 +639,7 @@ footer{background:var(--cream);padding:80px 52px 40px}
   </div>
 </div>
 
-<!-- ═══ STATS — CREAM ═══ -->
+<!-- ═══ STATS — asymmetric bento ═══ -->
 <section class="stats">
   <div class="stats-row">
     <div class="st rv">
@@ -645,24 +661,26 @@ footer{background:var(--cream);padding:80px 52px 40px}
 <section id="problem">
   <div class="prob-header">
     <div>
-      <p class="prob-eyebrow rv">The Problem</p>
+      <div class="pill rv">
+        <div class="pill-dot red"></div>
+        <span>The Problem</span>
+      </div>
       <h2 class="prob-hed rv">Your supplier<br>is not on<br>your side.</h2>
     </div>
     <p class="prob-sub rv">When a contract expires, suppliers have every financial incentive to keep you out-of-contract and paying premium rates. They are legally allowed to stay silent. Most do.</p>
   </div>
   <div class="drift-meters">
     <div class="dm dm-broker">
-      <span class="dm-label">
+      <!-- Commercial building background -->
+      <div class="dm-energy-bg" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=70" alt="">
+      </div>
+      <span class="dm-lbl">
         <span style="width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0"></span>
         Out of contract
       </span>
-      <div class="dm-rate">
-        <span id="drift-val">100</span><span class="sym">%</span>
-      </div>
-      <div class="dm-status">
-        <span class="status-dot"></span>
-        Rate drifting — live
-      </div>
+      <div class="dm-rate"><span id="drift-val">100</span><span class="sym">%</span></div>
+      <div class="dm-status"><span class="status-dot"></span>Rate drifting — live</div>
       <ul class="dm-list">
         <li class="rv">Your contract has expired</li>
         <li class="rv d1">Supplier moved you to out-of-contract rate silently</li>
@@ -671,17 +689,12 @@ footer{background:var(--cream);padding:80px 52px 40px}
       </ul>
     </div>
     <div class="dm dm-zd">
-      <span class="dm-label">
+      <span class="dm-lbl">
         <span style="width:6px;height:6px;border-radius:50%;background:var(--grn);flex-shrink:0"></span>
         Zero Drift
       </span>
-      <div class="dm-rate">
-        <span>LOCKED</span>
-      </div>
-      <div class="dm-status">
-        <span class="status-dot"></span>
-        Contract managed
-      </div>
+      <div class="dm-rate"><span>LOCKED</span></div>
+      <div class="dm-status"><span class="status-dot"></span>Contract managed</div>
       <ul class="dm-list">
         <li class="rv">Every renewal date monitored by us</li>
         <li class="rv d1">All suppliers quoted with collective buying power</li>
@@ -692,58 +705,78 @@ footer{background:var(--cream);padding:80px 52px 40px}
   </div>
 </section>
 
-<!-- ═══ SERVICES ═══ -->
+<!-- ═══ SERVICES BENTO ═══ -->
 <section id="services">
   <div class="srv-head">
     <div>
-      <p class="sec-tag rv">What We Do</p>
+      <div class="pill rv">
+        <div class="pill-dot active"></div>
+        <span>What We Do</span>
+      </div>
       <h2 class="sec-h rv">Built around<br>your energy.</h2>
     </div>
     <p class="rv" style="max-width:300px;color:var(--g4);font-size:14px;line-height:1.75">Every service is designed to stop you overpaying — and none of it costs you a penny.</p>
   </div>
-  <div class="sscroll">
-    <div class="strack">
-      <div class="scard">
-        <span class="sg-n2">01</span>
-        <div class="si"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <div class="sn">Contract Monitoring</div>
-        <p class="sd">We watch every renewal date. You will never drift out of contract onto punishing out-of-contract rates again.</p>
-        <div class="sm"><span class="sm-v">£0</span><span class="sm-l">Fee for this service</span></div>
+  <div class="srv-bento">
+    <div class="bc bc-energy bc-wide rv">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=75" alt="Energy infrastructure monitoring">
+      <div class="bc-energy-overlay"></div>
+      <div class="bc-energy-content">
+        <span class="bc-num">01</span>
+        <div class="bc-icon" style="position:relative;z-index:2;margin-bottom:28px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="bc-title">Contract Monitoring</div>
+        <p class="bc-desc">We watch every renewal date. You will never drift out of contract onto punishing out-of-contract rates again. One point of contact, indefinite cover.</p>
+        <div class="bc-stat" style="margin-top:auto"><span class="bc-sv">£0</span><span class="bc-sl">Fee for this service</span></div>
       </div>
-      <div class="scard">
-        <span class="sg-n2">02</span>
-        <div class="si"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-        <div class="sn">Full Market Sweep</div>
-        <p class="sd">Every supplier quoted every time. Not a shortlist, not preferred partners — the whole market, on a level playing field.</p>
-        <div class="sm"><span class="sm-v">All</span><span class="sm-l">Suppliers quoted</span></div>
+    </div>
+    <div class="bc bc-energy rv d1">
+      <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=70" alt="Solar panels — full market">
+      <div class="bc-energy-overlay"></div>
+      <div class="bc-energy-content">
+        <span class="bc-num">02</span>
+        <div class="bc-icon" style="position:relative;z-index:2;margin-bottom:28px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <div class="bc-title">Full Market Sweep</div>
+        <p class="bc-desc">Every supplier quoted every time. Not a shortlist, not preferred partners — the whole market, on a level playing field.</p>
+        <div class="bc-stat" style="margin-top:auto"><span class="bc-sv">All</span><span class="bc-sl">Suppliers quoted</span></div>
       </div>
-      <div class="scard">
-        <span class="sg-n2">03</span>
-        <div class="si"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
-        <div class="sn">Collective Buying Power</div>
-        <p class="sd">Your quote goes to market backed by our entire client book. You get rates a single business simply cannot achieve alone.</p>
-        <div class="sm"><span class="sm-v">Better</span><span class="sm-l">Than negotiating direct</span></div>
+    </div>
+    <div class="bc bc-energy rv d1">
+      <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=70" alt="Power grid infrastructure">
+      <div class="bc-energy-overlay"></div>
+      <div class="bc-energy-content">
+        <span class="bc-num">03</span>
+        <div class="bc-icon" style="position:relative;z-index:2;margin-bottom:28px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <div class="bc-title">Collective Buying Power</div>
+        <p class="bc-desc">Your quote goes to market backed by our entire client book. You get rates a single business simply cannot achieve alone.</p>
+        <div class="bc-stat" style="margin-top:auto"><span class="bc-sv">Better</span><span class="bc-sl">Than negotiating direct</span></div>
       </div>
-      <div class="scard">
-        <span class="sg-n2">04</span>
-        <div class="si"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-        <div class="sn">Rate Optimisation</div>
-        <p class="sd">Sometimes the best deal is with your existing supplier — on far better terms. We'll negotiate that too, without you switching.</p>
-        <div class="sm"><span class="sm-v">25–45%</span><span class="sm-l">Typical saving vs out-of-contract</span></div>
+    </div>
+    <div class="bc bc-energy rv d2">
+      <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=70" alt="Rate optimisation analysis">
+      <div class="bc-energy-overlay"></div>
+      <div class="bc-energy-content">
+        <span class="bc-num">04</span>
+        <div class="bc-icon" style="position:relative;z-index:2;margin-bottom:28px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <div class="bc-title">Rate Optimisation</div>
+        <p class="bc-desc">Sometimes the best deal is with your existing supplier — on far better terms. We'll negotiate that too, without you switching.</p>
+        <div class="bc-stat" style="margin-top:auto"><span class="bc-sv">25–45%</span><span class="bc-sl">Typical saving vs out-of-contract</span></div>
       </div>
-      <div class="scard">
-        <span class="sg-n2">05</span>
-        <div class="si"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
-        <div class="sn">Ongoing Management</div>
-        <p class="sd">Multiple sites, multiple contracts — all managed indefinitely by us. One point of contact, zero hassle, zero cost.</p>
-        <div class="sm"><span class="sm-v">∞</span><span class="sm-l">Sites managed, zero fee</span></div>
+    </div>
+    <div class="bc bc-energy rv d2">
+      <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&q=70" alt="Wind turbines — clean energy infrastructure">
+      <div class="bc-energy-overlay"></div>
+      <div class="bc-energy-content">
+        <span class="bc-num">05</span>
+        <div class="bc-icon" style="position:relative;z-index:2;margin-bottom:28px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+        <div class="bc-title">Ongoing Management</div>
+        <p class="bc-desc">Multiple sites, multiple contracts — all managed indefinitely by us. One point of contact, zero hassle, zero cost.</p>
+        <div class="bc-stat" style="margin-top:auto"><span class="bc-sv">∞</span><span class="bc-sl">Sites managed, zero fee</span></div>
       </div>
     </div>
   </div>
-  <div class="shint"><div class="arr"><span></span><span></span><span></span></div> Scroll to see all services</div>
 </section>
 
-<!-- ═══ HOW — GREEN ═══ -->
+<!-- ═══ HOW ═══ -->
 <section id="how">
   <div class="how-ghost" aria-hidden="true">HOW</div>
   <div class="how-in">
@@ -755,37 +788,24 @@ footer{background:var(--cream);padding:80px 52px 40px}
       <p class="how-sub rv">Free review to ongoing management. Most clients see a better rate within 2 weeks.</p>
     </div>
     <div class="steps">
-      <div class="step rv">
-        <div class="step-n">01</div><div class="step-line"></div>
-        <div class="step-t">Free Review</div>
-        <p class="step-d">Share your current contract and latest bill. We audit whether you're in contract, out, or about to slip — no cost, no obligation.</p>
-      </div>
-      <div class="step rv d1">
-        <div class="step-n">02</div><div class="step-line"></div>
-        <div class="step-t">Market Sweep</div>
-        <p class="step-d">We take your profile to every supplier, backed by collective buying power. Every option returned, fully transparent.</p>
-      </div>
-      <div class="step rv d2">
-        <div class="step-n">03</div><div class="step-line"></div>
-        <div class="step-t">Best Deal</div>
-        <p class="step-d">We present the best rate — which may even be with your current supplier on improved terms. You decide. No pressure.</p>
-      </div>
-      <div class="step rv d3">
-        <div class="step-n">04</div><div class="step-line"></div>
-        <div class="step-t">Protected Forever</div>
-        <p class="step-d">We monitor every renewal date and repeat this automatically. You will never drift out of contract again.</p>
-      </div>
+      <div class="step rv"><div class="step-img"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=700&q=60" alt=""></div><div class="step-n">01</div><div class="step-line"></div><div class="step-t">Free Review</div><p class="step-d">Share your current contract and latest bill. We audit whether you're in contract, out, or about to slip — no cost, no obligation.</p></div>
+      <div class="step rv d1"><div class="step-img"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=700&q=60" alt=""></div><div class="step-n">02</div><div class="step-line"></div><div class="step-t">Market Sweep</div><p class="step-d">We take your profile to every supplier, backed by collective buying power. Every option returned, fully transparent.</p></div>
+      <div class="step rv d2"><div class="step-img"><img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=700&q=60" alt=""></div><div class="step-n">03</div><div class="step-line"></div><div class="step-t">Best Deal</div><p class="step-d">We present the best rate — which may even be with your current supplier on improved terms. You decide. No pressure.</p></div>
+      <div class="step rv d3"><div class="step-img"><img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=700&q=60" alt=""></div><div class="step-n">04</div><div class="step-line"></div><div class="step-t">Protected Forever</div><p class="step-d">We monitor every renewal date and repeat this automatically. You will never drift out of contract again.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ ABOUT — CREAM ═══ -->
+<!-- ═══ ABOUT ═══ -->
 <section id="about">
   <div class="about-img">
-    <img src="tim.jpg" alt="Tim Jackson — Founder, Zero Drift" loading="lazy">
+    <img src="assets/images/tim.jpg" alt="Tim Jackson — Founder, Zero Drift" loading="lazy">
   </div>
   <div class="about-txt">
-    <p class="a-tag rv">The Founder</p>
+    <div class="pill light rv" style="margin-bottom:28px">
+      <div class="pill-dot dim"></div>
+      <span style="color:rgba(0,0,0,.4)">The Founder</span>
+    </div>
     <h2 class="a-name rv">Tim<br>Jackson.</h2>
     <p class="a-bio rv">I've spent years watching businesses pay over the odds for energy — not because of complexity, but because of silence. Suppliers know when your contract expires. They just won't tell you. Zero Drift was built to break that silence, and to bring the collective buying power of a full client book to every single deal we place.</p>
     <div class="a-creds">
@@ -797,19 +817,91 @@ footer{background:var(--cream);padding:80px 52px 40px}
   </div>
 </section>
 
+<!-- ═══ COVERAGE ═══ -->
+<section id="coverage">
+  <div class="cov-in">
+    <div class="cov-txt rv">
+      <div class="pill" style="margin-bottom:20px">
+        <div class="pill-dot active"></div>
+        <span>NI Coverage</span>
+      </div>
+      <h2 class="cov-hed">All 6 counties.<br>Zero exceptions.</h2>
+      <p class="cov-sub">Zero Drift protects businesses across every county in Northern Ireland. Hover the map to explore coverage.</p>
+      <div class="cov-pills">
+        <span class="cov-pill" data-county="County Antrim">Antrim</span>
+        <span class="cov-pill" data-county="County Armagh">Armagh</span>
+        <span class="cov-pill" data-county="County Down">Down</span>
+        <span class="cov-pill" data-county="County Fermanagh">Fermanagh</span>
+        <span class="cov-pill" data-county="County Derry">Derry</span>
+        <span class="cov-pill" data-county="County Tyrone">Tyrone</span>
+      </div>
+    </div>
+    <div class="cov-map-wrap rv d1">
+      <svg class="cov-svg cov-ni-svg" viewBox="55 62 698 555" xmlns="http://www.w3.org/2000/svg">
+        <g class="county-grp" data-county="County Antrim">
+          <path class="cp" d="M 435.9,88.3 L 436.8,91.6 L 441.5,89.8 L 447.1,93.7 L 447.3,96.6 L 450.1,96.1 L 451.9,102.7 L 454.6,101.4 L 457.6,112.0 L 460.7,116.1 L 460.3,125.6 L 457.3,134.4 L 450.9,140.4 L 457.8,150.0 L 457.1,153.1 L 459.6,159.4 L 457.2,170.9 L 460.2,181.5 L 466.1,184.0 L 464.7,186.3 L 466.5,193.0 L 473.1,201.1 L 477.5,210.8 L 475.9,215.4 L 487.9,252.0 L 487.6,255.2 L 484.6,257.3 L 482.3,273.3 L 488.0,279.4 L 480.9,290.4 L 478.4,300.5 L 485.0,312.9 L 500.4,328.9 L 495.8,364.5 L 507.4,388.2 L 520.0,388.8 L 527.6,395.3 L 531.4,396.2 L 532.2,393.7 L 537.0,398.0 L 543.8,396.0 L 554.1,404.1 L 563.2,401.8 L 568.3,395.3 L 572.6,396.4 L 582.0,391.5 L 586.2,395.3 L 593.5,392.2 L 595.7,389.0 L 593.6,383.2 L 596.8,380.5 L 596.0,378.2 L 602.1,375.3 L 607.0,380.7 L 610.1,377.5 L 609.0,373.4 L 617.7,368.6 L 616.4,366.4 L 618.7,363.9 L 617.3,360.9 L 621.7,352.4 L 620.1,349.1 L 631.7,334.0 L 629.8,332.7 L 623.4,337.2 L 625.2,333.2 L 621.2,331.5 L 626.1,317.8 L 641.1,303.2 L 647.9,302.0 L 653.1,296.9 L 663.1,295.4 L 677.0,277.2 L 675.4,274.1 L 676.0,258.2 L 668.5,242.5 L 658.6,236.7 L 658.4,239.6 L 654.4,237.0 L 651.7,241.5 L 665.6,256.8 L 669.3,268.0 L 667.9,269.1 L 669.6,269.2 L 668.7,274.8 L 660.7,257.8 L 663.5,259.3 L 663.6,257.4 L 654.7,255.6 L 647.7,250.8 L 645.2,242.1 L 649.4,245.2 L 650.0,238.9 L 644.2,229.7 L 640.5,227.6 L 638.6,218.6 L 635.0,219.4 L 630.3,215.6 L 620.2,191.8 L 616.4,188.5 L 611.3,188.6 L 607.8,183.4 L 603.2,183.1 L 602.1,179.6 L 605.9,171.9 L 609.3,153.7 L 602.2,149.2 L 589.8,151.9 L 585.9,147.3 L 587.3,146.4 L 586.7,138.0 L 591.6,129.8 L 591.6,121.4 L 589.9,118.6 L 594.1,113.9 L 594.1,106.7 L 592.6,101.4 L 588.9,99.7 L 584.6,91.8 L 585.2,88.2 L 571.7,83.3 L 565.5,75.5 L 561.2,76.1 L 556.4,81.6 L 542.0,85.9 L 542.1,84.0 L 536.3,81.8 L 529.2,74.4 L 523.9,74.8 L 518.6,70.2 L 509.8,67.5 L 500.1,73.4 L 496.8,70.7 L 488.5,70.4 L 485.2,65.1 L 481.8,64.7 L 469.8,72.8 L 470.6,76.4 L 466.2,78.4 L 466.1,80.6 L 464.1,78.8 L 457.3,83.5 L 441.1,85.9 L 437.4,82.0 L 439.2,87.0 Z" fill="rgba(25,197,89,.13)" stroke="rgba(25,197,89,.5)" stroke-width="1.2"/>
+          <text class="cl" x="567" y="218" text-anchor="middle" font-size="26" font-family="'Space Mono',monospace" letter-spacing="1">ANTRIM</text>
+        </g>
+        <g class="county-grp" data-county="County Derry">
+          <path class="cp" d="M 254.4,191.1 L 255.7,192.8 L 254.6,195.2 L 262.2,202.8 L 265.0,211.6 L 275.2,212.5 L 280.4,208.0 L 290.7,211.0 L 287.5,221.8 L 288.3,224.2 L 294.7,226.0 L 305.3,224.1 L 306.0,228.3 L 303.8,233.2 L 308.4,237.7 L 304.4,239.2 L 307.5,242.6 L 316.9,237.1 L 316.0,241.8 L 329.1,253.1 L 329.6,257.0 L 331.7,254.7 L 338.8,257.9 L 344.8,254.1 L 353.5,253.6 L 357.6,248.3 L 361.5,250.4 L 367.8,247.9 L 376.1,253.9 L 373.6,261.5 L 378.3,270.1 L 373.7,274.5 L 369.3,274.3 L 370.3,277.6 L 369.1,283.6 L 361.3,287.4 L 361.8,290.2 L 367.1,293.3 L 376.9,291.6 L 381.2,293.3 L 381.2,295.7 L 387.8,290.7 L 396.3,288.5 L 397.7,296.6 L 401.5,299.3 L 404.5,305.3 L 407.6,305.8 L 409.2,312.2 L 417.1,318.3 L 419.0,324.7 L 423.2,323.3 L 422.8,326.5 L 425.0,328.2 L 430.2,325.3 L 431.8,326.7 L 429.8,331.9 L 425.3,329.8 L 423.6,334.2 L 424.4,337.8 L 433.6,335.2 L 433.0,331.6 L 440.3,333.6 L 440.0,336.7 L 443.1,337.2 L 447.4,333.0 L 448.6,327.6 L 452.3,325.4 L 455.8,326.2 L 459.8,322.1 L 461.3,324.8 L 466.9,325.3 L 469.4,321.5 L 485.0,312.9 L 478.4,300.5 L 480.9,290.4 L 488.0,279.4 L 482.3,273.3 L 484.6,257.3 L 487.6,255.2 L 487.9,252.0 L 475.9,215.4 L 477.5,210.8 L 473.1,201.1 L 466.5,193.0 L 464.7,186.3 L 466.1,184.0 L 460.2,181.5 L 457.2,170.9 L 459.6,159.4 L 457.1,153.1 L 457.8,150.0 L 450.9,140.4 L 457.3,134.4 L 460.3,125.6 L 460.7,116.1 L 457.6,112.0 L 454.6,101.4 L 451.9,102.7 L 450.1,96.1 L 447.3,96.6 L 447.1,93.7 L 441.5,89.8 L 436.8,91.6 L 435.1,87.4 L 422.9,92.0 L 423.5,94.4 L 420.8,100.0 L 392.0,102.1 L 376.2,98.6 L 363.3,89.8 L 364.3,97.3 L 363.0,107.9 L 356.3,125.1 L 357.1,127.2 L 355.1,126.7 L 361.8,130.0 L 350.7,129.5 L 348.5,135.4 L 351.1,141.5 L 343.2,149.6 L 343.8,151.8 L 322.2,156.8 L 318.2,155.0 L 318.0,146.3 L 317.9,150.1 L 309.4,148.4 L 302.0,150.7 L 299.0,148.5 L 297.3,154.0 L 292.7,155.8 L 292.0,152.4 L 294.2,147.3 L 289.4,146.0 L 283.5,154.4 L 280.9,150.6 L 276.3,155.4 L 269.7,152.9 L 258.3,165.4 L 255.5,171.9 L 255.2,174.5 L 258.3,176.4 L 254.5,182.6 L 256.1,187.3 Z" fill="rgba(25,197,89,.16)" stroke="rgba(25,197,89,.5)" stroke-width="1.2"/>
+          <text class="cl" x="348" y="205" text-anchor="middle" font-size="22" font-family="'Space Mono',monospace" letter-spacing="1">DERRY</text>
+        </g>
+        <g class="county-grp" data-county="County Tyrone">
+          <path class="cp" d="M 128.2,308.3 L 133.6,310.6 L 133.7,313.1 L 129.9,317.3 L 132.4,322.9 L 144.0,328.2 L 145.1,336.9 L 150.9,335.9 L 154.5,331.0 L 156.7,335.2 L 162.0,335.8 L 164.7,340.9 L 168.3,339.4 L 169.1,342.2 L 172.2,342.5 L 180.4,335.1 L 180.9,341.7 L 184.1,342.0 L 181.7,346.5 L 184.6,345.7 L 184.3,348.6 L 188.4,348.9 L 187.5,350.4 L 189.9,357.5 L 201.0,357.0 L 202.1,360.4 L 210.0,366.1 L 219.5,363.4 L 221.9,365.3 L 224.6,370.0 L 220.9,374.8 L 217.1,375.3 L 217.6,380.1 L 213.9,385.6 L 211.5,395.2 L 198.1,401.5 L 202.5,406.7 L 202.0,412.0 L 205.7,411.5 L 199.6,414.5 L 201.0,420.7 L 214.7,424.3 L 218.5,420.8 L 218.4,423.4 L 221.0,424.1 L 224.8,428.5 L 223.6,429.9 L 224.7,431.9 L 229.4,435.5 L 250.1,423.3 L 250.9,420.3 L 249.5,419.2 L 264.3,421.5 L 266.6,428.3 L 265.7,429.6 L 273.1,435.9 L 273.7,439.0 L 270.7,444.7 L 273.1,447.4 L 272.5,450.2 L 280.1,452.2 L 281.7,451.4 L 280.2,449.2 L 281.9,448.2 L 283.2,451.0 L 285.6,450.4 L 287.9,454.9 L 287.8,462.6 L 296.3,470.6 L 305.1,465.4 L 305.1,463.4 L 316.8,466.4 L 329.0,457.3 L 329.5,455.1 L 327.5,451.8 L 336.7,443.0 L 340.5,433.1 L 347.4,428.6 L 354.4,432.1 L 355.5,435.6 L 359.7,434.2 L 359.9,437.2 L 364.5,438.8 L 364.5,441.3 L 373.3,445.5 L 371.1,447.6 L 376.4,449.1 L 377.4,451.3 L 376.5,453.0 L 378.4,455.1 L 377.5,459.6 L 385.0,461.3 L 386.9,468.2 L 393.7,467.1 L 397.1,455.5 L 400.3,452.7 L 402.6,446.7 L 401.8,438.4 L 405.1,431.4 L 410.8,431.8 L 413.3,434.9 L 419.6,433.9 L 421.4,437.2 L 425.8,436.2 L 428.1,430.7 L 427.3,426.2 L 429.8,424.9 L 429.0,419.4 L 434.6,415.8 L 436.1,410.4 L 440.5,407.3 L 440.4,399.9 L 445.7,392.4 L 454.9,392.6 L 467.4,375.3 L 495.8,364.5 L 500.4,328.9 L 485.0,312.9 L 469.4,321.5 L 466.9,325.3 L 461.3,324.8 L 459.8,322.1 L 455.8,326.2 L 452.3,325.4 L 448.6,327.6 L 447.4,333.0 L 443.1,337.2 L 440.0,336.7 L 440.3,333.6 L 433.0,331.6 L 433.6,335.2 L 424.4,337.8 L 423.6,334.2 L 425.3,329.8 L 429.8,331.9 L 431.8,326.7 L 430.2,325.3 L 425.0,328.2 L 422.8,326.5 L 423.2,323.3 L 419.0,324.7 L 417.1,318.3 L 409.2,312.2 L 407.6,305.8 L 404.5,305.3 L 401.5,299.3 L 397.7,296.6 L 396.3,288.5 L 387.8,290.7 L 381.2,295.7 L 381.2,293.3 L 376.9,291.6 L 367.1,293.3 L 361.8,290.2 L 361.3,287.4 L 369.1,283.6 L 370.3,277.6 L 369.3,274.3 L 373.7,274.5 L 378.3,270.1 L 373.6,261.5 L 376.1,253.9 L 367.8,247.9 L 361.5,250.4 L 357.6,248.3 L 353.5,253.6 L 344.8,254.1 L 338.8,257.9 L 331.7,254.7 L 329.6,257.0 L 329.1,253.1 L 316.0,241.8 L 316.9,237.1 L 307.5,242.6 L 304.4,239.2 L 308.4,237.7 L 303.8,233.2 L 306.0,228.3 L 305.3,224.1 L 294.7,226.0 L 288.3,224.2 L 287.5,221.8 L 290.7,211.0 L 280.4,208.0 L 275.2,212.5 L 266.7,212.4 L 263.4,210.2 L 262.2,202.8 L 258.1,199.0 L 244.6,203.5 L 245.1,214.2 L 243.3,219.6 L 245.7,231.4 L 235.6,252.3 L 224.6,259.4 L 224.9,261.5 L 222.0,262.5 L 219.5,267.4 L 221.0,270.4 L 219.9,282.2 L 223.1,285.9 L 221.0,287.8 L 212.3,288.2 L 212.2,284.4 L 209.9,287.4 L 202.8,287.5 L 198.1,284.0 L 183.2,296.2 L 179.6,295.1 L 173.7,299.2 L 170.2,304.7 L 163.3,302.0 L 160.7,297.9 L 156.7,298.4 L 153.6,291.7 L 148.9,290.6 L 138.3,305.4 L 128.9,305.3 Z" fill="rgba(25,197,89,.11)" stroke="rgba(25,197,89,.5)" stroke-width="1.2"/>
+          <text class="cl" x="300" y="375" text-anchor="middle" font-size="24" font-family="'Space Mono',monospace" letter-spacing="1">TYRONE</text>
+        </g>
+        <g class="county-grp" data-county="County Fermanagh">
+          <path class="cp" d="M 65.1,409.6 L 73.6,415.6 L 69.0,419.5 L 88.1,439.1 L 94.6,452.9 L 101.0,456.9 L 108.5,456.1 L 108.9,461.0 L 112.1,462.3 L 118.2,476.3 L 121.9,479.8 L 128.7,480.4 L 130.6,483.5 L 132.9,481.1 L 136.2,481.5 L 138.0,485.3 L 142.7,484.6 L 139.9,490.7 L 140.0,496.4 L 143.0,499.1 L 144.3,515.5 L 143.1,517.9 L 155.0,525.2 L 157.0,522.4 L 165.7,521.4 L 172.8,524.0 L 186.1,522.1 L 185.3,525.9 L 188.2,533.4 L 193.3,531.8 L 200.0,539.0 L 200.8,546.0 L 204.5,550.1 L 213.3,551.1 L 213.2,554.6 L 215.5,557.7 L 219.9,559.6 L 220.1,556.5 L 222.4,557.4 L 224.7,553.7 L 236.7,559.6 L 239.8,554.3 L 239.4,551.4 L 245.9,545.6 L 253.9,544.6 L 250.0,551.3 L 251.1,553.1 L 262.9,552.0 L 257.9,557.7 L 258.2,560.5 L 265.3,555.5 L 269.4,559.4 L 269.5,562.1 L 274.1,558.5 L 276.2,563.5 L 279.5,559.1 L 276.9,557.5 L 277.8,555.4 L 276.2,552.8 L 274.0,553.8 L 271.1,548.8 L 278.3,539.8 L 282.9,537.8 L 285.7,539.5 L 284.8,545.7 L 280.4,549.9 L 284.4,553.4 L 282.6,555.9 L 278.6,555.2 L 280.1,559.5 L 283.1,560.8 L 289.9,552.9 L 289.6,549.4 L 292.5,544.9 L 291.1,541.1 L 295.5,538.8 L 291.0,535.4 L 290.8,528.9 L 297.3,526.5 L 293.2,526.3 L 293.6,523.6 L 297.5,523.1 L 297.4,520.7 L 300.2,518.6 L 305.7,518.6 L 308.3,514.6 L 312.5,517.8 L 318.9,514.7 L 317.7,511.1 L 318.7,508.2 L 315.5,506.3 L 319.6,501.2 L 315.0,493.2 L 310.4,493.7 L 312.0,487.8 L 302.4,481.9 L 305.9,476.9 L 310.4,477.7 L 309.9,467.2 L 305.1,463.4 L 305.2,465.3 L 299.8,466.9 L 298.7,469.9 L 294.0,469.9 L 287.7,462.5 L 287.9,454.9 L 285.6,450.4 L 283.2,451.0 L 281.9,448.2 L 280.2,449.2 L 281.7,451.4 L 280.1,452.2 L 272.5,450.2 L 273.1,447.4 L 270.7,444.7 L 273.7,439.0 L 273.1,435.9 L 265.7,429.6 L 266.6,428.3 L 264.3,421.5 L 249.5,419.2 L 250.9,420.3 L 250.1,423.3 L 229.4,435.5 L 224.7,431.9 L 223.6,429.9 L 224.8,428.5 L 221.0,424.1 L 218.4,423.4 L 218.5,420.8 L 214.7,424.3 L 201.0,420.7 L 199.6,414.5 L 205.7,411.5 L 202.0,412.0 L 202.5,406.7 L 198.1,401.5 L 211.5,395.2 L 213.9,385.6 L 217.6,380.1 L 217.1,375.3 L 220.9,374.8 L 224.7,369.7 L 220.4,363.5 L 210.0,366.1 L 202.1,360.4 L 201.0,357.0 L 189.9,357.5 L 187.5,350.4 L 188.4,348.9 L 184.3,348.6 L 184.6,345.7 L 169.8,350.9 L 167.7,352.9 L 167.6,356.3 L 159.5,358.3 L 158.0,360.6 L 158.7,362.8 L 149.7,371.2 L 152.0,374.7 L 145.4,379.6 L 121.1,379.4 L 116.0,373.5 L 107.3,374.0 L 105.9,379.4 L 98.5,391.3 L 98.3,399.5 L 87.1,399.7 L 84.5,401.0 L 86.3,404.4 L 80.9,404.5 L 80.6,407.7 Z" fill="rgba(25,197,89,.13)" stroke="rgba(25,197,89,.5)" stroke-width="1.2"/>
+          <text class="cl" x="190" y="472" text-anchor="middle" font-size="20" font-family="'Space Mono',monospace" letter-spacing="1">FERM.</text>
+        </g>
+        <g class="county-grp" data-county="County Armagh">
+          <path class="cp" d="M 384.5,490.8 L 387.6,495.0 L 396.9,498.6 L 396.5,504.7 L 399.0,508.6 L 399.7,515.4 L 403.6,516.3 L 403.4,519.7 L 409.7,526.0 L 414.5,525.8 L 418.1,533.3 L 422.9,533.5 L 425.8,526.4 L 430.3,525.4 L 442.0,534.3 L 445.5,545.9 L 442.7,550.9 L 443.1,555.5 L 440.6,556.4 L 440.9,559.8 L 437.8,559.4 L 441.8,571.1 L 438.4,571.0 L 438.5,580.0 L 435.9,581.2 L 447.0,597.1 L 454.1,593.6 L 453.9,590.3 L 456.2,587.9 L 463.2,591.6 L 469.6,587.0 L 474.8,590.0 L 481.2,583.9 L 484.5,584.1 L 482.0,581.6 L 482.9,579.3 L 488.2,581.3 L 491.3,588.4 L 499.1,585.5 L 504.2,587.3 L 506.3,583.1 L 511.0,581.3 L 510.3,563.3 L 516.8,564.1 L 517.6,571.6 L 522.2,573.3 L 524.4,566.4 L 528.8,563.8 L 514.6,538.1 L 514.2,532.4 L 518.0,531.9 L 514.9,528.8 L 513.4,518.8 L 508.4,504.9 L 511.6,499.9 L 510.3,495.0 L 513.2,493.0 L 509.0,485.3 L 511.8,475.8 L 510.2,468.9 L 511.2,463.9 L 508.1,459.3 L 501.9,440.9 L 507.7,436.0 L 508.4,429.6 L 507.2,428.0 L 514.9,422.7 L 514.2,419.8 L 518.0,417.2 L 523.0,419.7 L 525.3,417.7 L 524.0,410.0 L 528.2,405.3 L 526.9,402.4 L 527.7,399.7 L 518.6,395.6 L 517.5,391.7 L 507.4,388.2 L 495.8,364.5 L 467.4,375.3 L 455.0,392.5 L 445.8,392.3 L 440.4,399.9 L 440.6,407.2 L 436.1,410.4 L 434.6,415.8 L 429.0,419.4 L 429.8,424.9 L 427.3,426.2 L 428.1,430.7 L 425.8,436.2 L 421.4,437.2 L 419.6,433.9 L 413.3,434.9 L 410.8,431.8 L 405.1,431.4 L 401.8,438.4 L 402.6,446.7 L 400.3,452.7 L 397.1,455.5 L 394.6,466.1 L 387.6,469.4 L 391.1,485.2 L 388.9,486.4 L 388.5,490.0 L 385.3,487.3 Z" fill="rgba(25,197,89,.12)" stroke="rgba(25,197,89,.5)" stroke-width="1.2"/>
+          <text class="cl" x="460" y="510" text-anchor="middle" font-size="20" font-family="'Space Mono',monospace" letter-spacing="1">ARMAGH</text>
+        </g>
+        <g class="county-grp" data-county="County Down">
+          <path class="cp" d="M 501.9,440.9 L 508.1,459.3 L 511.2,463.9 L 510.2,468.9 L 511.8,475.8 L 509.0,485.3 L 513.2,493.0 L 510.3,495.0 L 511.6,499.9 L 508.4,504.9 L 513.4,518.8 L 514.9,528.8 L 518.0,531.7 L 514.2,532.4 L 515.8,541.0 L 517.5,541.3 L 528.8,563.8 L 537.9,570.9 L 542.5,568.7 L 551.4,570.3 L 553.4,572.0 L 555.3,580.9 L 561.2,584.7 L 577.0,585.7 L 582.1,593.3 L 577.5,591.4 L 573.9,595.5 L 585.0,603.1 L 603.2,587.9 L 601.3,586.2 L 609.4,585.6 L 612.0,579.3 L 626.6,565.4 L 628.4,559.9 L 627.5,555.0 L 631.9,539.9 L 630.7,530.3 L 626.9,522.7 L 641.7,508.0 L 642.6,504.8 L 640.0,502.2 L 635.1,508.6 L 634.8,503.3 L 637.1,503.8 L 639.5,500.5 L 643.9,489.9 L 645.6,489.4 L 644.5,493.9 L 645.6,499.5 L 641.2,500.7 L 644.2,506.9 L 666.8,502.2 L 668.9,504.3 L 675.4,503.0 L 679.2,504.0 L 681.3,508.6 L 680.6,510.3 L 682.3,510.1 L 684.1,514.3 L 689.5,507.3 L 689.7,502.5 L 687.5,500.9 L 688.9,497.9 L 691.3,500.0 L 690.3,502.6 L 693.0,501.2 L 693.6,505.0 L 695.7,505.1 L 698.2,500.7 L 696.7,496.8 L 699.8,498.9 L 708.7,487.2 L 711.1,478.6 L 717.2,477.0 L 717.6,475.3 L 712.8,473.0 L 713.2,464.7 L 711.3,462.0 L 710.8,451.3 L 707.7,448.4 L 708.2,452.0 L 706.6,453.5 L 704.1,449.8 L 705.8,448.2 L 705.4,445.4 L 695.0,446.9 L 682.4,454.4 L 677.8,450.4 L 682.6,445.7 L 685.3,446.1 L 684.4,444.3 L 687.1,440.9 L 686.3,439.0 L 688.5,437.7 L 688.4,433.3 L 686.4,433.4 L 687.9,431.4 L 687.8,424.6 L 691.7,424.2 L 687.8,416.7 L 690.4,417.1 L 692.1,410.2 L 690.6,411.7 L 691.4,414.0 L 689.6,413.3 L 690.2,415.3 L 686.2,414.8 L 688.7,413.6 L 687.1,411.9 L 688.8,412.3 L 689.0,409.7 L 685.2,409.5 L 687.3,406.3 L 685.3,405.5 L 687.7,402.5 L 685.4,400.8 L 688.9,399.0 L 686.5,399.2 L 684.3,395.1 L 682.1,397.8 L 679.5,395.5 L 679.9,389.9 L 684.7,387.0 L 686.3,388.7 L 685.5,385.5 L 678.5,385.3 L 676.9,381.9 L 677.5,379.6 L 669.7,378.0 L 664.9,374.1 L 669.4,377.1 L 674.9,373.6 L 674.3,364.1 L 679.1,357.6 L 689.0,367.1 L 695.2,368.5 L 697.4,372.6 L 699.8,372.9 L 699.8,376.2 L 703.0,379.9 L 708.5,380.0 L 710.8,386.2 L 710.0,388.4 L 711.7,395.6 L 713.9,396.6 L 712.8,400.7 L 716.0,400.5 L 713.0,405.0 L 715.3,407.6 L 712.3,411.1 L 716.2,414.1 L 714.0,419.1 L 714.6,421.4 L 711.4,421.2 L 714.7,423.1 L 713.4,426.8 L 711.7,426.1 L 712.8,424.3 L 711.0,425.5 L 712.2,423.2 L 711.2,422.6 L 704.3,427.8 L 705.4,429.7 L 703.7,437.7 L 716.3,455.7 L 716.7,462.9 L 720.0,462.1 L 722.2,467.8 L 724.1,467.2 L 724.0,459.5 L 728.0,455.6 L 725.0,453.2 L 726.7,450.2 L 725.7,448.3 L 727.4,445.1 L 732.4,445.1 L 733.4,442.6 L 731.6,437.9 L 732.1,431.5 L 728.4,424.6 L 734.1,420.9 L 735.7,415.4 L 739.0,413.0 L 738.0,411.9 L 739.0,407.0 L 737.4,404.9 L 739.8,400.0 L 732.2,394.8 L 730.5,382.6 L 727.8,379.3 L 728.4,374.8 L 726.7,373.7 L 728.8,366.2 L 725.9,360.1 L 723.0,359.6 L 721.7,354.0 L 717.9,351.4 L 714.8,340.3 L 716.2,332.7 L 713.9,331.2 L 713.0,326.5 L 706.6,322.6 L 704.5,317.3 L 700.8,317.8 L 699.4,315.2 L 696.2,317.5 L 690.5,315.2 L 689.4,320.6 L 685.9,321.6 L 684.8,319.3 L 680.8,322.8 L 679.1,320.2 L 669.1,320.8 L 664.0,316.3 L 646.9,325.3 L 636.0,335.8 L 631.7,334.0 L 620.1,349.1 L 621.7,352.4 L 617.3,360.9 L 618.7,363.9 L 616.4,366.4 L 617.7,368.6 L 609.0,373.4 L 610.1,377.5 L 607.0,380.7 L 602.1,375.3 L 596.0,378.2 L 596.8,380.5 L 593.6,383.2 L 595.7,389.0 L 593.5,392.2 L 586.2,395.3 L 582.0,391.5 L 572.6,396.4 L 568.3,395.3 L 563.2,401.8 L 554.1,404.1 L 543.8,396.0 L 537.0,398.0 L 532.2,393.7 L 531.4,396.2 L 527.6,395.3 L 520.0,388.8 L 512.6,390.1 L 517.5,391.7 L 519.6,396.4 L 527.7,399.7 L 526.9,402.4 L 528.2,405.3 L 526.4,405.5 L 523.6,413.7 L 526.0,416.3 L 523.1,419.7 L 518.0,417.2 L 514.2,419.8 L 514.9,422.7 L 507.2,428.0 L 508.4,429.6 L 507.7,436.0 Z" fill="rgba(25,197,89,.10)" stroke="rgba(25,197,89,.5)" stroke-width="1.2"/>
+          <text class="cl" x="632" y="440" text-anchor="middle" font-size="22" font-family="'Space Mono',monospace" letter-spacing="1">DOWN</text>
+        </g>
+        <!-- Lough Neagh -->
+        <path d="M 450.6,378.0 L 458.2,385.5 L 462.1,386.0 L 460.2,389.1 L 465.1,392.2 L 468.6,388.9 L 472.1,391.8 L 475.7,386.5 L 481.4,386.0 L 480.6,384.9 L 490.0,390.8 L 497.1,387.2 L 499.4,395.5 L 499.1,400.2 L 502.7,396.2 L 504.4,400.1 L 506.3,395.3 L 506.4,398.1 L 509.8,396.6 L 511.4,398.9 L 507.5,394.1 L 508.6,393.4 L 513.2,395.5 L 516.2,391.3 L 519.3,393.6 L 518.1,389.3 L 514.0,388.1 L 514.8,383.7 L 512.4,381.1 L 513.9,379.4 L 516.7,381.4 L 518.7,375.7 L 521.7,375.7 L 520.9,372.4 L 517.7,373.9 L 516.5,371.4 L 520.3,366.9 L 524.8,368.0 L 524.6,362.5 L 533.8,360.0 L 535.9,350.4 L 532.3,344.9 L 529.0,346.9 L 521.8,345.5 L 526.9,333.9 L 526.5,328.4 L 539.9,308.2 L 542.5,307.4 L 543.7,303.2 L 535.0,294.5 L 527.6,299.2 L 518.1,299.6 L 516.0,303.7 L 510.6,305.7 L 498.0,305.8 L 493.5,301.9 L 491.5,304.2 L 487.0,303.2 L 484.8,297.2 L 488.1,287.8 L 484.8,284.1 L 477.0,285.5 L 478.1,286.1 L 473.6,290.2 L 474.7,296.9 L 471.0,298.0 L 470.0,302.1 L 471.1,302.3 L 470.2,308.4 L 473.0,323.0 L 476.2,324.9 L 474.6,328.0 L 477.7,330.5 L 475.2,338.5 L 477.0,341.5 L 469.3,354.1 L 469.5,357.0 L 466.6,355.4 L 462.5,359.5 L 463.2,362.4 L 454.6,366.1 L 453.4,375.2 Z" fill="rgba(0,20,14,.85)" stroke="rgba(25,197,89,.2)" stroke-width="1" pointer-events="none"/>
+        <!-- Belfast pulse -->
+        <circle cx="617.5" cy="351.6" r="4" fill="#19C559" pointer-events="none"/>
+        <circle cx="617.5" cy="351.6" r="4" fill="none" stroke="#19C559" stroke-width="1.5" pointer-events="none">
+          <animate attributeName="r" from="4" to="18" dur="2.5s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" from="0.8" to="0" dur="2.5s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Derry pulse -->
+        <circle cx="278.6" cy="176.5" r="4" fill="#19C559" pointer-events="none"/>
+        <circle cx="278.6" cy="176.5" r="4" fill="none" stroke="#19C559" stroke-width="1.5" pointer-events="none">
+          <animate attributeName="r" from="4" to="18" dur="2.5s" begin="0.7s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" from="0.8" to="0" dur="2.5s" begin="0.7s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+      <div class="cov-tag" id="covTag"></div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ PROOF ═══ -->
 <section id="proof">
   <div class="proof-in">
     <div class="proof-hd rv">
-      <h2 class="proof-hed">Client results.</h2>
-      <p style="max-width:280px;font-size:14px;color:var(--g4);line-height:1.75">Real businesses. Real savings. Zero cost to any of them.</p>
+      <div>
+        <div class="pill" style="margin-bottom:20px">
+          <div class="pill-dot active"></div>
+          <span>Client Results</span>
+        </div>
+        <h2 class="proof-hed">Client results.</h2>
+      </div>
+      <p style="max-width:280px;font-size:14px;color:rgba(0,0,0,.5);line-height:1.75">Real businesses. Real savings. Zero cost to any of them.</p>
     </div>
     <div class="proof-grid rv">
       <div class="pq">
+        <div class="pq-img" aria-hidden="true"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=60" alt=""></div>
         <span class="big-q">"</span>
         <p class="q-t">Our contract had expired eight months before Tim contacted us. The supplier never said a word — we were just quietly paying 38% above what we should have been. Tim switched us, recovered the overpayment in savings within the year, and we haven't had to think about energy since.</p>
         <div class="q-a">
-          <div class="q-av"></div>
+          <div class="q-av" style="background:url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=80&q=60') center/cover"></div>
           <div>
             <div class="q-nm">Sarah Mitchell</div>
             <div class="q-ro">Operations Director · Clearwater Facilities</div>
@@ -833,33 +925,38 @@ footer{background:var(--cream);padding:80px 52px 40px}
 <!-- ═══ CONTACT ═══ -->
 <section id="contact">
   <div class="con-l">
+    <div class="con-l-img" aria-hidden="true"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1400&q=60" alt=""></div>
     <div>
-      <p class="sec-tag rv" style="color:var(--g4)">Get Started</p>
+      <div class="pill rv">
+        <div class="pill-dot active"></div>
+        <span>Get Started</span>
+      </div>
       <h2 class="con-title rv">Let's end<br>the drift.</h2>
       <p class="con-sub rv">Send us your latest bill and we'll tell you within 24 hours whether you're in contract, out of contract, or overpaying — and by how much. Free. No obligation. No fee, ever.</p>
     </div>
     <div class="con-card rv">
-      <div class="cp-img"><img src="tim.jpg" alt="Tim Jackson"></div>
+      <div class="cp-img"><img src="assets/images/tim.jpg" alt="Tim Jackson"></div>
       <div>
         <div class="cp-n">Tim Jackson</div>
         <div class="cp-r">Founder · Zero Drift Energy</div>
-        <div class="cp-e">tim@zerodrift.co.uk</div>
+        <a href="mailto:tim@zerodrift.energy" class="cp-e">tim@zerodrift.energy</a>
+        <a href="https://wa.me/447482642882" target="_blank" rel="noopener" class="cp-e" style="margin-top:4px">07482 642882 · WhatsApp</a>
       </div>
     </div>
   </div>
   <div class="con-r">
     <form id="cform">
-      <div class="fg"><label class="fl">Your Name</label><input type="text" class="fi" placeholder="Jane Smith" required></div>
-      <div class="fg"><label class="fl">Company</label><input type="text" class="fi" placeholder="Acme Ltd" required></div>
-      <div class="fg"><label class="fl">Email</label><input type="email" class="fi" placeholder="jane@acme.co.uk" required></div>
-      <div class="fg"><label class="fl">Annual Energy Spend (approx.)</label><input type="text" class="fi" placeholder="e.g. £50,000"></div>
-      <div class="fg"><label class="fl">Tell us your situation</label><textarea class="fi" rows="3" placeholder="Are you in contract? Out of contract? Not sure?"></textarea></div>
+      <div class="fg"><label class="fl" for="f-name">Your Name</label><input id="f-name" type="text" class="fi" placeholder="Jane Smith" required></div>
+      <div class="fg"><label class="fl" for="f-company">Company</label><input id="f-company" type="text" class="fi" placeholder="Acme Ltd" required></div>
+      <div class="fg"><label class="fl" for="f-email">Email</label><input id="f-email" type="email" class="fi" placeholder="jane@acme.co.uk" required></div>
+      <div class="fg"><label class="fl" for="f-spend">Annual Energy Spend (approx.)</label><input id="f-spend" type="text" class="fi" placeholder="e.g. £50,000"></div>
+      <div class="fg"><label class="fl" for="f-situation">Tell us your situation</label><textarea id="f-situation" class="fi" rows="3" placeholder="Are you in contract? Out of contract? Not sure?"></textarea></div>
       <button type="submit" class="f-sub magnetic"><span>Send Message</span><span>→</span></button>
     </form>
   </div>
 </section>
 
-<!-- ═══ FOOTER — CREAM ═══ -->
+<!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="fw">
     <a href="#" class="fw-a">ZERO</a>
@@ -882,21 +979,14 @@ footer{background:var(--cream);padding:80px 52px 40px}
   cs.forEach((c,i)=>setTimeout(()=>c.classList.add('in'),100+i*65));
   setTimeout(()=>{
     ldr.classList.add('out');
-    document.getElementById('hn-val').classList.add('in');
-    document.querySelector('.h-eyebrow').classList.add('in');
-    document.querySelector('.h-sub').classList.add('in');
-    document.querySelector('.h-btns').classList.add('in');
-    document.getElementById('hbrand').classList.add('in');
+    document.getElementById('hero-hed').classList.add('in');
+    document.getElementById('hero-row').classList.add('in');
+    document.getElementById('hero-pill').classList.add('in');
   },1850);
 })();
 
-/* CURSOR */
-const dot=document.getElementById('dot'),ring=document.getElementById('ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
-(function tick(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick)})();
 
-/* BG CANVAS — particle network */
+/* BG CANVAS */
 (function(){
   const c=document.getElementById('bg-canvas'),ctx=c.getContext('2d');
   let W,H,nodes=[],cmx=-999,cmy=-999;
@@ -908,16 +998,15 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.le
     nodes.forEach(n=>{
       const dx=n.x-cmx,dy=n.y-cmy,d=Math.sqrt(dx*dx+dy*dy);
       if(d<160){n.vx+=dx/d*.15;n.vy+=dy/d*.15}
-      n.vx*=.98;n.vy*=.98;
-      n.x+=n.vx;n.y+=n.vy;
+      n.vx*=.98;n.vy*=.98;n.x+=n.vx;n.y+=n.vy;
       if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;
       n.x=Math.max(0,Math.min(W,n.x));n.y=Math.max(0,Math.min(H,n.y));
     });
     for(let i=0;i<N;i++)for(let j=i+1;j<N;j++){
       const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y,d=Math.sqrt(dx*dx+dy*dy);
-      if(d<D){ctx.beginPath();ctx.strokeStyle=`rgba(0,179,131,${(1-d/D)*.09})`;ctx.lineWidth=1;ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);ctx.stroke()}
+      if(d<D){ctx.beginPath();ctx.strokeStyle=`rgba(25,197,89,${(1-d/D)*.09})`;ctx.lineWidth=1;ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);ctx.stroke()}
     }
-    nodes.forEach(n=>{ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);ctx.fillStyle='rgba(0,179,131,0.3)';ctx.fill()});
+    nodes.forEach(n=>{ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);ctx.fillStyle='rgba(25,197,89,0.3)';ctx.fill()});
     requestAnimationFrame(draw);
   }
   c.style.cssText='position:fixed;inset:0;z-index:0;pointer-events:none';
@@ -933,7 +1022,7 @@ const mb=document.getElementById('mbtn'),mm=document.getElementById('mmenu');
 mb.addEventListener('click',()=>{const o=mm.classList.toggle('open');mb.classList.toggle('x',o)});
 mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mm.classList.remove('open');mb.classList.remove('x')}));
 
-/* LIVE DRIFT METER — left panel ticks up */
+/* LIVE DRIFT METER */
 (function(){
   const el=document.getElementById('drift-val');
   if(!el)return;
@@ -941,9 +1030,7 @@ mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mm.classList
   new IntersectionObserver(entries=>{
     if(entries[0].isIntersecting&&!started){
       started=true;
-      setInterval(()=>{
-        if(Math.random()>.35){val+=1;el.textContent=val;}
-      },900);
+      setInterval(()=>{if(Math.random()>.35){val+=1;el.textContent=val;}},900);
     }
   },{threshold:.3}).observe(document.getElementById('problem'));
 })();
@@ -976,58 +1063,71 @@ document.querySelectorAll('.magnetic').forEach(el=>{
   el.addEventListener('mouseleave',()=>el.style.transform='');
 });
 
-/* FORM */
-document.getElementById('cform')?.addEventListener('submit',e=>{
-  e.preventDefault();const b=e.target.querySelector('.f-sub');
-  b.innerHTML="<span>Sent — we'll be in touch within 24 hours</span>";
-  b.style.cssText+='background:#0A0A0A;color:var(--grn)';
+/* FORM → CRM */
+const CRM_URL='https://zerodriftenergy.netlify.app';
+const ENQUIRY_SECRET='zd-web-enq-2026';
+document.getElementById('cform')?.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const btn=e.target.querySelector('.f-sub');
+  const orig=btn.innerHTML;
+  btn.innerHTML='<span>Sending…</span>';
+  btn.disabled=true;
+  try{
+    const res=await fetch(CRM_URL+'/api/public/website-enquiry',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-enquiry-secret':ENQUIRY_SECRET},
+      body:JSON.stringify({
+        name:document.getElementById('f-name')?.value||'',
+        company:document.getElementById('f-company')?.value||'',
+        email:document.getElementById('f-email')?.value||'',
+        spend:document.getElementById('f-spend')?.value||'',
+        situation:document.getElementById('f-situation')?.value||''
+      })
+    });
+    if(res.ok){
+      btn.innerHTML="<span>Sent ✓ — Tim will be in touch within 24 hours</span>";
+      btn.style.cssText+='background:#0A0A0A;color:var(--grn)';
+      e.target.reset();
+    }else{
+      throw new Error('Server error');
+    }
+  }catch{
+    btn.innerHTML=orig;
+    btn.disabled=false;
+    btn.insertAdjacentHTML('afterend','<p style="font-size:12px;color:#E8240A;margin-top:8px">Something went wrong — please email tim@zerodrift.energy directly.</p>');
+  }
 });
 
-/* CURSOR GLOW */
-(function(){
-  const g=document.getElementById('glow');
-  let gx=window.innerWidth/2,gy=window.innerHeight/2;
-  let tx=gx,ty=gy;
-  document.addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY});
-  (function tick(){gx+=(tx-gx)*.08;gy+=(ty-gy)*.08;g.style.left=gx+'px';g.style.top=gy+'px';requestAnimationFrame(tick)})();
-})();
 
-/* HERO 3D TILT */
+/* HERO — 3D tilt on hed-block */
 (function(){
   const hero=document.getElementById('hero');
-  const num=document.querySelector('.hero-number');
-  if(!hero||!num)return;
-  let rx=0,ry=0,active=false;
-  hero.addEventListener('mouseenter',()=>active=true);
-  hero.addEventListener('mouseleave',()=>{
-    active=false;rx=0;ry=0;
-    num.style.transform='translateY(-55%)';
-  });
+  const block=document.querySelector('.hed-block');
+  if(!hero||!block)return;
   hero.addEventListener('mousemove',e=>{
-    if(!active)return;
     const r=hero.getBoundingClientRect();
-    rx=(e.clientX-r.left)/r.width-.5;
-    ry=(e.clientY-r.top)/r.height-.5;
-    num.style.transform=`translateY(-55%) perspective(900px) rotateY(${rx*10}deg) rotateX(${-ry*5}deg)`;
+    const rx=(e.clientX-r.left)/r.width-.5;
+    const ry=(e.clientY-r.top)/r.height-.5;
+    block.style.transform=`perspective(800px) rotateY(${rx*14}deg) rotateX(${-ry*7}deg)`;
   });
+  hero.addEventListener('mouseleave',()=>{block.style.transform=''});
 })();
 
-/* SCROLL PARALLAX — hero section fades/drifts on scroll */
+/* HERO PARALLAX — headline drifts up on scroll */
 (function(){
-  const hero=document.getElementById('hero');
-  const num=document.querySelector('.hero-number');
-  const hc=document.querySelector('.hero-content');
-  if(!hero||!num)return;
+  const hed=document.getElementById('hero-hed');
+  const pill=document.getElementById('hero-pill');
+  if(!hed)return;
   let ticking=false;
   window.addEventListener('scroll',()=>{
     if(ticking)return;
     requestAnimationFrame(()=>{
-      const y=window.scrollY;
-      const vh=window.innerHeight;
+      const y=window.scrollY,vh=window.innerHeight;
       if(y<vh){
         const pct=y/vh;
-        num.style.setProperty('--par',`${y*.18}px`);
-        hero.style.setProperty('--hero-fade',1-pct*.6);
+        hed.style.transform=`translateY(${y*.14}px)`;
+        hed.style.opacity=Math.max(0,1-pct*1.9);
+        if(pill)pill.style.opacity=Math.max(0,1-pct*2.5);
       }
       ticking=false;
     });
@@ -1035,15 +1135,32 @@ document.getElementById('cform')?.addEventListener('submit',e=>{
   });
 })();
 
-/* RIPPLE ON CTA CLICK */
+/* NI COUNTY MAP */
+(function(){
+  const tag=document.getElementById('covTag');
+  if(!tag)return;
+  const pills=document.querySelectorAll('.cov-pill');
+  document.querySelectorAll('.cov-ni-svg .county-grp').forEach(g=>{
+    g.addEventListener('mouseenter',()=>{
+      const name=g.dataset.county;
+      tag.textContent=name;tag.classList.add('show');
+      pills.forEach(p=>p.classList.toggle('hl',p.dataset.county===name));
+    });
+    g.addEventListener('mouseleave',()=>{
+      tag.classList.remove('show');
+      pills.forEach(p=>p.classList.remove('hl'));
+    });
+  });
+})();
+
+/* RIPPLE ON CTA */
 (function(){
   document.querySelectorAll('.btn-fill,.f-sub').forEach(btn=>{
     btn.addEventListener('click',e=>{
       const r=btn.getBoundingClientRect();
       const s=document.createElement('span');
       s.style.cssText=`position:absolute;left:${e.clientX-r.left}px;top:${e.clientY-r.top}px;width:0;height:0;background:rgba(255,255,255,.18);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;animation:ripple-out .65s ease-out forwards;z-index:10`;
-      btn.appendChild(s);
-      setTimeout(()=>s.remove(),700);
+      btn.appendChild(s);setTimeout(()=>s.remove(),700);
     });
   });
 })();
