@@ -243,6 +243,7 @@ nav.up{padding:14px 52px;background:rgba(6,6,6,.94);backdrop-filter:blur(20px);b
 .bc:hover .bc-icon{border-color:var(--grn);background:rgba(25,197,89,.09)}
 .bc-title{font-family:var(--fd);font-size:30px;letter-spacing:.02em;margin-bottom:10px}
 .bc-desc{font-size:13px;color:var(--g4);line-height:1.8;margin-bottom:24px}
+.bc-energy .bc-desc{color:rgba(255,255,255,.78)}
 .bc-stat{display:inline-flex;flex-direction:column;gap:3px;padding:12px 16px;background:rgba(25,197,89,.055);border:1px solid rgba(25,197,89,.14)}
 .bc-sv{font-family:var(--fd);font-size:24px;color:var(--grn)}
 .bc-sl{font-family:var(--fm);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--g4)}
@@ -643,7 +644,7 @@ nav a:hover::after{transform:scaleX(1);transform-origin:left}
 <section class="stats">
   <div class="stats-row">
     <div class="st rv">
-      <div class="st-n">£<span class="counter" data-target="0">0</span></div>
+      <div class="st-n"><em>Zero</em></div>
       <div class="st-l">Our fee. Now and always.<br>Zero Drift costs you nothing.</div>
     </div>
     <div class="st rv d1">
@@ -726,7 +727,7 @@ nav a:hover::after{transform:scaleX(1);transform-origin:left}
         <div class="bc-icon" style="position:relative;z-index:2;margin-bottom:28px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <div class="bc-title">Contract Monitoring</div>
         <p class="bc-desc">We watch every renewal date. You will never drift out of contract onto punishing out-of-contract rates again. One point of contact, indefinite cover.</p>
-        <div class="bc-stat" style="margin-top:auto"><span class="bc-sv">£0</span><span class="bc-sl">Fee for this service</span></div>
+        <div class="bc-stat" style="margin-top:auto"><span class="bc-sv">Never</span><span class="bc-sl">Out of contract again</span></div>
       </div>
     </div>
     <div class="bc bc-energy rv d1">
@@ -1064,7 +1065,7 @@ document.querySelectorAll('.magnetic').forEach(el=>{
 });
 
 /* FORM → CRM */
-const CRM_URL='https://zerodriftenergy.netlify.app';
+const CRM_URL='https://zerodrift-crm.vercel.app';
 const ENQUIRY_SECRET='zd-web-enq-2026';
 document.getElementById('cform')?.addEventListener('submit',async e=>{
   e.preventDefault();
